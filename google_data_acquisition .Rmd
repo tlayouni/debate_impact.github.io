@@ -1,0 +1,52 @@
+---
+title: "google_trends"
+author: "Emily Halford"
+date: "11/15/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(gtrendsR)
+library(tidyverse)
+library(viridis)
+
+knitr::opts_chunk$set(
+  echo = TRUE,
+  warning = FALSE,
+  fig.width = 8,
+  fig.height = 6,
+  out.width = "90%"
+)
+options(
+  ggplot2.continuous.colour = "viridis",
+  ggplot2.continuous.fill = "viridis"
+)
+scale_colour_discrete = scale_colour_viridis_d
+scale_fill_discrete = scale_fill_viridis_d
+theme_set(theme_minimal() + theme(legend.position = "bottom"))
+```
+
+## Downloading Google Trends Data
+```{r, eval = FALSE}
+candidates = readxl::read_excel(path = "./data/candidates.xlsx")
+
+state_data = 
+  candidates %>% 
+  mutate(
+    data = map(name, ~(gtrends(.x, geo = c("US-PA", "US-IA"), time = "2019-02-01 2019-11-03")$interest_over_time))) %>% 
+  unnest(cols = data) %>% 
+  select(-time:-category)
+
+us_data = 
+  candidates %>% 
+  mutate(
+    data = map(name, ~(gtrends(.x, geo = "US", time = "2019-02-01 2019-11-03")$interest_over_time))) %>% 
+  unnest(cols = data) %>% 
+  select(-time:-category)
+
+full_google_data = 
+  full_join(state_data, us_data) 
+
+write.csv(full_google_data, file="./data/google_data.csv")
+```
