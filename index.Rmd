@@ -1,0 +1,11 @@
+---
+title: "Factors Influencing Polling Performance in the 2020 Democratic Primary"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+    theme: sandstone
+---
+
+<img src="images/candidates 2.png" style="width:75%">
+
