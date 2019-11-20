@@ -7,6 +7,5 @@ output:
     theme: sandstone
 ---
 
-
 <img src="images/candidates 2.png" style="width:75%">
 
