@@ -1,0 +1,84 @@
+---
+title: "Cleaned Polling Data"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(rvest)
+library(viridis)
+library(plotly)
+
+knitr::opts_chunk$set(
+	echo = TRUE,
+	warning = FALSE,
+	fig.width = 8, 
+  fig.height = 6,
+  out.width = "90%"
+)
+options(
+  ggplot2.continuous.colour = "viridis",
+  ggplot2.continuous.fill = "viridis"
+)
+scale_colour_discrete = scale_colour_viridis_d
+scale_fill_discrete = scale_fill_viridis_d
+theme_set(theme_minimal() + theme(legend.position = "bottom"))
+```
+
+
+## Bringing in and cleaning polling data
+
+* restrict to democrats and specific candidates
+* restricting grade of the poll (A or A+)
+* getting rid of state level polls
+* using `end_date` as the polling date used in figures
+* renaming candidates to commonly used name
+
+```{r}
+all_polls = 
+read_csv("./data/president_primary_polls.csv") %>%
+   filter(
+    is.na(state), 
+    party == "DEM",
+    fte_grade %in% c("A+", "A"),
+    candidate_name %in% c("Amy Klobuchar", "Andrew Yang", "Bernard Sanders", "Elizabeth Warren", "Joseph R. Biden Jr.", "Julián Castro", "Kamala D. Harris", "Pete Buttigieg", "Cory A. Booker", "Tulsi Gabbard")
+   ) %>% 
+  mutate(
+    end_date = as.Date(end_date, format = "%m/%d/%y"),
+    candidate_name = recode(candidate_name, "Bernard Sanders" = "Bernie Sanders", "Joseph R. Biden Jr." = "Joe Biden", "Kamala D. Harris" = "Kamala Harris", "Cory A. Booker" = "Cory Booker")
+    )
+```
+
+## Creating a dataset (`mean_polls`) with a mean polling percent (`mean_pct`) to use in plots 
+
+```{r}
+mean_polls = 
+  all_polls %>% 
+  group_by(end_date, candidate_name) %>% 
+  mutate(
+    mean_pct = mean(pct)
+  )
+```
+
+## Plotting average polling percent over time 
+
+```{r}
+average_plot = 
+mean_polls %>% 
+
+  ggplot(aes(x = end_date, y = mean_pct, color = candidate_name)) +
+  geom_line() +
+  geom_point() +
+  labs(
+    title = "Average Polling Over Time By Candidate",
+    x = "Time",
+    y = "Polling Percent"
+  )
+
+
+ggplotly(average_plot)
+```
+
+    
