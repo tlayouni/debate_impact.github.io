@@ -1,0 +1,180 @@
+---
+title: "Scraping"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(rvest)
+```
+
+**Should Discuss approach at meeting on 11/13**
+
+# Scraping Data on Debates 
+***
+
+#### URL for wikipedia page
+
+```{r}
+wiki_debate = read_html("https://en.wikipedia.org/wiki/2020_Democratic_Party_presidential_debates_and_forums")
+```
+
+#### Debate 1, Night 1 Scrape
+
+```{r}
+debate_time_1_1 = 
+wiki_debate %>% 
+  html_nodes(xpath = '//*[@id="mw-content-text"]/div/table[7]') %>%
+  html_table() 
+
+
+debate_time_1_1 = debate_time_1_1[[1]] 
+
+debate_time_1_1 = 
+  debate_time_1_1 %>% 
+  slice(-1, -2, -13) %>% 
+  rename(
+    "candidate" = "X1",
+    "airtime_min" = "X4"
+  ) %>% 
+  mutate(
+    debate = 1,
+    night = 1,
+    airtime_min = as.numeric(airtime_min)
+  ) %>% 
+  select(candidate, airtime_min, debate, night)
+  
+
+```
+
+#### Debate 1, Night 2 Scrape
+
+```{r}
+debate_time_1_2 = 
+  wiki_debate %>% 
+  html_nodes(xpath = '//*[@id="mw-content-text"]/div/table[8]') %>% 
+  html_table()
+
+debate_time_1_2 = debate_time_1_2[[1]] 
+
+debate_time_1_2 = 
+  debate_time_1_2 %>% 
+  slice(-1, -2, -13) %>% 
+  rename(
+    "candidate" = "X1",
+    "airtime_min" = "X4"
+  ) %>% 
+  mutate(
+    debate = 1,
+    night = 2,
+    airtime_min = as.numeric(airtime_min)
+  ) %>% 
+  select(candidate, airtime_min, debate, night)
+
+```
+
+#### Debate 2, Night 1 Scrape
+
+```{r}
+debate_time_2_1 = 
+  wiki_debate %>% 
+  html_node(xpath = '//*[@id="mw-content-text"]/div/table[12]') %>% 
+  html_table()
+
+debate_time_2_1 = 
+  debate_time_2_1 %>% 
+  slice(-1, -2, -13) %>% 
+  rename(
+    "candidate" = "X1",
+    "airtime_min" = "X4"
+  ) %>% 
+    mutate(
+    debate = 2,
+    night = 1,
+    airtime_min = as.numeric(airtime_min)
+  ) %>% 
+  select(candidate, airtime_min, debate, night)
+```
+
+#### Debate 2, Night 2 Scrape
+
+```{r}
+debate_time_2_2 = 
+  wiki_debate %>% 
+  html_node(xpath = '//*[@id="mw-content-text"]/div/table[13]') %>% 
+  html_table()
+
+debate_time_2_2 = 
+  debate_time_2_2 %>% 
+  slice(-1, -2, -13) %>% 
+  rename(
+    "candidate" = "X1",
+    "airtime_min" = "X4"
+  ) %>% 
+      mutate(
+    debate = 2,
+    night = 2,
+    airtime_min = as.numeric(airtime_min)
+  ) %>% 
+  select(candidate, airtime_min, debate, night)
+
+```
+
+#### Debate 3 Scrape
+
+```{r}
+debate_time_3 = 
+  wiki_debate %>% 
+  html_node(xpath = '//*[@id="mw-content-text"]/div/table[17]') %>% 
+  html_table()
+
+debate_time_3 = 
+  debate_time_3 %>% 
+  slice(-11) %>% 
+  rename(
+    "candidate" = "Candidates",
+    "airtime_min" = "Airtime (min.)[109]"
+  ) %>% 
+     mutate(
+    debate = 3,
+    night = 1,
+    airtime_min = as.numeric(airtime_min)
+  ) %>%
+  select(candidate, airtime_min, debate, night)
+```
+
+#### Debate 4 Scrape
+
+```{r}
+debate_time_4 = 
+  wiki_debate %>% 
+  html_node(xpath = '//*[@id="mw-content-text"]/div/table[20]') %>% 
+  html_table()
+
+ debate_time_4 = 
+  debate_time_4 %>% 
+  slice(-13) %>% 
+  rename(
+    "candidate" = "Candidates",
+    "airtime_min" = "Airtime (min.)[120]"
+  ) %>% 
+  mutate(
+    debate = 4,
+    night = 1,
+    airtime_min = as.numeric(airtime_min)
+  ) %>%
+  select(candidate, airtime_min, debate, night)
+```
+
+## Binding all speaking time datasets 
+
+```{r}
+speaking_time_df = 
+  bind_rows(debate_time_1_1, debate_time_1_2, debate_time_2_1, debate_time_2_2, debate_time_3, debate_time_4) %>% 
+  filter(
+    candidate %in% c("Warren", "Booker", "Klobuchar", "Castro", "Biden", "Sanders", "Buttigieg", "Harris", "Yang", "Gabbard") 
+  )
+```
+
