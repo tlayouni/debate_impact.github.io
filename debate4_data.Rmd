@@ -1,0 +1,42 @@
+---
+title: 'Debate #4 Data'
+author: "Sophia Miller"
+date: "11/29/2019"
+output: github_document
+---
+
+```{r}
+library(tidyverse)
+library(rvest)
+library(httr)
+```
+
+Scraping Trump mentions data from FiveThirtyEight:
+
+```{r trump_mentions}
+trump_mentions = 
+  read_html("https://fivethirtyeight.com/features/the-october-democratic-debate-in-6-charts/") %>%
+  html_nodes(css = "table") %>% 
+  .[[4]] %>% 
+  html_table(header = TRUE) %>% 
+  janitor::clean_names() %>% 
+  select(candidate, x) %>% 
+  rename(trump_mentions = x)
+```
+
+Scraping words spoken data from NBC News;
+
+```{r words_spoken}
+words_spoken = 
+  read_html("https://fivethirtyeight.com/features/the-october-democratic-debate-in-6-charts/") %>%
+  html_nodes(css = "table") %>% 
+  .[[3]] %>% 
+  html_table(header = TRUE) %>% 
+  janitor::clean_names() %>% 
+  select(candidate, x) %>% 
+  rename(words_spoken = x)
+```
+
+
+
+
