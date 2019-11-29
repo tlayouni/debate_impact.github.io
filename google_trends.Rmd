@@ -26,15 +26,50 @@ theme_set(theme_minimal() + theme(legend.position = "bottom"))
 ```
 
 ```{r data_acq, include=FALSE}
-debate_1 = (gtrends(c('"harris biden"', '"biden harris"', "biden busing"), geo = "US", time = "2019-06-20 2019-07-04")$interest_over_time) 
+debate_1 = (gtrends(c('"harris biden"', '"biden harris"', "biden busing"), geo = "US", time = "2019-06-20 2019-07-04")$interest_over_time) %>% 
+  select(c(-geo, -time, -gprop, -category))
 
-debate_1b = (gtrends(c("joe biden", "kamala harris"), geo = "US", time = "2019-06-20 2019-07-04")$interest_over_time)
+debate_1b = (gtrends(c("joe biden", "kamala harris"), geo = "US", time = "2019-06-20 2019-07-04")$interest_over_time) %>% 
+  select(c(-geo, -time, -gprop, -category))
+
+debate_2 = (gtrends(c("bernie sanders", "bernie", '"i wrote the damn bill'), geo = "US", time = "2019-07-23 2019-08-06")$interest_over_time) %>% 
+  select(c(-geo, -time, -gprop, -category))
+
+debate_3 = (gtrends(c('"hell yes"', "gun buybacks", "gun control"), geo = "US", time = "2019-09-05 2019-09-19")$interest_over_time) %>% 
+  select(c(-geo, -time, -gprop, -category))
+
+debate_3b = (gtrends(c("beto", "beto o'rourke"), geo = "US", time = "2019-09-05 2019-09-19")$interest_over_time) %>% 
+  select(c(-geo, -time, -gprop, -category))
+
+debate_4_yang = (gtrends(c("andrew yang policies", "andrew yang 1000", "universal base income", "ubi"), geo = "US", time = "2019-10-08 2019-10-22")$interest_over_time) %>% 
+  select(c(-geo, -time, -gprop, -category))
+
+debate_4_yangb = (gtrends("andrew yang", geo = "US", time = "2019-10-08 2019-10-22")$interest_over_time) %>% 
+  select(c(-geo, -time, -gprop, -category))
+
+debate_4_harris = (gtrends(c("reproductive rights", "kamala harris abortion", "abortion rights"), geo = "US", time = "2019-10-08 2019-10-22")$interest_over_time) %>% 
+  select(c(-geo, -time, -gprop, -category))
+
+debate_4_harrisb = (gtrends("kamala harris", geo = "US", time = "2019-10-08 2019-10-22")$interest_over_time) %>% 
+  select(c(-geo, -time, -gprop, -category))
+
+yang_harris = (gtrends(c("andrew yang", "kamala harris"), geo = "US", time = "2019-06-20 2019-10-22")$interest_over_time) %>% 
+  select(c(-geo, -time, -gprop, -category))
 ```
 
-```{r plots}
+# Introduction
+
+# Debate 1: June 27, 2019
+
+```{r debate_1, echo=FALSE}
 debate_1 %>% 
   group_by(keyword) %>% 
   ggplot() + geom_point(aes(x = date, y = hits, color = keyword)) +  
   geom_path(aes(x = date, y = hits, color = keyword))
 ```
 
+# Debate 2: July 30, 2019
+
+# Debate 3: September 12, 2019
+
+# Debate 4: October 15, 2019
