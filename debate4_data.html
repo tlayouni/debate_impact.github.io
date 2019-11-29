@@ -316,12 +316,12 @@ $(document).ready(function () {
 
 
 <pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>## ── Attaching packages ───────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>## ── Attaching packages ─────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
 <pre><code>## ✔ ggplot2 3.2.1     ✔ purrr   0.3.2
 ## ✔ tibble  2.1.3     ✔ dplyr   0.8.3
 ## ✔ tidyr   1.0.0     ✔ stringr 1.4.0
 ## ✔ readr   1.3.1     ✔ forcats 0.4.0</code></pre>
-<pre><code>## ── Conflicts ──────────────────────────────────── tidyverse_conflicts() ──
+<pre><code>## ── Conflicts ────────────────────────────────────────────────── tidyverse_conflicts() ──
 ## ✖ dplyr::filter() masks stats::filter()
 ## ✖ dplyr::lag()    masks stats::lag()</code></pre>
 <pre class="r"><code>library(rvest)</code></pre>
@@ -342,8 +342,11 @@ $(document).ready(function () {
   .[[4]] %&gt;% 
   html_table(header = TRUE) %&gt;% 
   janitor::clean_names() %&gt;% 
+  separate(candidate, c(&quot;first_name&quot;, &quot;candidate&quot;)) %&gt;% 
   select(candidate, x) %&gt;% 
-  rename(trump_mentions = x)</code></pre>
+  rename(trump_mentions = x) %&gt;% 
+  filter(candidate %in% c(&quot;Warren&quot;, &quot;Biden&quot;, &quot;Klobuchar&quot;, &quot;Sanders&quot;, &quot;Buttigieg&quot;, &quot;Harris&quot;, &quot;Booker&quot;, &quot;Yang&quot;, &quot;Castro&quot;, &quot;Gabbard&quot;))</code></pre>
+<pre><code>## Warning: Expected 2 pieces. Additional pieces discarded in 1 rows [12].</code></pre>
 <p>Scraping words spoken data from NBC News;</p>
 <pre class="r"><code>words_spoken = 
   read_html(&quot;https://fivethirtyeight.com/features/the-october-democratic-debate-in-6-charts/&quot;) %&gt;%
@@ -351,16 +354,43 @@ $(document).ready(function () {
   .[[3]] %&gt;% 
   html_table(header = TRUE) %&gt;% 
   janitor::clean_names() %&gt;% 
+  separate(candidate, c(&quot;first_name&quot;, &quot;candidate&quot;)) %&gt;%
   select(candidate, x) %&gt;% 
-  rename(words_spoken = x)</code></pre>
+  rename(words_spoken = x) %&gt;% 
+  filter(candidate %in% c(&quot;Warren&quot;, &quot;Biden&quot;, &quot;Klobuchar&quot;, &quot;Sanders&quot;, &quot;Buttigieg&quot;, &quot;Harris&quot;, &quot;Booker&quot;, &quot;Yang&quot;, &quot;Castro&quot;, &quot;Gabbard&quot;))</code></pre>
+<pre><code>## Warning: Expected 2 pieces. Additional pieces discarded in 1 rows [3].</code></pre>
 <p>Read in attack data:</p>
-<pre class="r"><code>attacks = read_csv(&quot;./data/debate4_attacks.csv&quot;)</code></pre>
+<pre class="r"><code>attacks = read_csv(&quot;./data/debate4_attacks.csv&quot;) %&gt;% 
+  separate(candidate, c(&quot;first_name&quot;, &quot;candidate&quot;)) %&gt;%
+  select(candidate, attacks_on, attacked_by) %&gt;%
+  filter(candidate %in% c(&quot;Warren&quot;, &quot;Biden&quot;, &quot;Klobuchar&quot;, &quot;Sanders&quot;, &quot;Buttigieg&quot;, &quot;Harris&quot;, &quot;Booker&quot;, &quot;Yang&quot;, &quot;Castro&quot;, &quot;Gabbard&quot;))</code></pre>
 <pre><code>## Parsed with column specification:
 ## cols(
 ##   candidate = col_character(),
 ##   attacks_on = col_double(),
 ##   attacked_by = col_double()
 ## )</code></pre>
+<pre><code>## Warning: Expected 2 pieces. Additional pieces discarded in 1 rows [12].</code></pre>
+<p>Read in airtime data:</p>
+<pre class="r"><code>airtime = read_csv(&quot;./speaking_time.csv&quot;) %&gt;% 
+  filter(debate == 4) %&gt;% 
+  select(candidate, airtime_min)</code></pre>
+<pre><code>## Warning: Missing column names filled in: &#39;X1&#39; [1]</code></pre>
+<pre><code>## Parsed with column specification:
+## cols(
+##   X1 = col_double(),
+##   candidate = col_character(),
+##   airtime_min = col_double(),
+##   debate = col_double(),
+##   night = col_double()
+## )</code></pre>
+<p>Join dataframes:</p>
+<pre class="r"><code>debate4_data1 =
+  full_join(trump_mentions, words_spoken, by = &quot;candidate&quot;)
+
+debate4_data2 = full_join(debate4_data1, attacks, by = &quot;candidate&quot;)
+
+debate4_data = full_join(debate4_data2, airtime, by = &quot;candidate&quot;)</code></pre>
 
 
 

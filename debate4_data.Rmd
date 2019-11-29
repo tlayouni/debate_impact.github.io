@@ -20,8 +20,10 @@ trump_mentions =
   .[[4]] %>% 
   html_table(header = TRUE) %>% 
   janitor::clean_names() %>% 
+  separate(candidate, c("first_name", "candidate")) %>% 
   select(candidate, x) %>% 
-  rename(trump_mentions = x)
+  rename(trump_mentions = x) %>% 
+  filter(candidate %in% c("Warren", "Biden", "Klobuchar", "Sanders", "Buttigieg", "Harris", "Booker", "Yang", "Castro", "Gabbard"))
 ```
 
 Scraping words spoken data from NBC News;
@@ -33,16 +35,38 @@ words_spoken =
   .[[3]] %>% 
   html_table(header = TRUE) %>% 
   janitor::clean_names() %>% 
+  separate(candidate, c("first_name", "candidate")) %>%
   select(candidate, x) %>% 
-  rename(words_spoken = x)
+  rename(words_spoken = x) %>% 
+  filter(candidate %in% c("Warren", "Biden", "Klobuchar", "Sanders", "Buttigieg", "Harris", "Booker", "Yang", "Castro", "Gabbard"))
 ```
 
 Read in attack data:
 
 ```{r attacks}
-attacks = read_csv("./data/debate4_attacks.csv")
+attacks = read_csv("./data/debate4_attacks.csv") %>% 
+  separate(candidate, c("first_name", "candidate")) %>%
+  select(candidate, attacks_on, attacked_by) %>%
+  filter(candidate %in% c("Warren", "Biden", "Klobuchar", "Sanders", "Buttigieg", "Harris", "Booker", "Yang", "Castro", "Gabbard"))
 ```
 
+Read in airtime data:
 
+```{r}
+airtime = read_csv("./speaking_time.csv") %>% 
+  filter(debate == 4) %>% 
+  select(candidate, airtime_min)
+```
+
+Join dataframes:
+
+```{r}
+debate4_data1 =
+  full_join(trump_mentions, words_spoken, by = "candidate")
+
+debate4_data2 = full_join(debate4_data1, attacks, by = "candidate")
+
+debate4_data = full_join(debate4_data2, airtime, by = "candidate")
+```
 
 
