@@ -8,11 +8,12 @@ knitr::opts_chunk$set(echo = TRUE)
 library(gtrendsR)
 library(tidyverse)
 library(viridis)
+library(patchwork)
 
 knitr::opts_chunk$set(
   echo = TRUE,
   warning = FALSE,
-  fig.width = 8,
+  fig.width = 10,
   fig.height = 6,
   out.width = "90%"
 )
@@ -22,39 +23,51 @@ options(
 )
 scale_colour_discrete = scale_colour_viridis_d
 scale_fill_discrete = scale_fill_viridis_d
-theme_set(theme_minimal() + theme(legend.position = "bottom"))
+theme_set(theme_minimal() + theme(legend.position = "right"))
 ```
 
 ```{r data_acq, include=FALSE}
+clean_google = function(df) {
+  
+  df %>% 
+  select(c(-geo, -time, -gprop, -category)) %>% 
+  mutate(
+    date = as.Date(date),
+    hits = str_replace(hits, "<1", "0.5"),
+    hits = as.numeric(hits)
+  )
+    
+}
+
 debate_1 = (gtrends(c('"harris biden"', '"biden harris"', "biden busing"), geo = "US", time = "2019-06-20 2019-07-04")$interest_over_time) %>% 
-  select(c(-geo, -time, -gprop, -category))
+  clean_google()
 
 debate_1b = (gtrends(c("joe biden", "kamala harris"), geo = "US", time = "2019-06-20 2019-07-04")$interest_over_time) %>% 
-  select(c(-geo, -time, -gprop, -category))
+  clean_google()
 
-debate_2 = (gtrends(c("bernie sanders", "bernie", '"i wrote the damn bill'), geo = "US", time = "2019-07-23 2019-08-06")$interest_over_time) %>% 
-  select(c(-geo, -time, -gprop, -category))
+debate_2 = (gtrends(c("bernie sanders", "bernie", '"i wrote the damn bill"'), geo = "US", time = "2019-07-23 2019-08-06")$interest_over_time) %>% 
+  clean_google()
 
 debate_3 = (gtrends(c('"hell yes"', "gun buybacks", "gun control"), geo = "US", time = "2019-09-05 2019-09-19")$interest_over_time) %>% 
-  select(c(-geo, -time, -gprop, -category))
+  clean_google()
 
 debate_3b = (gtrends(c("beto", "beto o'rourke"), geo = "US", time = "2019-09-05 2019-09-19")$interest_over_time) %>% 
-  select(c(-geo, -time, -gprop, -category))
+  clean_google()
 
 debate_4_yang = (gtrends(c("andrew yang policies", "andrew yang 1000", "universal base income", "ubi"), geo = "US", time = "2019-10-08 2019-10-22")$interest_over_time) %>% 
-  select(c(-geo, -time, -gprop, -category))
+  clean_google()
 
 debate_4_yangb = (gtrends("andrew yang", geo = "US", time = "2019-10-08 2019-10-22")$interest_over_time) %>% 
-  select(c(-geo, -time, -gprop, -category))
+  clean_google()
 
 debate_4_harris = (gtrends(c("reproductive rights", "kamala harris abortion", "abortion rights"), geo = "US", time = "2019-10-08 2019-10-22")$interest_over_time) %>% 
-  select(c(-geo, -time, -gprop, -category))
+  clean_google()
 
 debate_4_harrisb = (gtrends("kamala harris", geo = "US", time = "2019-10-08 2019-10-22")$interest_over_time) %>% 
-  select(c(-geo, -time, -gprop, -category))
+  clean_google()
 
 yang_harris = (gtrends(c("andrew yang", "kamala harris"), geo = "US", time = "2019-06-20 2019-10-22")$interest_over_time) %>% 
-  select(c(-geo, -time, -gprop, -category))
+  clean_google()
 ```
 
 # Introduction
@@ -62,14 +75,207 @@ yang_harris = (gtrends(c("andrew yang", "kamala harris"), geo = "US", time = "20
 # Debate 1: June 27, 2019
 
 ```{r debate_1, echo=FALSE}
-debate_1 %>% 
+debate_1_plot = 
+  debate_1 %>% 
   group_by(keyword) %>% 
-  ggplot() + geom_point(aes(x = date, y = hits, color = keyword)) +  
-  geom_path(aes(x = date, y = hits, color = keyword))
+  ggplot(aes(x = date, y = hits, color = keyword)) + geom_point() +  
+  geom_path() + 
+  labs(
+    x = "",
+    y = "",
+    color = "Search Query"
+  ) +
+  scale_x_date(
+    breaks = as.Date(c("2019-06-20", "2019-06-27", "2019-07-04")),
+    labels = c("Jun 20", "Debate 1 (June 27)", "Jul 4"),
+    minor_breaks = "1 day"
+  ) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+debate_1b_plot = 
+  debate_1b %>%
+  group_by(keyword) %>% 
+  ggplot(aes(x = date, y = hits, color = keyword)) + geom_point() +  
+  geom_path() + 
+  labs(
+    title = "Debate 1: Kamala Harris vs. Joe Biden Busing Comments",
+    x = "",
+    y = "Relative Proportion of Google Searches",
+    color = "Search Query"
+  ) +
+  scale_x_date(
+    breaks = as.Date(c("2019-06-20", "2019-06-27", "2019-07-04")),
+    date_labels = c("Jun 20", "Debate 1 (June 27)", "Jul 4"),
+    date_minor_breaks = "1 day"
+  ) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+debate_1b_plot + debate_1_plot
 ```
 
 # Debate 2: July 30, 2019
 
+```{r debate_2, echo = FALSE}
+debate_2 %>%
+  group_by(keyword) %>% 
+  ggplot(aes(x = date, y = hits, color = keyword)) + geom_point() +  
+  geom_path() + 
+  labs(
+    title = 'Debate 2: Bernie "Wrote the Damn Bill"',
+    x = "Date",
+    y = "Relative Proportion of Google Searches",
+    color = "Search Query"
+  ) +
+  scale_x_date(
+    breaks = as.Date(c("2019-07-23", "2019-07-30", "2019-08-06")),
+    date_labels = c("Jul 23", "Debate 2 (July 30)", "Aug 6"),
+    date_minor_breaks = "1 day"
+  ) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+  
+```
+
+
 # Debate 3: September 12, 2019
 
+```{r debate_3, echo=FALSE}
+debate_3_plot = 
+  debate_3 %>% 
+  group_by(keyword) %>% 
+  ggplot(aes(x = date, y = hits, color = keyword)) + geom_point() +  
+  geom_path() + 
+  labs(
+    x = "",
+    y = "",
+    color = "Search Query"
+  ) +
+  scale_x_date(
+    breaks = as.Date(c("2019-09-05", "2019-09-12", "2019-09-19")),
+    labels = c("Sept 5", "Debate 3 (Sept 12)", "Sept 19"),
+    minor_breaks = "1 day"
+  ) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+debate_3b_plot = 
+  debate_3b %>%
+  group_by(keyword) %>% 
+  ggplot(aes(x = date, y = hits, color = keyword)) + geom_point() +  
+  geom_path() + 
+  labs(
+    title = 'Debate 3: "Hell Yes" from Beto on Gun Buybacks',
+    x = "",
+    y = "Relative Proportion of Google Searches",
+    color = "Search Query"
+  ) +
+  scale_x_date(
+    breaks = as.Date(c("2019-09-05", "2019-09-12", "2019-09-19")),
+    labels = c("Sept 5", "Debate 3 (Sept 12)", "Sept 19"),
+    date_minor_breaks = "1 day"
+  ) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+debate_3b_plot + debate_3_plot
+```
+
+
 # Debate 4: October 15, 2019
+
+## Yang and Universal Basic Income
+
+```{r debate_4_yang}
+debate_4_yang_plot = 
+  debate_4_yang %>% 
+  group_by(keyword) %>% 
+  ggplot(aes(x = date, y = hits, color = keyword)) + geom_point() +  
+  geom_path() + 
+  labs(
+    x = "",
+    y = "",
+    color = "Search Query"
+  ) +
+  scale_x_date(
+    breaks = as.Date(c("2019-10-08", "2019-10-15", "2019-10-22")),
+    labels = c("Oct 8", "Debate 4 (Oct 15)", "Oct 22"),
+    minor_breaks = "1 day"
+  ) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+debate_4_yangb_plot = 
+  debate_4_yangb %>%
+  group_by(keyword) %>% 
+  ggplot(aes(x = date, y = hits, color = keyword)) + geom_point() +  
+  geom_path() + 
+  labs(
+    title = 'Debate 4: Andrew Yang Suggests Universal Basic Income',
+    x = "",
+    y = "Relative Proportion of Google Searches",
+    color = "Search Query"
+  ) +
+  scale_x_date(
+    breaks = as.Date(c("2019-10-08", "2019-10-15", "2019-10-22")),
+    labels = c("Oct 8", "Debate 4 (Oct 15)", "Oct 22"),
+    minor_breaks = "1 day"
+  ) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  theme_set(theme_minimal() + theme(legend.position = "right"))
+
+debate_4_yangb_plot + debate_4_yang_plot
+
+```
+
+
+## Harris and Reproductive Rights
+
+```{r debate_4_harris}
+debate_4_harris_plot = 
+  debate_4_harris %>% 
+  group_by(keyword) %>% 
+  ggplot(aes(x = date, y = hits, color = keyword)) + geom_point() +  
+  geom_path() + 
+  labs(
+    x = "",
+    y = "",
+    color = "Search Query"
+  ) +
+  scale_x_date(
+    breaks = as.Date(c("2019-10-08", "2019-10-15", "2019-10-22")),
+    labels = c("Oct 8", "Debate 4 (Oct 15)", "Oct 22"),
+    minor_breaks = "1 day"
+  ) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+debate_4_harrisb_plot = 
+  debate_4_harrisb %>%
+  group_by(keyword) %>% 
+  ggplot(aes(x = date, y = hits, color = keyword)) + geom_point() +  
+  geom_path() + 
+  labs(
+    title = 'Debate 4: Kamala Harris Calls Attention to Reproductive Rights',
+    x = "",
+    y = "Relative Proportion of Google Searches",
+    color = "Search Query"
+  ) +
+  scale_x_date(
+    breaks = as.Date(c("2019-10-08", "2019-10-15", "2019-10-22")),
+    labels = c("Oct 8", "Debate 4 (Oct 15)", "Oct 22"),
+    minor_breaks = "1 day"
+  ) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) 
+
+debate_4_harrisb_plot + debate_4_harris_plot
+```
+
+### Yang vs. Harris 
+
+```{r yang_harris}
+yang_harris %>%
+  group_by(keyword) %>% 
+  ggplot(aes(x = date, y = hits, color = keyword)) + geom_line() + 
+  labs(
+    title = "Yang vs. Harris Over Time",
+    x = "Date",
+    y = "Relative Proportion of Google Searches",
+    color = "Search Query"
+  ) 
+```
+

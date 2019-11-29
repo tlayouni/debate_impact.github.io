@@ -320,12 +320,108 @@ $(document).ready(function () {
 </div>
 <div id="debate-2-july-30-2019" class="section level1">
 <h1>Debate 2: July 30, 2019</h1>
+<p><img src="google_trends_files/figure-html/debate_2-1.png" width="90%" /></p>
 </div>
 <div id="debate-3-september-12-2019" class="section level1">
 <h1>Debate 3: September 12, 2019</h1>
+<p><img src="google_trends_files/figure-html/debate_3-1.png" width="90%" /></p>
 </div>
 <div id="debate-4-october-15-2019" class="section level1">
 <h1>Debate 4: October 15, 2019</h1>
+<div id="yang-and-universal-basic-income" class="section level2">
+<h2>Yang and Universal Basic Income</h2>
+<pre class="r"><code>debate_4_yang_plot = 
+  debate_4_yang %&gt;% 
+  group_by(keyword) %&gt;% 
+  ggplot(aes(x = date, y = hits, color = keyword)) + geom_point() +  
+  geom_path() + 
+  labs(
+    x = &quot;&quot;,
+    y = &quot;&quot;,
+    color = &quot;Search Query&quot;
+  ) +
+  scale_x_date(
+    breaks = as.Date(c(&quot;2019-10-08&quot;, &quot;2019-10-15&quot;, &quot;2019-10-22&quot;)),
+    labels = c(&quot;Oct 8&quot;, &quot;Debate 4 (Oct 15)&quot;, &quot;Oct 22&quot;),
+    minor_breaks = &quot;1 day&quot;
+  ) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+debate_4_yangb_plot = 
+  debate_4_yangb %&gt;%
+  group_by(keyword) %&gt;% 
+  ggplot(aes(x = date, y = hits, color = keyword)) + geom_point() +  
+  geom_path() + 
+  labs(
+    title = &#39;Debate 4: Andrew Yang Suggests Universal Basic Income&#39;,
+    x = &quot;&quot;,
+    y = &quot;Relative Proportion of Google Searches&quot;,
+    color = &quot;Search Query&quot;
+  ) +
+  scale_x_date(
+    breaks = as.Date(c(&quot;2019-10-08&quot;, &quot;2019-10-15&quot;, &quot;2019-10-22&quot;)),
+    labels = c(&quot;Oct 8&quot;, &quot;Debate 4 (Oct 15)&quot;, &quot;Oct 22&quot;),
+    minor_breaks = &quot;1 day&quot;
+  ) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  theme_set(theme_minimal() + theme(legend.position = &quot;right&quot;))
+
+debate_4_yangb_plot + debate_4_yang_plot</code></pre>
+<p><img src="google_trends_files/figure-html/debate_4_yang-1.png" width="90%" /></p>
+</div>
+<div id="harris-and-reproductive-rights" class="section level2">
+<h2>Harris and Reproductive Rights</h2>
+<pre class="r"><code>debate_4_harris_plot = 
+  debate_4_harris %&gt;% 
+  group_by(keyword) %&gt;% 
+  ggplot(aes(x = date, y = hits, color = keyword)) + geom_point() +  
+  geom_path() + 
+  labs(
+    x = &quot;&quot;,
+    y = &quot;&quot;,
+    color = &quot;Search Query&quot;
+  ) +
+  scale_x_date(
+    breaks = as.Date(c(&quot;2019-10-08&quot;, &quot;2019-10-15&quot;, &quot;2019-10-22&quot;)),
+    labels = c(&quot;Oct 8&quot;, &quot;Debate 4 (Oct 15)&quot;, &quot;Oct 22&quot;),
+    minor_breaks = &quot;1 day&quot;
+  ) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+debate_4_harrisb_plot = 
+  debate_4_harrisb %&gt;%
+  group_by(keyword) %&gt;% 
+  ggplot(aes(x = date, y = hits, color = keyword)) + geom_point() +  
+  geom_path() + 
+  labs(
+    title = &#39;Debate 4: Kamala Harris Calls Attention to Reproductive Rights&#39;,
+    x = &quot;&quot;,
+    y = &quot;Relative Proportion of Google Searches&quot;,
+    color = &quot;Search Query&quot;
+  ) +
+  scale_x_date(
+    breaks = as.Date(c(&quot;2019-10-08&quot;, &quot;2019-10-15&quot;, &quot;2019-10-22&quot;)),
+    labels = c(&quot;Oct 8&quot;, &quot;Debate 4 (Oct 15)&quot;, &quot;Oct 22&quot;),
+    minor_breaks = &quot;1 day&quot;
+  ) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) 
+
+debate_4_harrisb_plot + debate_4_harris_plot</code></pre>
+<p><img src="google_trends_files/figure-html/debate_4_harris-1.png" width="90%" /></p>
+<div id="yang-vs.harris" class="section level3">
+<h3>Yang vs. Harris</h3>
+<pre class="r"><code>yang_harris %&gt;%
+  group_by(keyword) %&gt;% 
+  ggplot(aes(x = date, y = hits, color = keyword)) + geom_line() + 
+  labs(
+    title = &quot;Yang vs. Harris Over Time&quot;,
+    x = &quot;Date&quot;,
+    y = &quot;Relative Proportion of Google Searches&quot;,
+    color = &quot;Search Query&quot;
+  ) </code></pre>
+<p><img src="google_trends_files/figure-html/yang_harris-1.png" width="90%" /></p>
+</div>
+</div>
 </div>
 
 
