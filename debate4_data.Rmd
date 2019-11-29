@@ -2,7 +2,7 @@
 title: 'Debate #4 Data'
 author: "Sophia Miller"
 date: "11/29/2019"
-output: github_document
+output: html_document
 ---
 
 ```{r}
@@ -35,6 +35,12 @@ words_spoken =
   janitor::clean_names() %>% 
   select(candidate, x) %>% 
   rename(words_spoken = x)
+```
+
+Read in attack data:
+
+```{r attacks}
+attacks = read_csv("./data/debate4_attacks.csv")
 ```
 
 

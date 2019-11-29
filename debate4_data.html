@@ -353,6 +353,14 @@ $(document).ready(function () {
   janitor::clean_names() %&gt;% 
   select(candidate, x) %&gt;% 
   rename(words_spoken = x)</code></pre>
+<p>Read in attack data:</p>
+<pre class="r"><code>attacks = read_csv(&quot;./data/debate4_attacks.csv&quot;)</code></pre>
+<pre><code>## Parsed with column specification:
+## cols(
+##   candidate = col_character(),
+##   attacks_on = col_double(),
+##   attacked_by = col_double()
+## )</code></pre>
 
 
 
