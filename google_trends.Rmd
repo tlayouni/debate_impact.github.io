@@ -1,5 +1,5 @@
 ---
-title: "*Debate Impact on Google Search Behavior*"
+title: "**Debate Impact on Google Search Behavior**"
 output: html_document
 ---
 
@@ -123,9 +123,11 @@ debate_1b_plot =
 debate_1b_plot + debate_1_plot
 ```
 
-There is a clear, sharp spike in relative search volume on June 28th, the day immediately following the debate. Search volume for Kamala Harris surpassed that for Joe Biden, perhaps because Kamala, a lesser-known candidate, was able to draw significant and negative attention to Biden, an extremely well-known candidate. Harris's search advantage was sustained in the days following the debate. Search volume for “harris biden” is also higher than for “biden harris”, and it is reported by [Seth Stephens-Davidowitz](https://www.nytimes.com/2016/10/23/opinion/campaign-stops/if-they-google-you-do-you-win.html) in his book “Everybody Lies” that voters tend to subconsciously place the name of the candidate they support first in searches including two candidate names. This change in search volume is an indication that the busing comments increased support for Kamala Harris and hurt Joe Biden’s popularity among voters. 
+There is a clear, sharp spike in relative search volume on June 28th, the day immediately following the debate. Search volume for Kamala Harris surpassed that for Joe Biden, perhaps because Kamala, a lesser-known candidate, was able to draw significant and negative attention to Biden, an extremely well-known candidate. Harris's search advantage was sustained in the days following the debate. Search volume for “harris biden” is also higher than for “biden harris”, and [it is reported by Seth Stephens-Davidowitz](https://www.nytimes.com/2016/10/23/opinion/campaign-stops/if-they-google-you-do-you-win.html) in his book “Everybody Lies” that voters tend to subconsciously place the name of the candidate they support first in searches including two candidate names. This change in search volume is an indication that the busing comments increased support for Kamala Harris and hurt Joe Biden’s popularity among voters. 
 
 # Debate 2: July 30, 2019
+
+When Bernie Sanders enthusiastically advocated for Medicare for All and spoke to all it would cover, Tim Ryan interjected to say that Bernie couldn't know exactly what it would cover. Sanders shot back, emphatically saying "I wrote the damn bill!" in one of the night's most memorable moments. 
 
 ```{r debate_2, echo = FALSE}
 debate_2 %>%
@@ -147,6 +149,7 @@ debate_2 %>%
   
 ```
 
+Search interest in Bernie spiked immediately following the debate, although this increase was not sustained. Although Bernie's comeback was witty and memorable, it was used in a less controversial situation than Harris's comments toward Biden and may not have resonated long-term with voters. It can be seen, however, that people were searching the phrase "I wrote the damn bill" immediately following the debate, which shows that this moment certainly did get some attention from voters. 
 
 # Debate 3: September 12, 2019
 
