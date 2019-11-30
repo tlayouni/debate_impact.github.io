@@ -1,5 +1,5 @@
 ---
-title: "Debate Impact on Google Search Behavior"
+title: "*Debate Impact on Google Search Behavior*"
 output: html_document
 ---
 
@@ -82,6 +82,8 @@ It is important to note that it is impossible to know an individual's motivation
 
 # Debate 1: June 27, 2019
 
+During the first debate, [Kamala Harris called Joe Biden out](https://www.washingtonpost.com/politics/2019/07/29/school-busing-debate-between-joe-biden-kamala-harris/) for his previous cooperation with segregationalist Senators and his opposition to school busing programs. She made a tense moment personal by sharing her experience as a young girl brought to her California public school every day by a busing program. Biden defended himself by arguing that he only opposed busing mandated by the Department of Education. 
+
 ```{r debate_1, echo=FALSE}
 debate_1_plot = 
   debate_1 %>% 
@@ -120,6 +122,8 @@ debate_1b_plot =
 
 debate_1b_plot + debate_1_plot
 ```
+
+There is a clear, sharp spike in relative search volume on June 28th, the day immediately following the debate. Search volume for Kamala Harris surpassed that for Joe Biden, perhaps because Kamala, a lesser-known candidate, was able to draw significant and negative attention to Biden, an extremely well-known candidate. Harris's search advantage was sustained in the days following the debate. Search volume for “harris biden” is also higher than for “biden harris”, and it is reported by [Seth Stephens-Davidowitz](https://www.nytimes.com/2016/10/23/opinion/campaign-stops/if-they-google-you-do-you-win.html) in his book “Everybody Lies” that voters tend to subconsciously place the name of the candidate they support first in searches including two candidate names. This change in search volume is an indication that the busing comments increased support for Kamala Harris and hurt Joe Biden’s popularity among voters. 
 
 # Debate 2: July 30, 2019
 
