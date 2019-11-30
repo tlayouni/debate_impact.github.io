@@ -74,15 +74,15 @@ yang_harris = (gtrends(c("andrew yang", "kamala harris"), geo = "US", time = "20
 
 # Introduction
 
-Google search data is increasingly being viewed as an important predictor of election outcomes. It is thought that the Americans who make searches may be a more representative sample of the voting population than that reached by polling organizations, and that people may be more honest in the privacy of their own computer than in a poll response. Main events from each of the first four Democratic Debates were selected for investigation with Google Trends data, and search volume for relevant terms has been plotted for the week immediately preceding and immediately following each debate. These analyses are considered a secondary predictor of debate performance alongside polling performance. 
+Google search data is increasingly viewed as an important predictor of election outcomes. It is thought that the Americans who make searches online may be a more representative sample of the voting population than those reached by polling organizations, and that people may be more honest in the privacy of their own computer than in a poll response. Main events from each of the first four Democratic Debates were selected for investigation with Google Trends data, and search volume for relevant terms has been plotted for the week immediately preceding and immediately following each debate. These analyses are considered a secondary indicator of the impact that debate performance has on public perceptions of Democratic presidential candidates. 
 
-Arguably the most notable advocate of the use of Google Trends data in election applications is Seth Stephens-Davidowitz, former data scientist at Google and author of "Everybody Lies," a collection of his research utilizing primarily Trends data. Stephens-Davidowitz has examined questions such as the [role of racism in Barack Obama's 2008 and 2012 election performance](https://static1.squarespace.com/static/51d894bee4b01caf88ccb4f3/t/51d89ab3e4b05a25fc1f39d4/1373149875469/RacialAnimusAndVotingSethStephensDavidowitz.pdf), how Google data can show [voter reactions to rumors and ad campaigns](https://www.wnyc.org/story/245757-what-our-google-habits-reveal-about-our-voting-habits/). Several of his ideas are incorporated into the following analyses, although his work has been almost entirely focused on predicting presidential elections and these analyses look exclusively at the current Democratic primaries. 
+Arguably the most notable advocate of the use of Google Trends data in election applications is Seth Stephens-Davidowitz, former data scientist at Google and bestselling author of "Everybody Lies." Stephens-Davidowitz has examined questions such as the [role of racism in Barack Obama's 2008 and 2012 election performance](https://static1.squarespace.com/static/51d894bee4b01caf88ccb4f3/t/51d89ab3e4b05a25fc1f39d4/1373149875469/RacialAnimusAndVotingSethStephensDavidowitz.pdf) and how Google data can show [voter reactions to rumors and advertising  campaigns](https://www.wnyc.org/story/245757-what-our-google-habits-reveal-about-our-voting-habits/). Several of his ideas are incorporated into the following analyses, although his work has been almost entirely focused on predicting presidential elections and these analyses look exclusively at the current Democratic primaries. 
 
-It is important to note that it is impossible to know an individual's motivation for making a particular search, so these analyses are exclusively exploratory. Additionally, Google Trends yeilds relative search proportions rather than absolute search counts. This means that all searches are scaled from 0 to 100, with 100 representing the day during the period of interest during which the search query of interest made up the greatest proportion of all Google Searches. Comparisons between graphs should therefore be made with caution. Google Trends does allow the comparison of up to 5 search queries at once, where all results are shown on a shared scale. Graphs with multiple queries where generated in this manner and all included terms are relative to each other so can be compared. Given this scaling system, some searches (such as those for candidate names) have such greater volume than other, less frequently searched terms, that they mask any trends in these lower-volume queries. When this occurred, these high-volume terms were considered in separate panels. 
+It is important to note that it is impossible to know an individual's motivation for making a particular search, so these analyses are exclusively exploratory. Additionally, Google Trends yeilds relative search proportions rather than absolute search counts. This means that all searches are scaled from 0 to 100, with 100 representing the day during the period of interest during which the search query made up the greatest proportion of all Google Searches. Comparisons between graphs should therefore be made with caution. Google Trends does allow the comparison of up to 5 search queries at once, where all results are shown on a shared scale. All graphs with multiple queries were generated in this manner. Included terms are therefore all relative to each other and comparisons can be made. Given this scaling system, some searches (such as those for candidate names) have search volume so great that they mask any trends in less frequently searched queries. When this occurred, these high-volume terms were considered on a separate scale in a second panel. 
 
 # Debate 1: June 27, 2019
 
-During the first debate, [Kamala Harris called Joe Biden out](https://www.washingtonpost.com/politics/2019/07/29/school-busing-debate-between-joe-biden-kamala-harris/) for his previous cooperation with segregationalist Senators and his opposition to school busing programs. She made a tense moment personal by sharing her experience as a young girl brought to her California public school every day by a busing program. Biden defended himself by arguing that he only opposed busing mandated by the Department of Education. 
+During the first debate, [Kamala Harris called Joe Biden out](https://www.washingtonpost.com/politics/2019/07/29/school-busing-debate-between-joe-biden-kamala-harris/) for his previous cooperation with segregationalist Senators and his opposition to school busing programs. She made a tense moment personal by sharing her experience as a young girl brought to her California public school every day by a busing program. Biden defended himself by arguing that he only opposed busing that was mandated by the Department of Education. 
 
 ```{r debate_1, echo=FALSE}
 debate_1_plot = 
@@ -108,7 +108,7 @@ debate_1b_plot =
   ggplot(aes(x = date, y = hits, color = keyword)) + geom_point() +  
   geom_path() + 
   labs(
-    title = "Debate 1: Kamala Harris vs. Joe Biden Busing Comments",
+    title = "Debate 1: Kamala Harris calls out Joe Biden",
     x = "",
     y = "Relative Proportion of Google Searches",
     color = "Search Query"
@@ -123,11 +123,11 @@ debate_1b_plot =
 debate_1b_plot + debate_1_plot
 ```
 
-There is a clear, sharp spike in relative search volume on June 28th, the day immediately following the debate. Search volume for Kamala Harris surpassed that for Joe Biden, perhaps because Kamala, a lesser-known candidate, was able to draw significant and negative attention to Biden, an extremely well-known candidate. Harris's search advantage was sustained in the days following the debate. Search volume for “harris biden” is also higher than for “biden harris”, and [it is reported by Seth Stephens-Davidowitz](https://www.nytimes.com/2016/10/23/opinion/campaign-stops/if-they-google-you-do-you-win.html) in his book “Everybody Lies” that voters tend to subconsciously place the name of the candidate they support first in searches including two candidate names. This change in search volume is an indication that the busing comments increased support for Kamala Harris and hurt Joe Biden’s popularity among voters. 
+There is a clear, sharp spike in relative search volume on June 28th, the day immediately following the debate. Search volume for Kamala Harris surpassed that for Joe Biden, perhaps because Kamala, a lesser-known candidate, was able to draw significant and negative attention to Biden, an extremely well-known candidate. Harris's search advantage was sustained in the days following the debate. Search volume for “harris biden” is also higher than for “biden harris”, and [it is reported by Seth Stephens-Davidowitz](https://www.nytimes.com/2016/10/23/opinion/campaign-stops/if-they-google-you-do-you-win.html) in his book “Everybody Lies” that voters tend to subconsciously place the name of the candidate they support first in searches including two candidate names. This change in search volume is therefore an indication that the busing comments increased support for Kamala Harris and hurt Joe Biden’s popularity among voters. 
 
 # Debate 2: July 30, 2019
 
-When Bernie Sanders enthusiastically advocated for Medicare for All and spoke to all it would cover, Tim Ryan interjected to say that Bernie couldn't know exactly what it would cover. Sanders shot back, emphatically saying "I wrote the damn bill!" in one of the night's most memorable moments. 
+When Bernie Sanders enthusiastically advocated for Medicare for All and spoke to the extensive coverage that it would provide, Tim Ryan interjected to say that Bernie couldn't know exactly what it would cover. Sanders shot back, emphatically stating that he did know because ["I wrote the damn bill!"](https://www.nytimes.com/2019/07/30/us/politics/bernie-sanders-debate.html) in one of the night's most memorable moments. 
 
 ```{r debate_2, echo = FALSE}
 debate_2 %>%
@@ -149,9 +149,11 @@ debate_2 %>%
   
 ```
 
-Search interest in Bernie spiked immediately following the debate, although this increase was not sustained. Although Bernie's comeback was witty and memorable, it was used in a less controversial situation than Harris's comments toward Biden and may not have resonated long-term with voters. It can be seen, however, that people were searching the phrase "I wrote the damn bill" immediately following the debate, which shows that this moment certainly did get some attention from voters. 
+Search interest in Bernie spiked immediately following the debate, although this increase was not sustained. Although Bernie's comeback was witty and memorable, it was used in a less controversial situation than Harris's comments toward Biden and may not have resonated with voters long-term. It can be seen, however, that people were searching the phrase "I wrote the damn bill" immediately following the debate, which shows that this moment certainly did get some attention from voters. 
 
 # Debate 3: September 12, 2019
+
+When asked if he would mandate gun buybacks, Beto O'Rourke answered with an enthusiastic ["hell yes"](https://fortune.com/2019/09/12/live-updates-third-democratic-debate/). This line earned significant applause from the debate's live audience, and O'Rourke backed up his strong stance on gun control with a passionate description of the devastating potential of semi-automatic rifles. Shortly after, he received praise from fellow candidates for his response to the recent shooting in El Paso, O'Rourke's hometown.  
 
 ```{r debate_3, echo=FALSE}
 debate_3_plot = 
@@ -192,10 +194,13 @@ debate_3b_plot =
 debate_3b_plot + debate_3_plot
 ```
 
+Beto’s resounding support of gun control measures seems to have increased voter interest in him. Searches for his name remained elevated even after the initial spike immediately following the debate, and a small spike is also noted for “hell yes” searches. Interestingly, searches for gun control also increased following the debate, possibly indicating this issue's importance to voters. 
 
 # Debate 4: October 15, 2019
 
-## Yang and Universal Basic Income
+## *Yang and Universal Basic Income*
+
+Andrew Yang responded to Bernie Sanders' federal jobs guarantee by [proposing universal basic income](https://www.vox.com/policy-and-politics/2019/10/15/20916329/democratic-debate-highlights-elizabeth-warren-bernie-sanders-joe-biden) as an alternative solution to job loss. He made a strong case for the proposal, emphasizing the idea's simplicity and ability to provide Americans with money without forcing an undesirable job in federal government.  
 
 ```{r debate_4_yang, echo=FALSE}
 debate_4_yang_plot = 
@@ -231,15 +236,17 @@ debate_4_yangb_plot =
     labels = c("Oct 8", "Debate 4 (Oct 15)", "Oct 22"),
     minor_breaks = "1 day"
   ) +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
-  theme_set(theme_minimal() + theme(legend.position = "right"))
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 debate_4_yangb_plot + debate_4_yang_plot
 
 ```
 
+Searches for Andrew Yang and his Universal Basic Income proposal (indicated by "ubi" searches) sharply increased following the debate and remained somewhat elevated in the following days. Searches for "ubi" stayed relatively higher than searches for "andrew yang" in the days following the debate, suggesting that Yang may have increased interest in his proposal more than in himself. 
 
-## Harris and Reproductive Rights
+## *Harris and Reproductive Rights*
+
+Kamala Harris expressed her frustration in the lack of conversation around reproductive rights and abortion in the previous debates by [turning a conversation about financing Medicare for All to abortion](https://www.vox.com/policy-and-politics/2019/10/15/20916329/democratic-debate-highlights-elizabeth-warren-bernie-sanders-joe-biden). She spoke eloquently and dramatically about the need to ensure women's access to these services. 
 
 ```{r debate_4_harris, echo=FALSE}
 debate_4_harris_plot = 
@@ -280,7 +287,11 @@ debate_4_harrisb_plot =
 debate_4_harrisb_plot + debate_4_harris_plot
 ```
 
+Again, search interest in Kamala Harris rose sharply immediately after the debate, and an increase in searches that included both her name and “abortion” indicates that this interest may have been due in part to her impassioned comments on women’s reproductive rights. However, search volume for “kamala harris” fell much faster than it did for “andrew yang” following this debate, indicated that his debate performance may have caused a longer-felt impact on voters. 
+
 ### Yang vs. Harris 
+
+To further explore the differences seen in search behavior regarding Kamala Harris and Andrew Yang following the fourth debate, their relative search volume from June 20th, 2019 (a week prior to the first debate) until October 22nd, 2019 (a week following the fourth debate) was graphed. 
 
 ```{r yang_harris, echo=FALSE}
 yang_harris %>%
@@ -294,3 +305,4 @@ yang_harris %>%
   ) 
 ```
 
+Kamala Harris clearly put herself on the map during the first debate, likely with her comments regarding busing, and her search volume swamps that of Yang. However, their performance became more comparable after the second debate, and Yang has steadily received slightly higher search volume since that point. It is also interesting that search volume appears to be decreasingly impacted by each subsequent debate. This could be explained by lower viewership in the later debates, or possibly less voter interest in these candidates over time. 
