@@ -70,7 +70,15 @@ yang_harris = (gtrends(c("andrew yang", "kamala harris"), geo = "US", time = "20
   clean_google()
 ```
 
+
+
 # Introduction
+
+Google search data is increasingly being viewed as an important predictor of election outcomes. It is thought that the Americans who make searches may be a more representative sample of the voting population than that reached by polling organizations, and that people may be more honest in the privacy of their own computer than in a poll response. Main events from each of the first four Democratic Debates were selected for investigation with Google Trends data, and search volume for relevant terms has been plotted for the week immediately preceding and immediately following each debate. These analyses are considered a secondary predictor of debate performance alongside polling performance. 
+
+Arguably the most notable advocate of the use of Google Trends data in election applications is Seth Stephens-Davidowitz, former data scientist at Google and author of "Everybody Lies," a collection of his research utilizing primarily Trends data. Stephens-Davidowitz has examined questions such as the [role of racism in Barack Obama's 2008 and 2012 election performance](https://static1.squarespace.com/static/51d894bee4b01caf88ccb4f3/t/51d89ab3e4b05a25fc1f39d4/1373149875469/RacialAnimusAndVotingSethStephensDavidowitz.pdf), how Google data can show [voter reactions to rumors and ad campaigns](https://www.wnyc.org/story/245757-what-our-google-habits-reveal-about-our-voting-habits/). Several of his ideas are incorporated into the following analyses, although his work has been almost entirely focused on predicting presidential elections and these analyses look exclusively at the current Democratic primaries. 
+
+It is important to note that it is impossible to know an individual's motivation for making a particular search, so these analyses are exclusively exploratory. Additionally, Google Trends yeilds relative search proportions rather than absolute search counts. This means that all searches are scaled from 0 to 100, with 100 representing the day during the period of interest during which the search query of interest made up the greatest proportion of all Google Searches. Comparisons between graphs should therefore be made with caution. Google Trends does allow the comparison of up to 5 search queries at once, where all results are shown on a shared scale. Graphs with multiple queries where generated in this manner and all included terms are relative to each other so can be compared. Given this scaling system, some searches (such as those for candidate names) have such greater volume than other, less frequently searched terms, that they mask any trends in these lower-volume queries. When this occurred, these high-volume terms were considered in separate panels. 
 
 # Debate 1: June 27, 2019
 
@@ -182,7 +190,7 @@ debate_3b_plot + debate_3_plot
 
 ## Yang and Universal Basic Income
 
-```{r debate_4_yang}
+```{r debate_4_yang, echo=FALSE}
 debate_4_yang_plot = 
   debate_4_yang %>% 
   group_by(keyword) %>% 
@@ -226,7 +234,7 @@ debate_4_yangb_plot + debate_4_yang_plot
 
 ## Harris and Reproductive Rights
 
-```{r debate_4_harris}
+```{r debate_4_harris, echo=FALSE}
 debate_4_harris_plot = 
   debate_4_harris %>% 
   group_by(keyword) %>% 
@@ -267,7 +275,7 @@ debate_4_harrisb_plot + debate_4_harris_plot
 
 ### Yang vs. Harris 
 
-```{r yang_harris}
+```{r yang_harris, echo=FALSE}
 yang_harris %>%
   group_by(keyword) %>% 
   ggplot(aes(x = date, y = hits, color = keyword)) + geom_line() + 
