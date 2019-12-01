@@ -57,7 +57,7 @@ airtime = read_csv("./speaking_time.csv") %>%
   filter(debate == 4) %>% 
   select(candidate, airtime_min)
 ```
-Candidate age and sex:
+Read in candidate age and sex:
 
 ```{r age_sex}
 age_sex = read_csv("./data/candidate_age_sex.csv")
