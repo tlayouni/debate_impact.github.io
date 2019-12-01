@@ -111,4 +111,10 @@ debate4_data4 = full_join(debate4_data3, age_sex, by = "candidate")
 debate4_data_final = full_join(debate4_data4, debate4_polls, by = "candidate")
 ```
 
+Save as CSV:
+
+```{r save}
+write.csv(debate4_data_final, "./data/debate_4.csv", row.names = FALSE )
+```
+
 
