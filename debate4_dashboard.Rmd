@@ -56,7 +56,11 @@ Column {data-width=350}
 ### Chart B
 
 ```{r}
+airtime_plot = 
+  ggplot(debate4_data, aes(x = words_spoken, y = pct_change, color = candidate)) + 
+  geom_point(shape = 21, size = 5, stroke = 3)
 
+ggplotly(airtime_plot)
 ```
 
 ### Chart C
