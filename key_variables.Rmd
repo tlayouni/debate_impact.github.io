@@ -1,7 +1,7 @@
 # **Key Campaign Events and Their Impacts on Polling Performance**
 ***
 
-```{r}
+
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 
@@ -31,10 +31,65 @@ theme_set(theme_minimal() + theme(legend.position = "bottom"))
 
 ## Former Vice President Joe Biden
 
-```{r include = FALSE}
+```{r echo = FALSE, message = FALSE}
 
 poll_data = 
-read_csv("./data/cleaned_polls.csv") 
+read_csv("./data/cleaned_polls.csv") %>% 
+  group_by(end_date, candidate_name) %>% 
+  mutate(
+    mean_pct = mean(pct)
+  )
 
+poll_data %>% 
+  filter(candidate_name == "Joe Biden") %>% 
+  ggplot(aes(x = end_date, y = mean_pct)) +
+  geom_point() + 
+  geom_line() +
+  geom_vline(xintercept = as.numeric(as.Date("2019-03-31")), linetype = 4) +
+  geom_vline(xintercept = as.numeric(as.Date("2019-06-28")), linetype = 4) +
+   geom_vline(xintercept = as.numeric(as.Date("2019-05-01")), linetype = 4) +
+  labs(
+    x = "Date",
+    y = "Polling Percent",
+    title = "Polling Performance from January 24th 2019 to November 3, 2019"
+  )
+
+
+```
+
+## Senator Elizabeth Warren
+
+```{r echo = FALSE, message = FALSE}
+poll_data %>% 
+  filter(candidate_name == "Elizabeth Warren") %>% 
+  ggplot(aes(x = end_date, y = mean_pct)) +
+  geom_point() + 
+  geom_line() +
+  geom_vline(xintercept = as.numeric(as.Date("2019-09-16")), linetype = 4) +
+  geom_vline(xintercept = as.numeric(as.Date("2019-10-28")), linetype = 4) +
+   geom_vline(xintercept = as.numeric(as.Date("2019-08-19")), linetype = 4) +
+  labs(
+    x = "Date",
+    y = "Polling Percent",
+    title = "Polling Performance from January 24th 2019 to November 3, 2019"
+  )
+```
+
+## Senator Bernie Sanders
+
+```{r echo = FALSE, message = FALSE}
+poll_data %>% 
+  filter(candidate_name == "Bernie Sanders") %>% 
+  ggplot(aes(x = end_date, y = mean_pct)) +
+  geom_point() + 
+  geom_line() +
+  geom_vline(xintercept = as.numeric(as.Date("2019-04-15")), linetype = 4) +
+  geom_vline(xintercept = as.numeric(as.Date("2019-10-04")), linetype = 4) +
+   geom_vline(xintercept = as.numeric(as.Date("2019-10-15")), linetype = 4) +
+  labs(
+    x = "Date",
+    y = "Polling Percent",
+    title = "Polling Performance from January 24th 2019 to November 3, 2019"
+  )
 ```
 
