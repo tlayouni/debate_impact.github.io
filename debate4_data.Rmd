@@ -26,7 +26,7 @@ trump_mentions =
   filter(candidate %in% c("Warren", "Biden", "Klobuchar", "Sanders", "Buttigieg", "Harris", "Booker", "Yang", "Castro", "Gabbard"))
 ```
 
-Scraping words spoken data from NBC News;
+Scraping words spoken data from NBC News:
 
 ```{r words_spoken}
 words_spoken = 
