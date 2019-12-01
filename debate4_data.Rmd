@@ -52,21 +52,63 @@ attacks = read_csv("./data/debate4_attacks.csv") %>%
 
 Read in airtime data:
 
-```{r}
+```{r airtime}
 airtime = read_csv("./speaking_time.csv") %>% 
   filter(debate == 4) %>% 
   select(candidate, airtime_min)
 ```
+Candidate age and sex:
+
+```{r age_sex}
+age_sex = read_csv("./data/candidate_age_sex.csv")
+```
+
+Polling data: 
+
+```{r polling}
+debate4_polls = 
+read_csv("./data/president_primary_polls.csv") %>%
+   filter(
+    is.na(state), 
+    party == "DEM",
+    fte_grade %in% c("A+", "A"),
+    candidate_name %in% c("Amy Klobuchar", "Andrew Yang", "Bernard Sanders", "Elizabeth Warren", "Joseph R. Biden Jr.", "Julián Castro", "Kamala D. Harris", "Pete Buttigieg", "Cory A. Booker", "Tulsi Gabbard")
+   ) %>% 
+  mutate(
+    end_date = as.Date(end_date, format = "%m/%d/%y"),
+    candidate_name = recode(candidate_name, "Bernard Sanders" = "Bernie Sanders", "Joseph R. Biden Jr." = "Joe Biden", "Kamala D. Harris" = "Kamala Harris", "Cory A. Booker" = "Cory Booker")
+    ) %>% 
+  group_by(end_date, candidate_name) %>% 
+  mutate(mean_pct = mean(pct)) %>% 
+  rename(candidate = candidate_name) %>% 
+  select(candidate, end_date, mean_pct) %>% 
+  filter(end_date >= as.Date("2019-09-29") & end_date <= as.Date("2019-10-16")) %>% 
+  pivot_wider(
+    names_from = end_date,
+    values_from = mean_pct) %>%
+  separate(candidate, c("first_name", "candidate")) %>%
+  select(candidate, "2019-09-29", "2019-10-16") %>% 
+  rename(pre_debate = "2019-09-29", post_debate = "2019-10-16") %>% 
+  mutate(
+    pct_change = ((post_debate - pre_debate)/pre_debate)*100,
+    point_difference = post_debate - pre_debate) 
+
+debate4_polls[9, 4] = 100
+```
+
 
 Join dataframes:
 
 ```{r}
-debate4_data1 =
-  full_join(trump_mentions, words_spoken, by = "candidate")
+debate4_data1 = full_join(trump_mentions, words_spoken, by = "candidate")
 
 debate4_data2 = full_join(debate4_data1, attacks, by = "candidate")
 
-debate4_data = full_join(debate4_data2, airtime, by = "candidate")
+debate4_data3 = full_join(debate4_data2, airtime, by = "candidate")
+
+debate4_data4 = full_join(debate4_data3, age_sex, by = "candidate")
+
+debate4_data_final = full_join(debate4_data4, debate4_polls, by = "candidate")
 ```
 
 
