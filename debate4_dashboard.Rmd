@@ -8,6 +8,8 @@ output:
 
 ```{r setup, include=FALSE}
 library(flexdashboard)
+library(tidyverse)
+library(plotly)
 
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE)
 options(
