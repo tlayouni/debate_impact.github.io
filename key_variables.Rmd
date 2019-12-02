@@ -74,8 +74,11 @@ poll_data %>%
   knitr::kable()
 ```
 
-#### The Ukraine Conspiracy
+#### Ukraine Conspiracy: Family Conflict of Interest 
 
+On May 1, 2019, the New York Times ran a story on [Joe Biden’s involvement in the firing of Ukraine’s Prosecutor General Viktor Shokin in 2015 that raised questions of a conflict of interest](https://www.nytimes.com/2019/05/01/us/politics/biden-son-ukraine.html). The negotiation that led to Shokin’s firing was touted as a strong performance of Vice President Biden in his foreign policy role while in the White House and the decision to fire Shokin was supported by both the Obama Administration and other Western nations. The prosecutor general was fired for his inability to crack down on the corruption. Hunter Biden, the son of Joe Biden sat on the board of a natural gas company, Burisma,  that according to this New York Times article, was being investigated by Shokin at the time of his firing.
+
+The next poll after this article was published showed the largest gain in polling percentage during the time period covered by these data. After dropping to 17 percent after announcing his candidacy, the next poll ending collection on May 20th, showed an increase of 16 percent to 33 percent overall. While we may have accepted this controversy to negatively impact Joe Biden’s polling performance, this surge in the polls may be due to initial momentum following his bid for presidency or push back against the narrative the Trump Administration had been stressing regarding Biden’s role in Ukraine. 
 
 
 
