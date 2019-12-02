@@ -7,5 +7,6 @@ output:
     theme: sandstone
 ---
 
-<img src="images/candidates 2.png" style="width:75%">
+<img src="images/candidates.png" style="width:75%">
 
+Image source: Vox 
