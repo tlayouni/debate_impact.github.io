@@ -315,16 +315,8 @@ $(document).ready(function () {
 </div>
 
 
-<pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>## ── Attaching packages ──── tidyverse 1.2.1 ──</code></pre>
-<pre><code>## ✔ ggplot2 3.2.1     ✔ purrr   0.3.2
-## ✔ tibble  2.1.3     ✔ dplyr   0.8.3
-## ✔ tidyr   1.0.0     ✔ stringr 1.4.0
-## ✔ readr   1.3.1     ✔ forcats 0.4.0</code></pre>
-<pre><code>## ── Conflicts ─────── tidyverse_conflicts() ──
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()</code></pre>
-<pre class="r"><code>library(rvest)</code></pre>
+<pre class="r"><code>library(tidyverse)
+library(rvest)</code></pre>
 <pre><code>## Loading required package: xml2</code></pre>
 <pre><code>## 
 ## Attaching package: &#39;rvest&#39;</code></pre>
@@ -335,6 +327,11 @@ $(document).ready(function () {
 ## 
 ##     guess_encoding</code></pre>
 <pre class="r"><code>library(httr)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;httr&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:plotly&#39;:
+## 
+##     config</code></pre>
 <p>Scraping Trump mentions data from FiveThirtyEight:</p>
 <pre class="r"><code>trump_mentions = 
   read_html(&quot;https://fivethirtyeight.com/features/the-october-democratic-debate-in-6-charts/&quot;) %&gt;%

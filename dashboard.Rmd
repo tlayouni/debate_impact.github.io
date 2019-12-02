@@ -1,0 +1,145 @@
+---
+title: "Debate Indicators and Polling Performance"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    vertical_layout: scroll
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(tidyverse)
+library(viridis)
+library(plotly)
+
+debate4_data = read.csv("./data/debate_4.csv")
+```
+
+Row {data-height=550 }
+-----------------------------------------------------------------------
+
+### Candidate Polling Before and After the Fourth Debate 
+
+```{r}
+debate_compare = 
+  debate4_data %>% 
+  select(candidate, pre_debate, post_debate) %>% 
+  pivot_longer(
+    pre_debate:post_debate,
+    names_to = "poll", 
+    values_to = "pct"
+  ) %>% 
+  mutate(poll = recode(poll, "pre_debate" = "Pre debate", "post_debate" = "Post debate")) %>% 
+  mutate(poll = factor(poll, c("Pre debate", "Post debate"))) %>% 
+  ggplot(aes(candidate, pct, fill = poll)) +
+  geom_bar(stat = "identity", position = "dodge") +
+  labs(
+    x = "Candidate",
+    y = "Percent",
+    fill = " "
+    ) +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  scale_fill_viridis(discrete = TRUE) +
+  theme_bw()
+
+ggplotly(debate_compare)
+```
+
+Row {data-height=350}
+-----------------------------------------------------------------------
+
+### Words Spoken vs. Polling Percent Change
+
+```{r}
+words_plot = 
+  debate4_data %>% 
+  mutate(words_spoken = recode(words_spoken, "2,256" = "2256", "1,791" = "1791", "2,266" = "2266", "2,559" = "2559", "1,497" = "1497", "3,695" = "3695", "2,267" = "2267", "2,085" = "2085", "3,064" = "3064", "1,666" = "1666")) %>% 
+  mutate(words_spoken = as.numeric(as.character((words_spoken)))) %>% 
+  ggplot(aes(x = words_spoken, y = pct_change, color = candidate)) + 
+  geom_point(shape = 21, size = 5, stroke = 2) +
+  scale_color_viridis(discrete = TRUE) +
+  theme_bw() +
+  labs(
+    x = "Words Spoken",
+    y = "Percent Change",
+    color = " "
+  )
+
+ggplotly(words_plot)
+```
+
+### Airtime vs. Polling Percent Change
+
+```{r}
+airtime_plot = 
+  ggplot(debate4_data, aes(x = airtime_min, y = pct_change, color = candidate)) + 
+  geom_point(shape = 21, size = 5, stroke = 2) +
+  scale_color_viridis(discrete = TRUE) +
+  theme_bw() +
+  labs(
+    x = "Airtime (min)",
+    y = "Percent Change",
+    color = " "
+  )
+
+ggplotly(airtime_plot)
+```
+
+Row {data-height=550}
+-----------------------------------------------------------------------
+
+### Trump Mentions vs. Polling Percent Change
+
+```{r}
+trump_plot = 
+  ggplot(debate4_data, aes(x = trump_mentions, y = pct_change, fill = candidate)) + 
+  geom_col() +
+  scale_fill_viridis(discrete = TRUE) +
+  theme_bw() +
+  labs(
+    x = "Trump Mentions",
+    y = "Percent Change",
+    fill = " "
+  )
+
+ggplotly(trump_plot)
+```
+
+Row {data-height=350}
+-----------------------------------------------------------------------
+
+### Attacks on Other Candidates vs. Polling Percent Change
+
+```{r}
+attack_plot = 
+  ggplot(debate4_data, aes(x = attacks_on, y = pct_change, color = candidate)) + 
+  geom_point(shape = 21, size = 5, stroke = 2) +
+  scale_color_viridis(discrete = TRUE) +
+  theme_bw() +
+  labs(
+    x = "Attacks",
+    y = "Percent Change",
+    color = " "
+  )
+
+ggplotly(attack_plot)
+```
+
+### Attacks by Other Candidates vs. Polling Percent Change
+
+```{r}
+attacked_plot = 
+  ggplot(debate4_data, aes(x = attacked_by, y = pct_change, color = candidate)) + 
+  geom_point(shape = 21, size = 5, stroke = 2) +
+  scale_color_viridis(discrete = TRUE) +
+  theme_bw() +
+    labs(
+    x = "Times Attacked",
+    y = "Percent Change",
+    color = " "
+  )
+
+ggplotly(attacked_plot)
+```
+
+

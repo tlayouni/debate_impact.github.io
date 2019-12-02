@@ -5,8 +5,10 @@ navbar:
   right:
     - text: "Key Variables"
       href: key_variables.html
-    - text: "Debate 4"
-      href: debate4_dashboard.html
+    - text: "Battleground States"
+      href: Battleground.html
+    - text: "The Fourth Debate"
+      href: dashboard.html
     - text: "Google Trends"
       href: google_trends.html
     - icon: fa-envelope fa-lg
