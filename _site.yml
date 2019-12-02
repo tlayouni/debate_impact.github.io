@@ -5,6 +5,8 @@ navbar:
   right:
     - text: "Key Variables"
       href: key_variables.html
+    - text: "Battleground States"
+      href: battleground.html
     - text: "The Fourth Debate"
       href: dashboard.html
     - text: "Google Trends"
