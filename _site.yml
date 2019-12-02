@@ -6,7 +6,7 @@ navbar:
     - text: "Key Variables"
       href: key_variables.html
     - text: "Debate 4"
-      href: debate_dashboard.html
+      href: debate4_dashboard.html
     - text: "Google Trends"
       href: google_trends.html
     - icon: fa-envelope fa-lg
