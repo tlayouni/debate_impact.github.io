@@ -40,13 +40,13 @@ poll_data %>%
   ggplot(aes(x = end_date, y = mean_pct)) +
   geom_point() + 
   geom_line() +
-  geom_vline(xintercept = as.numeric(as.Date("2019-03-31")), linetype = 4) +
-  geom_vline(xintercept = as.numeric(as.Date("2019-06-28")), linetype = 4) +
-   geom_vline(xintercept = as.numeric(as.Date("2019-05-01")), linetype = 4) +
+  geom_vline(xintercept = as.numeric(as.Date("2019-03-31")), linetype = 4, color = "blue") +
+  geom_vline(xintercept = as.numeric(as.Date("2019-06-28")), linetype = 4, color = "red") +
+   geom_vline(xintercept = as.numeric(as.Date("2019-05-01")), linetype = 4, color = "green") +
   labs(
     x = "Date",
     y = "Polling Percent",
-    title = "Polling Performance from January 24th 2019 to November 3, 2019"
+    title = "Joe Biden: Polling Performance from January 24th 2019 to November 3, 2019"
   )
 
 ggplotly(biden_plot)
@@ -74,14 +74,14 @@ warren_plot =
   ggplot(aes(x = end_date, y = mean_pct)) +
   geom_point() + 
   geom_line() +
-  geom_vline(xintercept = as.numeric(as.Date("2019-09-16")), linetype = 4) +
-  geom_vline(xintercept = as.numeric(as.Date("2019-10-28")), linetype = 4) +
-   geom_vline(xintercept = as.numeric(as.Date("2019-08-19")), linetype = 4) +
-   geom_vline(xintercept = as.numeric(as.Date("2019-02-19")), linetype = 4) +
+  geom_vline(xintercept = as.numeric(as.Date("2019-09-16")), linetype = 4, color = "blue") +
+  geom_vline(xintercept = as.numeric(as.Date("2019-10-28")), linetype = 4, color = "green") +
+   geom_vline(xintercept = as.numeric(as.Date("2019-08-19")), linetype = 4, color = "red") +
+   geom_vline(xintercept = as.numeric(as.Date("2019-02-19")), linetype = 4, color = "orange") +
   labs(
     x = "Date",
     y = "Polling Percent",
-    title = "Polling Performance from January 24th 2019 to November 3, 2019"
+    title = "Elizabeth Warren: Polling Performance from January 24th 2019 to November 3, 2019"
   )
 
 ggplotly(warren_plot)
@@ -97,14 +97,14 @@ poll_data %>%
   ggplot(aes(x = end_date, y = mean_pct)) +
   geom_point() + 
   geom_line() +
-  geom_vline(xintercept = as.numeric(as.Date("2019-04-15")), linetype = 4) +
-  geom_vline(xintercept = as.numeric(as.Date("2019-10-04")), linetype = 4) +
-   geom_vline(xintercept = as.numeric(as.Date("2019-10-15")), linetype = 4) +
- geom_vline(xintercept = as.numeric(as.Date("2019-04-25")), linetype = 4) +
+  geom_vline(xintercept = as.numeric(as.Date("2019-04-15")), linetype = 4, color = "blue") +
+  geom_vline(xintercept = as.numeric(as.Date("2019-10-04")), linetype = 4, color = "green") +
+   geom_vline(xintercept = as.numeric(as.Date("2019-10-15")), linetype = 4, color  = "red") +
+ geom_vline(xintercept = as.numeric(as.Date("2019-04-25")), linetype = 4, color = "orange") +
   labs(
     x = "Date",
     y = "Polling Percent",
-    title = "Polling Performance from January 24th 2019 to November 3, 2019"
+    title = "Bernie Sanders: Polling Performance from January 24th 2019 to November 3, 2019"
   )
 
 ggplotly(sanders_plot)
