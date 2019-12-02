@@ -40,7 +40,7 @@ poll_data %>%
   ggplot(aes(x = end_date, y = mean_pct)) +
   geom_point() + 
   geom_line() +
-  geom_vline(xintercept = as.numeric(as.Date("2019-03-31")), linetype = 4, color = "blue") +
+  geom_vline(xintercept = as.numeric(as.Date("2019-03-29")), linetype = 4, color = "blue") +
   geom_vline(xintercept = as.numeric(as.Date("2019-06-28")), linetype = 4, color = "red") +
    geom_vline(xintercept = as.numeric(as.Date("2019-05-01")), linetype = 4, color = "green") +
   labs(
@@ -53,16 +53,28 @@ ggplotly(biden_plot)
 ```
 
 
+<center><img src="./images/Flores.jpg" style="width:50%">
+
+#### Lucy Flores’ Essay on Joe Biden’s Inappropriate Touching: March 29, 2019  
+
+
+Lucy Flores a former assemblywoman in the state of Nevada wrote an essay published in The Cut that detailed her experience at a campaign event in 2014 during her run for Lieutenant governor where he smelled her hair and ["proceeded to plant a big slow kiss on the back of my head"]((https://www.thecut.com/2019/03/an-awkward-kiss-changed-how-i-saw-joe-biden.html)). This essay was published less than a month before Vice President Biden announced his campaign for president in April and it was quickly met with a response from the former VP saying [“not once -  never – did I believe I acted inappropriately”](https://www.nytimes.com/2019/03/30/us/politics/joe-biden-lucy-flores-news.html?action=click&module=RelatedCoverage&pgtype=Article&region=Footer) but acknowledged he had made “expressions of affection” over his career and pledged to listen to any accuser or women who shared their experiences. This news was quickly followed by other women speaking out in early April 2019 and sharing similar accounts of inappropriate or uncomfortable touching by the Vice President. 
+
+While the first poll after the publishing of the essay by Flores only showed a 1% decrease from 28% to 27%, the following poll released around the same time as Biden’s official announcement of his bid for the Presidency showed a drastic decline to only 17%. The negative press he received due to these accusations likely contributed to this drop in support in national polls. 
+
+
 ```{r echo = FALSE, message = FALSE}
 
 poll_data %>% 
+  ungroup() %>% 
+  mutate(poll_date = as.character(end_date)) %>% 
   filter(
     candidate_name == "Joe Biden",
-    end_date >= as.Date("2019-03-04") & end_date <=
-      as.Date("2019-04-25")
-    ) %>% 
-  ggplot(aes(x = end_date, y = mean_pct)) +
-  geom_col()
+    poll_date %in% c("2019-03-04", "2019-04-15", "2019-04-25")
+    )  %>% 
+  select(poll_date, mean_pct) %>% 
+  arrange(poll_date) %>% 
+  knitr::kable()
 ```
 
 ## Senator Elizabeth Warren
