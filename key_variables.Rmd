@@ -52,10 +52,7 @@ poll_data %>%
 ggplotly(biden_plot)
 ```
 
-
-<img src="./images/Flores.jpg" style="width:50%">
-
-#### Lucy Flores’ Essay on Joe Biden’s Inappropriate Touching: March 29, 2019  
+#### Lucy Flores’ Essay on Joe Biden’s Inappropriate Touching: March 29, 2019
 
 
 Lucy Flores a former assemblywoman in the state of Nevada wrote an essay published in The Cut that detailed her experience at a campaign event in 2014 during her run for Lieutenant governor where he smelled her hair and ["proceeded to plant a big slow kiss on the back of my head"]((https://www.thecut.com/2019/03/an-awkward-kiss-changed-how-i-saw-joe-biden.html)). This essay was published less than a month before Vice President Biden announced his campaign for president in April and it was quickly met with a response from the former VP saying [“not once -  never – did I believe I acted inappropriately”](https://www.nytimes.com/2019/03/30/us/politics/joe-biden-lucy-flores-news.html?action=click&module=RelatedCoverage&pgtype=Article&region=Footer) but acknowledged he had made “expressions of affection” over his career and pledged to listen to any accuser or women who shared their experiences. This news was quickly followed by other women speaking out in early April 2019 and sharing similar accounts of inappropriate or uncomfortable touching by the Vice President. 
@@ -76,6 +73,11 @@ poll_data %>%
   arrange(poll_date) %>% 
   knitr::kable()
 ```
+
+#### The Ukraine Conspiracy
+
+
+
 
 ## Senator Elizabeth Warren
 
