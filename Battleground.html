@@ -321,8 +321,8 @@ $(document).ready(function () {
 </div>
 
 
-<div id="battleground-states-in-american-politics" class="section level1">
-<h1>Battleground States in American Politics</h1>
+<div id="battlegroundswing-states-in-american-politics" class="section level1">
+<h1>Battleground/Swing States in American Politics</h1>
 <p><img src = "Battleground_files/2020-election-map.png" style = "width:75%"></p>
 <p>While voters from various states exhibit trends of selecting a candidate from a particular party in the presidential elections, there are those select few states where no single candidate may have garnered overwhelming support, resulting in a close race up until election night. The term “Swing State” <a href="https://books.google.com/ngrams/graph?content=battleground+states%2Cswing+states&amp;year_start=1950&amp;year_end=2008&amp;corpus=15&amp;smoothing=3&amp;share=&amp;direct_url=t1%3B%2Cbattleground%20states%3B%2Cc0%3B.t1%3B%2Cswing%20states%3B%2Cc0#t1%3B%2Cbattleground%20states%3B%2Cc0%3B.t1%3B%2Cswing%20states%3B%2Cc0">first emerged</a> in politics around the 1960s but was replaced by “Battleground” in the early 2000s, reflecting the often tumultuous campaigning that will occur between leading candidates. Battleground states may change with election cycles as well, due to demographic shifts in the voter pool or recent changes in other elections like gubernatorial and state legislative, but typically they are characterized by a margin of victory in a previous presidential election of less than 5%. In 2016, eleven states carried this distinction: CO, FL, IA, MI, MN, NV, NH, NC, OH, PA, and VA. In the upcoming 2020 election, key states such as PA, MI, and WI from the rust belt are considered to be <a href="https://electoralvotemap.com">likely Battlegrounds</a>, as well as southern states like FL. In 2016, Trump <a href="https://www.washingtonpost.com/graphics/politics/2016-election/swing-state-margins/">won these three rust belt states</a> with an approxmiate total of 107,000 votes, which was only less than 1% of all votes in the election, but helped him clinch overall victory.</p>
 </div>
@@ -333,24 +333,44 @@ $(document).ready(function () {
 </div>
 <div id="polling-in-important-2020-election-states" class="section level1">
 <h1>Polling in Important 2020 Election States</h1>
-<p>Top democratic candidates from Iowa and Pennsylvania with the highest average polling results:</p>
-<p>Candidate | Average Polling Percentage (IA) | Average Polling Percentage (PA)</p>
-<p>Biden | 23.7 | 32.4</p>
-<p>Sanders | 16 | 13.5</p>
-<p>Warren | 15.8 | 11.8</p>
-<p>Buttigieg | 11.6 | 6.7</p>
-<div id="a-range-of-results--poll-projections-vary" class="section level2">
-<h2>A Range of Results- Poll Projections Vary</h2>
+<p>Democrats who are <a href="https://www.realclearpolitics.com/epolls/2020/president/us/2020_democratic_presidential_nomination-6730.html">currently leading the election field nationally</a> include Biden, Sanders, Warren, and Buttigieg. These candidates are similarly topping the field in both Iowa and Pennsylvania.</p>
+<pre class="r"><code>state_polls =
+  president_primary_polls %&gt;%
+  group_by(state) %&gt;%
+  filter(state == c(&quot;Iowa&quot;, &quot;Pennsylvania&quot;),
+         party == &quot;DEM&quot;) %&gt;%
+  ggplot(aes(x = state, y = pct, color = answer)) + geom_point()
+state_polls
+
+president_primary_polls %&gt;%
+  mutate(text_label = str_c(&quot;Name: &quot;, answer, &#39;\nPct: &#39;, pct)) %&gt;%
+  plot_ly(
+    x = ~state, ~pct, type = &quot;scatter&quot;, mode = &quot;markers&quot;,
+    color = ~state, text = ~text_label, alpha = 0.5
+  )
+
+
+inner_join(president_primary_polls, comon_poll) %&gt;%
+  mutate(answer = fct_reorder(answer, pct)) %&gt;%
+  filter(state == &quot;Iowa&quot;) %&gt;%
+  plot_ly(y = ~pct, color = ~answer, type = &quot;box&quot;)
+
+president_primary_polls %&gt;%
+  count(answer) %&gt;%
+  mutate(answer = fct_reorder(answer, n)) %&gt;%
+  plot_ly(x = ~answer, y = ~n, color = ~answer, type = &quot;bar&quot;)</code></pre>
+<div id="varying-projections" class="section level2">
+<h2>Varying Projections</h2>
 <div id="iowa" class="section level3">
 <h3>Iowa</h3>
-<div id="htmlwidget-2de2e423459d3b8651d8" style="width:672px;height:480px;" class="plotly html-widget"></div>
-<script type="application/json" data-for="htmlwidget-2de2e423459d3b8651d8">{"x":{"visdat":{"1fb66c3ed5fa":["function () ","plotlyVisDat"]},"cur_data":"1fb66c3ed5fa","attrs":{"1fb66c3ed5fa":{"y":{},"color":{},"colors":"Set2","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"box"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"yaxis":{"domain":[0,1],"automargin":true,"title":"pct"},"xaxis":{"domain":[0,1],"automargin":true},"hovermode":"closest","showlegend":true},"source":"A","config":{"showSendToCloud":false},"data":[{"fillcolor":"rgba(236,200,130,0.5)","y":[14,16.6,12,7,7.2,14],"type":"box","name":"Buttigieg","marker":{"color":"rgba(236,200,130,1)","line":{"color":"rgba(236,200,130,1)"}},"line":{"color":"rgba(236,200,130,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(206,188,164,0.5)","y":[28,16.8,22,24.6,24,18,20,12,9],"type":"box","name":"Warren","marker":{"color":"rgba(206,188,164,1)","line":{"color":"rgba(206,188,164,1)"}},"line":{"color":"rgba(206,188,164,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(200,186,167,0.5)","y":[12.5,21,18,24.1,10.38],"type":"box","name":"Sanders","marker":{"color":"rgba(200,186,167,1)","line":{"color":"rgba(200,186,167,1)"}},"line":{"color":"rgba(200,186,167,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(190,182,173,0.5)","y":[12,17.6,22,25,29,17,24,19,27,25.3,29,32,30],"type":"box","name":"Biden","marker":{"color":"rgba(190,182,173,1)","line":{"color":"rgba(190,182,173,1)"}},"line":{"color":"rgba(190,182,173,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-5f115f3b0fc23dcdb30b" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-5f115f3b0fc23dcdb30b">{"x":{"visdat":{"226064cfb1f9":["function () ","plotlyVisDat"]},"cur_data":"226064cfb1f9","attrs":{"226064cfb1f9":{"y":{},"color":{},"colors":"Set2","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"box"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"yaxis":{"domain":[0,1],"automargin":true,"title":"pct"},"xaxis":{"domain":[0,1],"automargin":true},"hovermode":"closest","showlegend":true},"source":"A","config":{"showSendToCloud":false},"data":[{"fillcolor":"rgba(236,200,130,0.5)","y":[14,16.6,12,7,7.2,14],"type":"box","name":"Buttigieg","marker":{"color":"rgba(236,200,130,1)","line":{"color":"rgba(236,200,130,1)"}},"line":{"color":"rgba(236,200,130,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(206,188,164,0.5)","y":[28,16.8,22,24.6,24,18,20,12,9],"type":"box","name":"Warren","marker":{"color":"rgba(206,188,164,1)","line":{"color":"rgba(206,188,164,1)"}},"line":{"color":"rgba(206,188,164,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(200,186,167,0.5)","y":[12.5,21,18,24.1,10.38],"type":"box","name":"Sanders","marker":{"color":"rgba(200,186,167,1)","line":{"color":"rgba(200,186,167,1)"}},"line":{"color":"rgba(200,186,167,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(190,182,173,0.5)","y":[12,17.6,22,25,29,17,24,19,27,25.3,29,32,30],"type":"box","name":"Biden","marker":{"color":"rgba(190,182,173,1)","line":{"color":"rgba(190,182,173,1)"}},"line":{"color":"rgba(190,182,173,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 <p>Median polling results for leading candidates show Biden still ahead of the pack with 25% but also a large range of 20% between lowest and highest predictions. Warren follows in second in the polls and with a similarly wide range of 19%. Just a 2% difference between Warren and Sanders may signify a tight race. Buttigieg continues to lag behind these three but remains in double digits with 13%, all the while exhibiting the lowest range in polls at only 9.6%.</p>
 </div>
 <div id="pennsylvania" class="section level3">
 <h3>Pennsylvania</h3>
-<div id="htmlwidget-160e7f3b1ff728f8b2a5" style="width:672px;height:480px;" class="plotly html-widget"></div>
-<script type="application/json" data-for="htmlwidget-160e7f3b1ff728f8b2a5">{"x":{"visdat":{"1fb67963cbde":["function () ","plotlyVisDat"]},"cur_data":"1fb67963cbde","attrs":{"1fb67963cbde":{"y":{},"color":{},"colors":"Set2","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"box"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"yaxis":{"domain":[0,1],"automargin":true,"title":"pct"},"xaxis":{"domain":[0,1],"automargin":true},"hovermode":"closest","showlegend":true},"source":"A","config":{"showSendToCloud":false},"data":[{"fillcolor":"rgba(236,200,130,0.5)","y":[8.5],"type":"box","name":"Buttigieg","marker":{"color":"rgba(236,200,130,1)","line":{"color":"rgba(236,200,130,1)"}},"line":{"color":"rgba(236,200,130,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(206,188,164,0.5)","y":[9,8,8],"type":"box","name":"Warren","marker":{"color":"rgba(206,188,164,1)","line":{"color":"rgba(206,188,164,1)"}},"line":{"color":"rgba(206,188,164,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(200,186,167,0.5)","y":[6,13],"type":"box","name":"Sanders","marker":{"color":"rgba(200,186,167,1)","line":{"color":"rgba(200,186,167,1)"}},"line":{"color":"rgba(200,186,167,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(190,182,173,0.5)","y":[46],"type":"box","name":"Biden","marker":{"color":"rgba(190,182,173,1)","line":{"color":"rgba(190,182,173,1)"}},"line":{"color":"rgba(190,182,173,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-f3c396db79a5db5abc7d" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f3c396db79a5db5abc7d">{"x":{"visdat":{"2260140fde08":["function () ","plotlyVisDat"]},"cur_data":"2260140fde08","attrs":{"2260140fde08":{"y":{},"color":{},"colors":"Set2","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"box"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"yaxis":{"domain":[0,1],"automargin":true,"title":"pct"},"xaxis":{"domain":[0,1],"automargin":true},"hovermode":"closest","showlegend":true},"source":"A","config":{"showSendToCloud":false},"data":[{"fillcolor":"rgba(236,200,130,0.5)","y":[8.5],"type":"box","name":"Buttigieg","marker":{"color":"rgba(236,200,130,1)","line":{"color":"rgba(236,200,130,1)"}},"line":{"color":"rgba(236,200,130,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(206,188,164,0.5)","y":[9,8,8],"type":"box","name":"Warren","marker":{"color":"rgba(206,188,164,1)","line":{"color":"rgba(206,188,164,1)"}},"line":{"color":"rgba(206,188,164,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(200,186,167,0.5)","y":[6,13],"type":"box","name":"Sanders","marker":{"color":"rgba(200,186,167,1)","line":{"color":"rgba(200,186,167,1)"}},"line":{"color":"rgba(200,186,167,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(190,182,173,0.5)","y":[46],"type":"box","name":"Biden","marker":{"color":"rgba(190,182,173,1)","line":{"color":"rgba(190,182,173,1)"}},"line":{"color":"rgba(190,182,173,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
 </div>
 </div>
 </div>

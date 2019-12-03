@@ -4,7 +4,7 @@ output: html_document
 ---
 
 
-# Battleground States in American Politics
+# Battleground/Swing States in American Politics
 
 <img src = "Battleground_files/2020-election-map.png" style = "width:75%">
 
@@ -30,39 +30,39 @@ google_data <- read_csv("./data/google_data.csv")
 ```
 
 # Polling in Important 2020 Election States
-```{r, echo = FALSE, message = FALSE, include = FALSE}
-IA_poll_table =
-  president_primary_polls %>%
-  group_by(answer) %>%
-  filter(state == "Iowa",
-         party == "DEM") %>%
-  summarize(mean(pct))
-IA_poll_table
 
-PA_poll_table =
+Democrats who are [currently leading the election field nationally](https://www.realclearpolitics.com/epolls/2020/president/us/2020_democratic_presidential_nomination-6730.html) include Biden, Sanders, Warren, and Buttigieg. These candidates are similarly topping the field in both Iowa and Pennsylvania.
+
+```{r, eval = FALSE, message = FALSE}
+state_polls =
   president_primary_polls %>%
-  group_by(answer) %>%
-  filter(state == "Pennsylvania",
+  group_by(state) %>%
+  filter(state == c("Iowa", "Pennsylvania"),
          party == "DEM") %>%
-  summarize(mean(pct))
-PA_poll_table
+  ggplot(aes(x = state, y = pct, color = answer)) + geom_point()
+state_polls
+
+president_primary_polls %>%
+  mutate(text_label = str_c("Name: ", answer, '\nPct: ', pct)) %>%
+  plot_ly(
+    x = ~state, ~pct, type = "scatter", mode = "markers",
+    color = ~state, text = ~text_label, alpha = 0.5
+  )
+
+
+inner_join(president_primary_polls, comon_poll) %>%
+  mutate(answer = fct_reorder(answer, pct)) %>%
+  filter(state == "Iowa") %>%
+  plot_ly(y = ~pct, color = ~answer, type = "box")
+
+president_primary_polls %>%
+  count(answer) %>%
+  mutate(answer = fct_reorder(answer, n)) %>%
+  plot_ly(x = ~answer, y = ~n, color = ~answer, type = "bar")
 ```
 
-Top democratic candidates from Iowa and Pennsylvania with the highest average polling results:
 
-Candidate | Average Polling Percentage (IA) | Average Polling Percentage (PA)
-
-Biden | 23.7 | 32.4
-
-Sanders | 16 | 13.5
-
-Warren | 15.8 | 11.8
-
-Buttigieg | 11.6 | 6.7
-
-
-
-## A Range of Results- Poll Projections Vary
+## Varying Projections
 
 ### Iowa
 ```{r, echo = FALSE, message = FALSE, warning = FALSE}
