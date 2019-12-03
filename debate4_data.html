@@ -282,7 +282,13 @@ $(document).ready(function () {
   <a href="key_variables.html">Key Variables</a>
 </li>
 <li>
-  <a href="debate_dashboard.html">Debate 4</a>
+<<<<<<< HEAD
+=======
+  <a href="Battleground.html">Battleground States</a>
+</li>
+<li>
+>>>>>>> 424b697665411783c6063d0ee8431c3b0929152e
+  <a href="dashboard.html">The Fourth Debate</a>
 </li>
 <li>
   <a href="google_trends.html">Google Trends</a>
@@ -315,16 +321,8 @@ $(document).ready(function () {
 </div>
 
 
-<pre class="r"><code>library(tidyverse)</code></pre>
-<pre><code>## ── Attaching packages ─────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
-<pre><code>## ✔ ggplot2 3.2.1     ✔ purrr   0.3.2
-## ✔ tibble  2.1.3     ✔ dplyr   0.8.3
-## ✔ tidyr   1.0.0     ✔ stringr 1.4.0
-## ✔ readr   1.3.1     ✔ forcats 0.4.0</code></pre>
-<pre><code>## ── Conflicts ────────────────────────────────────────────────── tidyverse_conflicts() ──
-## ✖ dplyr::filter() masks stats::filter()
-## ✖ dplyr::lag()    masks stats::lag()</code></pre>
-<pre class="r"><code>library(rvest)</code></pre>
+<pre class="r"><code>library(tidyverse)
+library(rvest)</code></pre>
 <pre><code>## Loading required package: xml2</code></pre>
 <pre><code>## 
 ## Attaching package: &#39;rvest&#39;</code></pre>
@@ -335,6 +333,11 @@ $(document).ready(function () {
 ## 
 ##     guess_encoding</code></pre>
 <pre class="r"><code>library(httr)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;httr&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:plotly&#39;:
+## 
+##     config</code></pre>
 <p>Scraping Trump mentions data from FiveThirtyEight:</p>
 <pre class="r"><code>trump_mentions = 
   read_html(&quot;https://fivethirtyeight.com/features/the-october-democratic-debate-in-6-charts/&quot;) %&gt;%
@@ -347,7 +350,7 @@ $(document).ready(function () {
   rename(trump_mentions = x) %&gt;% 
   filter(candidate %in% c(&quot;Warren&quot;, &quot;Biden&quot;, &quot;Klobuchar&quot;, &quot;Sanders&quot;, &quot;Buttigieg&quot;, &quot;Harris&quot;, &quot;Booker&quot;, &quot;Yang&quot;, &quot;Castro&quot;, &quot;Gabbard&quot;))</code></pre>
 <pre><code>## Warning: Expected 2 pieces. Additional pieces discarded in 1 rows [12].</code></pre>
-<p>Scraping words spoken data from NBC News;</p>
+<p>Scraping words spoken data from NBC News:</p>
 <pre class="r"><code>words_spoken = 
   read_html(&quot;https://fivethirtyeight.com/features/the-october-democratic-debate-in-6-charts/&quot;) %&gt;%
   html_nodes(css = &quot;table&quot;) %&gt;% 
@@ -384,13 +387,81 @@ $(document).ready(function () {
 ##   debate = col_double(),
 ##   night = col_double()
 ## )</code></pre>
+<p>Read in candidate age and sex:</p>
+<pre class="r"><code>age_sex = read_csv(&quot;./data/candidate_age_sex.csv&quot;)</code></pre>
+<pre><code>## Parsed with column specification:
+## cols(
+##   candidate = col_character(),
+##   age = col_double(),
+##   sex = col_character()
+## )</code></pre>
+<p>Polling data:</p>
+<pre class="r"><code>debate4_polls = 
+read_csv(&quot;./data/president_primary_polls.csv&quot;) %&gt;%
+   filter(
+    is.na(state), 
+    party == &quot;DEM&quot;,
+    fte_grade %in% c(&quot;A+&quot;, &quot;A&quot;),
+    candidate_name %in% c(&quot;Amy Klobuchar&quot;, &quot;Andrew Yang&quot;, &quot;Bernard Sanders&quot;, &quot;Elizabeth Warren&quot;, &quot;Joseph R. Biden Jr.&quot;, &quot;Julián Castro&quot;, &quot;Kamala D. Harris&quot;, &quot;Pete Buttigieg&quot;, &quot;Cory A. Booker&quot;, &quot;Tulsi Gabbard&quot;)
+   ) %&gt;% 
+  mutate(
+    end_date = as.Date(end_date, format = &quot;%m/%d/%y&quot;),
+    candidate_name = recode(candidate_name, &quot;Bernard Sanders&quot; = &quot;Bernie Sanders&quot;, &quot;Joseph R. Biden Jr.&quot; = &quot;Joe Biden&quot;, &quot;Kamala D. Harris&quot; = &quot;Kamala Harris&quot;, &quot;Cory A. Booker&quot; = &quot;Cory Booker&quot;)
+    ) %&gt;% 
+  group_by(end_date, candidate_name) %&gt;% 
+  mutate(mean_pct = mean(pct)) %&gt;% 
+  rename(candidate = candidate_name) %&gt;% 
+  select(candidate, end_date, mean_pct) %&gt;% 
+  filter(end_date &gt;= as.Date(&quot;2019-09-29&quot;) &amp; end_date &lt;= as.Date(&quot;2019-10-16&quot;)) %&gt;% 
+  pivot_wider(
+    names_from = end_date,
+    values_from = mean_pct) %&gt;%
+  separate(candidate, c(&quot;first_name&quot;, &quot;candidate&quot;)) %&gt;%
+  select(candidate, &quot;2019-09-29&quot;, &quot;2019-10-16&quot;) %&gt;% 
+  rename(pre_debate = &quot;2019-09-29&quot;, post_debate = &quot;2019-10-16&quot;) %&gt;% 
+  mutate(
+    pct_change = ((post_debate - pre_debate)/pre_debate)*100,
+    point_difference = post_debate - pre_debate) </code></pre>
+<pre><code>## Parsed with column specification:
+## cols(
+##   .default = col_character(),
+##   question_id = col_double(),
+##   poll_id = col_double(),
+##   cycle = col_double(),
+##   pollster_id = col_double(),
+##   sponsor_ids = col_number(),
+##   pollster_rating_id = col_double(),
+##   sample_size = col_double(),
+##   sponsor_candidate = col_logical(),
+##   internal = col_logical(),
+##   partisan = col_logical(),
+##   tracking = col_logical(),
+##   nationwide_batch = col_logical(),
+##   pct = col_double()
+## )</code></pre>
+<pre><code>## See spec(...) for full column specifications.</code></pre>
+<pre><code>## Warning: 72 parsing failures.
+##  row      col           expected actual                                 file
+## 3918 partisan 1/0/T/F/TRUE/FALSE    DEM &#39;./data/president_primary_polls.csv&#39;
+## 3919 partisan 1/0/T/F/TRUE/FALSE    DEM &#39;./data/president_primary_polls.csv&#39;
+## 3920 partisan 1/0/T/F/TRUE/FALSE    DEM &#39;./data/president_primary_polls.csv&#39;
+## 3921 partisan 1/0/T/F/TRUE/FALSE    DEM &#39;./data/president_primary_polls.csv&#39;
+## 3922 partisan 1/0/T/F/TRUE/FALSE    DEM &#39;./data/president_primary_polls.csv&#39;
+## .... ........ .................. ...... ....................................
+## See problems(...) for more details.</code></pre>
+<pre class="r"><code>debate4_polls[9, 4] = 100</code></pre>
 <p>Join dataframes:</p>
-<pre class="r"><code>debate4_data1 =
-  full_join(trump_mentions, words_spoken, by = &quot;candidate&quot;)
+<pre class="r"><code>debate4_data1 = full_join(trump_mentions, words_spoken, by = &quot;candidate&quot;)
 
 debate4_data2 = full_join(debate4_data1, attacks, by = &quot;candidate&quot;)
 
-debate4_data = full_join(debate4_data2, airtime, by = &quot;candidate&quot;)</code></pre>
+debate4_data3 = full_join(debate4_data2, airtime, by = &quot;candidate&quot;)
+
+debate4_data4 = full_join(debate4_data3, age_sex, by = &quot;candidate&quot;)
+
+debate4_data_final = full_join(debate4_data4, debate4_polls, by = &quot;candidate&quot;)</code></pre>
+<p>Save as CSV:</p>
+<pre class="r"><code>write.csv(debate4_data_final, &quot;./data/debate_4.csv&quot;, row.names = FALSE )</code></pre>
 
 
 

@@ -1,0 +1,126 @@
+---
+title: "Battleground"
+output: html_document
+---
+
+
+# Battleground/Swing States in American Politics
+
+<img src = "Battleground_files/2020-election-map.png" style = "width:75%">
+
+While voters from various states exhibit trends of selecting a candidate from a particular party in the presidential elections, there are those select few states where no single candidate may have garnered overwhelming support, resulting in a close race up until election night. The term "Swing State" [first emerged](https://books.google.com/ngrams/graph?content=battleground+states%2Cswing+states&year_start=1950&year_end=2008&corpus=15&smoothing=3&share=&direct_url=t1%3B%2Cbattleground%20states%3B%2Cc0%3B.t1%3B%2Cswing%20states%3B%2Cc0#t1%3B%2Cbattleground%20states%3B%2Cc0%3B.t1%3B%2Cswing%20states%3B%2Cc0) in politics around the 1960s but was replaced by "Battleground" in the early 2000s, reflecting the often tumultuous campaigning that will occur between leading candidates. Battleground states may change with election cycles as well, due to demographic shifts in the voter pool or recent changes in other elections like gubernatorial and state legislative, but typically they are characterized by a margin of victory in a previous presidential election of less than 5%. In 2016, eleven states carried this distinction: CO, FL, IA, MI, MN, NV, NH, NC, OH, PA, and VA. In the upcoming 2020 election, key states such as PA, MI, and WI from the rust belt are considered to be [likely Battlegrounds](https://electoralvotemap.com), as well as southern states like FL. In 2016, Trump [won these three rust belt states](https://www.washingtonpost.com/graphics/politics/2016-election/swing-state-margins/) with an approxmiate total of 107,000 votes, which was only less than 1% of all votes in the election, but helped him clinch overall victory.
+
+
+# Pennsylvania and Iowa
+
+Pennsylvania has experienced [recent shifts in local level results](https://www.dailykos.com/stories/2017/11/9/1714253/-Pennsylvania-Democrats-flip-offices-for-first-time-since-1799-and-GOP-congressmen-could-be-next), as three regularly strong Republican counties all flipped blue. In Chester County, it was the first time Democrats won several key offices since 1799, and similarly in Bucks County, it was the first time Democrats won any countywide office except for county commissioner in 30 years. Pennsylvania's 2020 primary will be held Tuesday, April 28th.
+
+Iowa is often considered to be a state of note, not only for its frequent Battleground status but also because it hosts the [first caucus](https://www.uspresidentialelectionnews.com/2020-presidential-primary-schedule-calendar/) or primary during a presidential election year, which will happen Monday, February 3rd. For the last 20 years, an Iowa winner (top 4 for their party) has gone on to [win the presidency](https://www.thewrap.com/how-good-are-the-iowa-caucuses-at-picking-presidential-nominees-pretty-good/). [Recent poll results](https://www.usatoday.com/story/news/politics/elections/2019/10/21/iowa-caucuses-pete-buttigieg-elizabeth-warren-joe-biden-top-poll/4025797002/) in October have shown a surprising jump by South Bend major Pete Buttigieg in Iowa, who has propelled himself into the top 3 leading candidates with 13%, following closely behind frontrunners Senator Elizabeth Warren at 17% and former Vice President Joe Biden at 18%.
+
+```{r, echo = FALSE, include = FALSE}
+library(tidyverse)
+library(viridis)
+library(plotly)
+library(patchwork)
+```
+
+```{r, echo = FALSE, include = FALSE}
+president_primary_polls <- read_csv("./data/president_primary_polls.csv")
+google_data <- read_csv("./data/google_data.csv")
+```
+
+# Polling in Important 2020 Election States
+
+Democrats who are [currently leading the election field nationally](https://www.realclearpolitics.com/epolls/2020/president/us/2020_democratic_presidential_nomination-6730.html) include Biden, Sanders, Warren, and Buttigieg. These candidates are similarly topping the field in both Iowa and Pennsylvania.
+
+```{r, eval = FALSE, message = FALSE}
+state_polls =
+  president_primary_polls %>%
+  group_by(state) %>%
+  filter(state == c("Iowa", "Pennsylvania"),
+         party == "DEM") %>%
+  ggplot(aes(x = state, y = pct, color = answer)) + geom_point()
+state_polls
+
+president_primary_polls %>%
+  mutate(text_label = str_c("Name: ", answer, '\nPct: ', pct)) %>%
+  plot_ly(
+    x = ~state, ~pct, type = "scatter", mode = "markers",
+    color = ~state, text = ~text_label, alpha = 0.5
+  )
+
+
+inner_join(president_primary_polls, comon_poll) %>%
+  mutate(answer = fct_reorder(answer, pct)) %>%
+  filter(state == "Iowa") %>%
+  plot_ly(y = ~pct, color = ~answer, type = "box")
+
+president_primary_polls %>%
+  count(answer) %>%
+  mutate(answer = fct_reorder(answer, n)) %>%
+  plot_ly(x = ~answer, y = ~n, color = ~answer, type = "bar")
+```
+
+
+## Varying Projections
+
+### Iowa
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+IA_plotly =
+president_primary_polls %>%
+  mutate(answer = fct_reorder(answer, pct)) %>%
+  filter(state == "Iowa",
+         answer == c("Biden", "Warren", "Sanders", "Buttigieg")) %>%
+  plot_ly(y = ~pct, color = ~answer, type = "box", colors = "Set2")
+IA_plotly
+```
+
+Median polling results for leading candidates show Biden still ahead of the pack with 25% but also a large range of 20% between lowest and highest predictions. Warren follows in second in the polls and with a similarly wide range of 19%. Just a 2% difference between Warren and Sanders may signify a tight race. Buttigieg continues to lag behind these three but remains in double digits with 13%, all the while exhibiting the lowest range in polls at only 9.6%.
+
+### Pennsylvania
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+PA_plotly =
+president_primary_polls %>%
+  mutate(answer = fct_reorder(answer, pct)) %>%
+  filter(state == "Pennsylvania",
+         answer == c("Biden", "Warren", "Sanders", "Buttigieg")) %>%
+  plot_ly(y = ~pct, color = ~answer, type = "box", colors = "Set2")
+PA_plotly
+```
+
+
+# Google Trends By State
+
+## Iowa
+```{r, echo = FALSE}
+iowa_google = 
+  google_data %>%
+  filter(geo == "US-IA",
+         name == c("bernie sanders", "elizabeth warren", "joe biden", "pete buttigieg")) %>%
+  ggplot(aes(x = date, y = hits, color = name)) + geom_point() + geom_path() +
+  labs(
+    x = "Time",
+    y = "Relative Proportion of Searches"
+  ) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+iowa_google
+```
+
+While Sanders could appreciate an increase in Google searches earlier in spring of this year, his relative search load in Iowa has fallen and remained just over 25%. This is in stark contrast to Warren and Buttigieg whose names shot up in searches this fall, with Warren closing in on 100% and Buttigieg up to almost 75%, potentially reflecting his result in the [October Suffolk University/USA Today poll](https://www.usatoday.com/story/news/politics/elections/2019/10/21/iowa-caucuses-pete-buttigieg-elizabeth-warren-joe-biden-top-poll/4025797002/) where he climbed into double digits. Biden may be showing the lowest relative proportion of searches at under 25%, but still maintains his support and an overall lead in polling within the state. In many cases it seems that candidates may have experienced positive movement in searches following debate periods in late June and July as well as early September and October, which is when they are most visible to voting audiences. Throughout the debates, Iowa has been [mentioned more often](https://www.desmoinesregister.com/story/news/elections/presidential/caucus/2019/11/22/democratic-presidential-candidates-mention-iowa-debates/4263726002/) than the other states whose caucus' or primaries will take place in February, 2020; however, only Buttigieg has directly mentioned Iowa while on stage, which may play a role in his within-state popularity.
+
+## Pennsylvania
+```{r, echo = FALSE}
+penn_google = 
+  google_data %>%
+  filter(geo == "US-PA",
+         name == c("bernie sanders", "elizabeth warren", "joe biden", "pete buttigieg")) %>%
+  ggplot(aes(x = date, y = hits, color = name)) + geom_point() + geom_path() +
+  labs(
+    x = "Time",
+    y = "Relative Proportion of Searches"
+  ) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+penn_google
+```
+
+Pennsylvania shows a different story in Google searches, as no single candidate has crested the 50% margin. Warren came close around August but has experienced some fluctuation, leaving her at about 33%. Sanders saw a significant jump in searches around July, giving him a 30% boost, but has since lowered. Biden is again low in search results, and Buttigieg does not seem to exhibit the same strength in popularity as he did in Iowa, coming in about 50% lower in overall searches in PA following the most recent polls.

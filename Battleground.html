@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Battleground</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/sandstone.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<script src="site_libs/plotly-binding-4.9.0/plotly.js"></script>
+<script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="site_libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="site_libs/plotly-htmlwidgets-css-1.46.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="site_libs/plotly-main-1.46.1/plotly-latest.min.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 61px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h2 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h3 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h4 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h5 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h6 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Home</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="key_variables.html">Key Variables</a>
+</li>
+<li>
+  <a href="Battleground.html">Battleground States</a>
+</li>
+<li>
+  <a href="dashboard.html">The Fourth Debate</a>
+</li>
+<li>
+  <a href="google_trends.html">Google Trends</a>
+</li>
+<li>
+  <a href="mailto:&lt;sm4594@cumc.columbia.edu&gt;">
+    <span class="fa fa-envelope fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="http://github.com/tlayouni/debate_impact.github.io/">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Battleground</h1>
+
+</div>
+
+
+<div id="battlegroundswing-states-in-american-politics" class="section level1">
+<h1>Battleground/Swing States in American Politics</h1>
+<p><img src = "Battleground_files/2020-election-map.png" style = "width:75%"></p>
+<p>While voters from various states exhibit trends of selecting a candidate from a particular party in the presidential elections, there are those select few states where no single candidate may have garnered overwhelming support, resulting in a close race up until election night. The term “Swing State” <a href="https://books.google.com/ngrams/graph?content=battleground+states%2Cswing+states&amp;year_start=1950&amp;year_end=2008&amp;corpus=15&amp;smoothing=3&amp;share=&amp;direct_url=t1%3B%2Cbattleground%20states%3B%2Cc0%3B.t1%3B%2Cswing%20states%3B%2Cc0#t1%3B%2Cbattleground%20states%3B%2Cc0%3B.t1%3B%2Cswing%20states%3B%2Cc0">first emerged</a> in politics around the 1960s but was replaced by “Battleground” in the early 2000s, reflecting the often tumultuous campaigning that will occur between leading candidates. Battleground states may change with election cycles as well, due to demographic shifts in the voter pool or recent changes in other elections like gubernatorial and state legislative, but typically they are characterized by a margin of victory in a previous presidential election of less than 5%. In 2016, eleven states carried this distinction: CO, FL, IA, MI, MN, NV, NH, NC, OH, PA, and VA. In the upcoming 2020 election, key states such as PA, MI, and WI from the rust belt are considered to be <a href="https://electoralvotemap.com">likely Battlegrounds</a>, as well as southern states like FL. In 2016, Trump <a href="https://www.washingtonpost.com/graphics/politics/2016-election/swing-state-margins/">won these three rust belt states</a> with an approxmiate total of 107,000 votes, which was only less than 1% of all votes in the election, but helped him clinch overall victory.</p>
+</div>
+<div id="pennsylvania-and-iowa" class="section level1">
+<h1>Pennsylvania and Iowa</h1>
+<p>Pennsylvania has experienced <a href="https://www.dailykos.com/stories/2017/11/9/1714253/-Pennsylvania-Democrats-flip-offices-for-first-time-since-1799-and-GOP-congressmen-could-be-next">recent shifts in local level results</a>, as three regularly strong Republican counties all flipped blue. In Chester County, it was the first time Democrats won several key offices since 1799, and similarly in Bucks County, it was the first time Democrats won any countywide office except for county commissioner in 30 years. Pennsylvania’s 2020 primary will be held Tuesday, April 28th.</p>
+<p>Iowa is often considered to be a state of note, not only for its frequent Battleground status but also because it hosts the <a href="https://www.uspresidentialelectionnews.com/2020-presidential-primary-schedule-calendar/">first caucus</a> or primary during a presidential election year, which will happen Monday, February 3rd. For the last 20 years, an Iowa winner (top 4 for their party) has gone on to <a href="https://www.thewrap.com/how-good-are-the-iowa-caucuses-at-picking-presidential-nominees-pretty-good/">win the presidency</a>. <a href="https://www.usatoday.com/story/news/politics/elections/2019/10/21/iowa-caucuses-pete-buttigieg-elizabeth-warren-joe-biden-top-poll/4025797002/">Recent poll results</a> in October have shown a surprising jump by South Bend major Pete Buttigieg in Iowa, who has propelled himself into the top 3 leading candidates with 13%, following closely behind frontrunners Senator Elizabeth Warren at 17% and former Vice President Joe Biden at 18%.</p>
+</div>
+<div id="polling-in-important-2020-election-states" class="section level1">
+<h1>Polling in Important 2020 Election States</h1>
+<p>Democrats who are <a href="https://www.realclearpolitics.com/epolls/2020/president/us/2020_democratic_presidential_nomination-6730.html">currently leading the election field nationally</a> include Biden, Sanders, Warren, and Buttigieg. These candidates are similarly topping the field in both Iowa and Pennsylvania.</p>
+<pre class="r"><code>state_polls =
+  president_primary_polls %&gt;%
+  group_by(state) %&gt;%
+  filter(state == c(&quot;Iowa&quot;, &quot;Pennsylvania&quot;),
+         party == &quot;DEM&quot;) %&gt;%
+  ggplot(aes(x = state, y = pct, color = answer)) + geom_point()
+state_polls
+
+president_primary_polls %&gt;%
+  mutate(text_label = str_c(&quot;Name: &quot;, answer, &#39;\nPct: &#39;, pct)) %&gt;%
+  plot_ly(
+    x = ~state, ~pct, type = &quot;scatter&quot;, mode = &quot;markers&quot;,
+    color = ~state, text = ~text_label, alpha = 0.5
+  )
+
+
+inner_join(president_primary_polls, comon_poll) %&gt;%
+  mutate(answer = fct_reorder(answer, pct)) %&gt;%
+  filter(state == &quot;Iowa&quot;) %&gt;%
+  plot_ly(y = ~pct, color = ~answer, type = &quot;box&quot;)
+
+president_primary_polls %&gt;%
+  count(answer) %&gt;%
+  mutate(answer = fct_reorder(answer, n)) %&gt;%
+  plot_ly(x = ~answer, y = ~n, color = ~answer, type = &quot;bar&quot;)</code></pre>
+<div id="varying-projections" class="section level2">
+<h2>Varying Projections</h2>
+<div id="iowa" class="section level3">
+<h3>Iowa</h3>
+<div id="htmlwidget-5f115f3b0fc23dcdb30b" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-5f115f3b0fc23dcdb30b">{"x":{"visdat":{"226064cfb1f9":["function () ","plotlyVisDat"]},"cur_data":"226064cfb1f9","attrs":{"226064cfb1f9":{"y":{},"color":{},"colors":"Set2","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"box"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"yaxis":{"domain":[0,1],"automargin":true,"title":"pct"},"xaxis":{"domain":[0,1],"automargin":true},"hovermode":"closest","showlegend":true},"source":"A","config":{"showSendToCloud":false},"data":[{"fillcolor":"rgba(236,200,130,0.5)","y":[14,16.6,12,7,7.2,14],"type":"box","name":"Buttigieg","marker":{"color":"rgba(236,200,130,1)","line":{"color":"rgba(236,200,130,1)"}},"line":{"color":"rgba(236,200,130,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(206,188,164,0.5)","y":[28,16.8,22,24.6,24,18,20,12,9],"type":"box","name":"Warren","marker":{"color":"rgba(206,188,164,1)","line":{"color":"rgba(206,188,164,1)"}},"line":{"color":"rgba(206,188,164,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(200,186,167,0.5)","y":[12.5,21,18,24.1,10.38],"type":"box","name":"Sanders","marker":{"color":"rgba(200,186,167,1)","line":{"color":"rgba(200,186,167,1)"}},"line":{"color":"rgba(200,186,167,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(190,182,173,0.5)","y":[12,17.6,22,25,29,17,24,19,27,25.3,29,32,30],"type":"box","name":"Biden","marker":{"color":"rgba(190,182,173,1)","line":{"color":"rgba(190,182,173,1)"}},"line":{"color":"rgba(190,182,173,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<p>Median polling results for leading candidates show Biden still ahead of the pack with 25% but also a large range of 20% between lowest and highest predictions. Warren follows in second in the polls and with a similarly wide range of 19%. Just a 2% difference between Warren and Sanders may signify a tight race. Buttigieg continues to lag behind these three but remains in double digits with 13%, all the while exhibiting the lowest range in polls at only 9.6%.</p>
+</div>
+<div id="pennsylvania" class="section level3">
+<h3>Pennsylvania</h3>
+<div id="htmlwidget-f3c396db79a5db5abc7d" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-f3c396db79a5db5abc7d">{"x":{"visdat":{"2260140fde08":["function () ","plotlyVisDat"]},"cur_data":"2260140fde08","attrs":{"2260140fde08":{"y":{},"color":{},"colors":"Set2","alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"box"}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"yaxis":{"domain":[0,1],"automargin":true,"title":"pct"},"xaxis":{"domain":[0,1],"automargin":true},"hovermode":"closest","showlegend":true},"source":"A","config":{"showSendToCloud":false},"data":[{"fillcolor":"rgba(236,200,130,0.5)","y":[8.5],"type":"box","name":"Buttigieg","marker":{"color":"rgba(236,200,130,1)","line":{"color":"rgba(236,200,130,1)"}},"line":{"color":"rgba(236,200,130,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(206,188,164,0.5)","y":[9,8,8],"type":"box","name":"Warren","marker":{"color":"rgba(206,188,164,1)","line":{"color":"rgba(206,188,164,1)"}},"line":{"color":"rgba(206,188,164,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(200,186,167,0.5)","y":[6,13],"type":"box","name":"Sanders","marker":{"color":"rgba(200,186,167,1)","line":{"color":"rgba(200,186,167,1)"}},"line":{"color":"rgba(200,186,167,1)"},"xaxis":"x","yaxis":"y","frame":null},{"fillcolor":"rgba(190,182,173,0.5)","y":[46],"type":"box","name":"Biden","marker":{"color":"rgba(190,182,173,1)","line":{"color":"rgba(190,182,173,1)"}},"line":{"color":"rgba(190,182,173,1)"},"xaxis":"x","yaxis":"y","frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+<div id="google-trends-by-state" class="section level1">
+<h1>Google Trends By State</h1>
+<div id="iowa-1" class="section level2">
+<h2>Iowa</h2>
+<p><img src="Battleground_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>While Sanders could appreciate an increase in Google searches earlier in spring of this year, his relative search load in Iowa has fallen and remained just over 25%. This is in stark contrast to Warren and Buttigieg whose names shot up in searches this fall, with Warren closing in on 100% and Buttigieg up to almost 75%, potentially reflecting his result in the <a href="https://www.usatoday.com/story/news/politics/elections/2019/10/21/iowa-caucuses-pete-buttigieg-elizabeth-warren-joe-biden-top-poll/4025797002/">October Suffolk University/USA Today poll</a> where he climbed into double digits. Biden may be showing the lowest relative proportion of searches at under 25%, but still maintains his support and an overall lead in polling within the state. In many cases it seems that candidates may have experienced positive movement in searches following debate periods in late June and July as well as early September and October, which is when they are most visible to voting audiences. Throughout the debates, Iowa has been <a href="https://www.desmoinesregister.com/story/news/elections/presidential/caucus/2019/11/22/democratic-presidential-candidates-mention-iowa-debates/4263726002/">mentioned more often</a> than the other states whose caucus’ or primaries will take place in February, 2020; however, only Buttigieg has directly mentioned Iowa while on stage, which may play a role in his within-state popularity.</p>
+</div>
+<div id="pennsylvania-1" class="section level2">
+<h2>Pennsylvania</h2>
+<p><img src="Battleground_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>Pennsylvania shows a different story in Google searches, as no single candidate has crested the 50% margin. Warren came close around August but has experienced some fluctuation, leaving her at about 33%. Sanders saw a significant jump in searches around July, giving him a 30% boost, but has since lowered. Biden is again low in search results, and Buttigieg does not seem to exhibit the same strength in popularity as he did in Iowa, coming in about 50% lower in overall searches in PA following the most recent polls.</p>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
