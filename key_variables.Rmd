@@ -26,13 +26,29 @@ knitr::opts_chunk$set(
 ## Former Vice President Joe Biden
 
 ```{r echo = FALSE, message = FALSE}
-
 poll_data = 
 read_csv("./data/cleaned_polls.csv") %>% 
   group_by(end_date, candidate_name) %>% 
   mutate(
     mean_pct = mean(pct)
   )
+
+poll_data %>% 
+  group_by(candidate_name) %>% 
+  mutate(
+    poll_min = min(mean_pct),
+    poll_max = max(mean_pct),
+    poll_mean = round(mean(mean_pct)),
+    poll_sd = round(sd(mean_pct))
+    ) %>% 
+  distinct(candidate_name, poll_min, poll_max, poll_mean, poll_sd) %>% 
+  filter(candidate_name == "Joe Biden") %>% 
+  rename("Candidate" = "candidate_name", "Minimum Polling %" = "poll_min", "Maximum Polling %" = "poll_max", "Average Polling %" = "poll_mean", "Standard Deviation Polling %" = "poll_sd") %>% 
+  knitr::kable()
+
+```
+
+```{r echo = FALSE, message = FALSE}
 
 biden_plot = 
 poll_data %>% 
@@ -91,6 +107,29 @@ There does appear to be some momentum following this October announcement, altho
 ## Senator Elizabeth Warren
 
 ```{r echo = FALSE, message = FALSE}
+poll_data = 
+read_csv("./data/cleaned_polls.csv") %>% 
+  group_by(end_date, candidate_name) %>% 
+  mutate(
+    mean_pct = mean(pct)
+  )
+
+poll_data %>% 
+  group_by(candidate_name) %>% 
+  mutate(
+    poll_min = min(mean_pct),
+    poll_max = max(mean_pct),
+    poll_mean = round(mean(mean_pct)),
+    poll_sd = round(sd(mean_pct))
+    ) %>% 
+  distinct(candidate_name, poll_min, poll_max, poll_mean, poll_sd) %>% 
+  filter(candidate_name == "Elizabeth Warren") %>% 
+  rename("Candidate" = "candidate_name", "Minimum Polling %" = "poll_min", "Maximum Polling %" = "poll_max", "Average Polling %" = "poll_mean", "Standard Deviation Polling %" = "poll_sd") %>% 
+  knitr::kable()
+
+```
+
+```{r echo = FALSE, message = FALSE}
 warren_plot = 
   poll_data %>% 
   filter(candidate_name == "Elizabeth Warren") %>% 
@@ -100,7 +139,7 @@ warren_plot =
   geom_vline(xintercept = as.numeric(as.Date("2019-09-16")), linetype = 4, color = "blue") +
   geom_vline(xintercept = as.numeric(as.Date("2019-10-28")), linetype = 4, color = "green") +
    geom_vline(xintercept = as.numeric(as.Date("2019-08-19")), linetype = 4, color = "red") +
-   geom_vline(xintercept = as.numeric(as.Date("2019-02-19")), linetype = 4, color = "orange") +
+   #geom_vline(xintercept = as.numeric(as.Date("2019-02-19")), linetype = 4, color = "orange") +
   labs(
     x = "Date",
     y = "Polling Percent",
@@ -127,7 +166,31 @@ It is hard to tell how this news affected her polling as it came just days befor
 Warren received a lot of backlash for her handling of her claims of Native American ancestry in 2018 when she took and publicly released ancestry results after challenging Trump to pay her one million dollars if she took the test. While she had previously apologized for this, during an [August 19th Forum in Iowa](https://www.nytimes.com/2019/08/19/us/politics/elizabeth-warren-native-american.html) in front of a majority Native American crowd, she again apologized for her actions and announced her plans to help Native American communities with housing and addressing the opioid crisis. 
 
 The polls following this meeting showed an initial drop in the polls, down 2.5% to 17.5% and remained lower for 2 consecutive polls. While this drop was small in comparison to the gains Senator Warren had been making in the polls, it may be indicative of some voters’ hesitation to back a candidate whose claims of ancestry have long been a controversy and even in previous elections been used against her by her opponents and seen as a weakness against Donald Trump. 
+
 ## Senator Bernie Sanders
+
+```{r echo = FALSE, message = FALSE}
+poll_data = 
+read_csv("./data/cleaned_polls.csv") %>% 
+  group_by(end_date, candidate_name) %>% 
+  mutate(
+    mean_pct = mean(pct)
+  )
+
+poll_data %>% 
+  group_by(candidate_name) %>% 
+  mutate(
+    poll_min = min(mean_pct),
+    poll_max = max(mean_pct),
+    poll_mean = round(mean(mean_pct)),
+    poll_sd = round(sd(mean_pct))
+    ) %>% 
+  distinct(candidate_name, poll_min, poll_max, poll_mean, poll_sd) %>% 
+  filter(candidate_name == "Bernie Sanders") %>% 
+  rename("Candidate" = "candidate_name", "Minimum Polling %" = "poll_min", "Maximum Polling %" = "poll_max", "Average Polling %" = "poll_mean", "Standard Deviation Polling %" = "poll_sd") %>% 
+  knitr::kable()
+
+```
 
 ```{r echo = FALSE, message = FALSE}
 
