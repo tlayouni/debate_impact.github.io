@@ -1,8 +1,7 @@
 ---
 title: "**Debate Impact on Google Search Behavior**"
 output:
-  html_document:
-    toc_float: true
+  html_document
 ---
 
 ```{r setup, include=FALSE}
