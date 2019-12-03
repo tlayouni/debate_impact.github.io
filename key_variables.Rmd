@@ -22,8 +22,15 @@ knitr::opts_chunk$set(
 
 
 ## Introduction 
+***
+
+Candidates gain and lose popularity for a variety of reasons during their bids for the presidency. Public opinion is often swayed by both political and personal news stories that either increase trustworthiness or perceived strength of a candidate or call into question a candidate’s integrity or ability to perform their duties as President of the United States.  
+
+Here we will examine key campaign events from January 2019 to November 2019 including controversies and endorsements that may have impacted 3 of the frontrunner candidates during their bids for the Democratic Nomination for President in 2020, Former Vice President Joe Biden, Senator Elizabeth Warren and Senator Bernie Sanders. Data on polling performance was obtained from [FiveThirtyEight](https://fivethirtyeight.com/features/the-state-of-the-polls-2019/) and stories on candidates were found in The New York Times, Vox and Politico. 
+
 
 ## Former Vice President Joe Biden
+***
 
 ```{r echo = FALSE, message = FALSE}
 poll_data = 
@@ -105,6 +112,7 @@ There does appear to be some momentum following this October announcement, altho
 
 
 ## Senator Elizabeth Warren
+***
 
 ```{r echo = FALSE, message = FALSE}
 poll_data = 
@@ -168,6 +176,7 @@ Warren received a lot of backlash for her handling of her claims of Native Ameri
 The polls following this meeting showed an initial drop in the polls, down 2.5% to 17.5% and remained lower for 2 consecutive polls. While this drop was small in comparison to the gains Senator Warren had been making in the polls, it may be indicative of some voters’ hesitation to back a candidate whose claims of ancestry have long been a controversy and even in previous elections been used against her by her opponents and seen as a weakness against Donald Trump. 
 
 ## Senator Bernie Sanders
+***
 
 ```{r echo = FALSE, message = FALSE}
 poll_data = 
