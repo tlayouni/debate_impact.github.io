@@ -1,6 +1,9 @@
 ---
 title: "**Debate Impact on Google Search Behavior**"
-output: html_document
+output:
+  html_document:
+    toc: true
+    toc_float: true
 ---
 
 ```{r setup, include=FALSE}
@@ -80,6 +83,8 @@ Arguably the most notable advocate of the use of Google Trends data in election 
 
 It is important to note that it is impossible to know an individual's motivation for making a particular search, so these analyses are exclusively exploratory. Additionally, Google Trends yeilds relative search proportions rather than absolute search counts. This means that all searches are scaled from 0 to 100, with 100 representing the day during the period of interest during which the search query made up the greatest proportion of all Google Searches. Comparisons between graphs should therefore be made with caution. Google Trends does allow the comparison of up to 5 search queries at once, where all results are shown on a shared scale. All graphs with multiple queries were generated in this manner. Included terms are therefore all relative to each other and comparisons can be made. Given this scaling system, some searches (such as those for candidate names) have search volume so great that they mask any trends in less frequently searched queries. When this occurred, these high-volume terms were considered on a separate scale in a second panel. 
 
+***
+
 # Debate 1: June 27, 2019
 
 During the first debate, [Kamala Harris called Joe Biden out](https://www.washingtonpost.com/politics/2019/07/29/school-busing-debate-between-joe-biden-kamala-harris/) for his previous cooperation with segregationalist Senators and his opposition to school busing programs. She made a tense moment personal by sharing her experience as a young girl brought to her California public school every day by a busing program. Biden defended himself by arguing that he only opposed busing that was mandated by the Department of Education. 
@@ -125,6 +130,8 @@ debate_1b_plot + debate_1_plot
 
 There is a clear, sharp spike in relative search volume on June 28th, the day immediately following the debate. Search volume for Kamala Harris surpassed that for Joe Biden, perhaps because Kamala, a lesser-known candidate, was able to draw significant and negative attention to Biden, an extremely well-known candidate. Harris's search advantage was sustained in the days following the debate. Search volume for “harris biden” is also higher than for “biden harris”, and [it is reported by Seth Stephens-Davidowitz](https://www.nytimes.com/2016/10/23/opinion/campaign-stops/if-they-google-you-do-you-win.html) in his book “Everybody Lies” that voters tend to subconsciously place the name of the candidate they support first in searches including two candidate names. This change in search volume is therefore an indication that the busing comments increased support for Kamala Harris and hurt Joe Biden’s popularity among voters. 
 
+***
+
 # Debate 2: July 30, 2019
 
 When Bernie Sanders enthusiastically advocated for Medicare for All and spoke to the extensive coverage that it would provide, Tim Ryan interjected to say that Bernie couldn't know exactly what it would cover. Sanders shot back, emphatically stating that he did know because ["I wrote the damn bill!"](https://www.nytimes.com/2019/07/30/us/politics/bernie-sanders-debate.html) in one of the night's most memorable moments. 
@@ -150,6 +157,8 @@ debate_2 %>%
 ```
 
 Search interest in Bernie spiked immediately following the debate, although this increase was not sustained. Although Bernie's comeback was witty and memorable, it was used in a less controversial situation than Harris's comments toward Biden and may not have resonated with voters long-term. It can be seen, however, that people were searching the phrase "I wrote the damn bill" immediately following the debate, which shows that this moment certainly did get some attention from voters. 
+
+***
 
 # Debate 3: September 12, 2019
 
@@ -195,6 +204,8 @@ debate_3b_plot + debate_3_plot
 ```
 
 Beto’s resounding support of gun control measures seems to have increased voter interest in him. Searches for his name remained elevated even after the initial spike immediately following the debate, and a small spike is also noted for “hell yes” searches. Interestingly, searches for gun control also increased following the debate, possibly indicating this issue's importance to voters. 
+
+***
 
 # Debate 4: October 15, 2019
 
@@ -288,6 +299,8 @@ debate_4_harrisb_plot + debate_4_harris_plot
 ```
 
 Again, search interest in Kamala Harris rose sharply immediately after the debate, and an increase in searches that included both her name and “abortion” indicates that this interest may have been due in part to her impassioned comments on women’s reproductive rights. However, search volume for “kamala harris” fell much faster than it did for “andrew yang” following this debate, indicated that his debate performance may have caused a longer-felt impact on voters. 
+
+***
 
 ### Yang vs. Harris 
 

@@ -20,6 +20,9 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -250,6 +253,63 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
 
 </head>
 
@@ -257,6 +317,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -322,24 +392,28 @@ $(document).ready(function () {
 <p>Google search data is increasingly viewed as an important predictor of election outcomes. It is thought that the Americans who make searches online may be a more representative sample of the voting population than those reached by polling organizations, and that people may be more honest in the privacy of their own computer than in a poll response. Main events from each of the first four Democratic Debates were selected for investigation with Google Trends data, and search volume for relevant terms has been plotted for the week immediately preceding and immediately following each debate. These analyses are considered a secondary indicator of the impact that debate performance has on public perceptions of Democratic presidential candidates.</p>
 <p>Arguably the most notable advocate of the use of Google Trends data in election applications is Seth Stephens-Davidowitz, former data scientist at Google and bestselling author of “Everybody Lies.” Stephens-Davidowitz has examined questions such as the <a href="https://static1.squarespace.com/static/51d894bee4b01caf88ccb4f3/t/51d89ab3e4b05a25fc1f39d4/1373149875469/RacialAnimusAndVotingSethStephensDavidowitz.pdf">role of racism in Barack Obama’s 2008 and 2012 election performance</a> and how Google data can show <a href="https://www.wnyc.org/story/245757-what-our-google-habits-reveal-about-our-voting-habits/">voter reactions to rumors and advertising campaigns</a>. Several of his ideas are incorporated into the following analyses, although his work has been almost entirely focused on predicting presidential elections and these analyses look exclusively at the current Democratic primaries.</p>
 <p>It is important to note that it is impossible to know an individual’s motivation for making a particular search, so these analyses are exclusively exploratory. Additionally, Google Trends yeilds relative search proportions rather than absolute search counts. This means that all searches are scaled from 0 to 100, with 100 representing the day during the period of interest during which the search query made up the greatest proportion of all Google Searches. Comparisons between graphs should therefore be made with caution. Google Trends does allow the comparison of up to 5 search queries at once, where all results are shown on a shared scale. All graphs with multiple queries were generated in this manner. Included terms are therefore all relative to each other and comparisons can be made. Given this scaling system, some searches (such as those for candidate names) have search volume so great that they mask any trends in less frequently searched queries. When this occurred, these high-volume terms were considered on a separate scale in a second panel.</p>
+<hr />
 </div>
 <div id="debate-1-june-27-2019" class="section level1">
 <h1>Debate 1: June 27, 2019</h1>
 <p>During the first debate, <a href="https://www.washingtonpost.com/politics/2019/07/29/school-busing-debate-between-joe-biden-kamala-harris/">Kamala Harris called Joe Biden out</a> for his previous cooperation with segregationalist Senators and his opposition to school busing programs. She made a tense moment personal by sharing her experience as a young girl brought to her California public school every day by a busing program. Biden defended himself by arguing that he only opposed busing that was mandated by the Department of Education.</p>
 <p><img src="google_trends_files/figure-html/debate_1-1.png" width="90%" /></p>
 <p>There is a clear, sharp spike in relative search volume on June 28th, the day immediately following the debate. Search volume for Kamala Harris surpassed that for Joe Biden, perhaps because Kamala, a lesser-known candidate, was able to draw significant and negative attention to Biden, an extremely well-known candidate. Harris’s search advantage was sustained in the days following the debate. Search volume for “harris biden” is also higher than for “biden harris”, and <a href="https://www.nytimes.com/2016/10/23/opinion/campaign-stops/if-they-google-you-do-you-win.html">it is reported by Seth Stephens-Davidowitz</a> in his book “Everybody Lies” that voters tend to subconsciously place the name of the candidate they support first in searches including two candidate names. This change in search volume is therefore an indication that the busing comments increased support for Kamala Harris and hurt Joe Biden’s popularity among voters.</p>
+<hr />
 </div>
 <div id="debate-2-july-30-2019" class="section level1">
 <h1>Debate 2: July 30, 2019</h1>
 <p>When Bernie Sanders enthusiastically advocated for Medicare for All and spoke to the extensive coverage that it would provide, Tim Ryan interjected to say that Bernie couldn’t know exactly what it would cover. Sanders shot back, emphatically stating that he did know because <a href="https://www.nytimes.com/2019/07/30/us/politics/bernie-sanders-debate.html">“I wrote the damn bill!”</a> in one of the night’s most memorable moments.</p>
 <p><img src="google_trends_files/figure-html/debate_2-1.png" width="90%" /></p>
 <p>Search interest in Bernie spiked immediately following the debate, although this increase was not sustained. Although Bernie’s comeback was witty and memorable, it was used in a less controversial situation than Harris’s comments toward Biden and may not have resonated with voters long-term. It can be seen, however, that people were searching the phrase “I wrote the damn bill” immediately following the debate, which shows that this moment certainly did get some attention from voters.</p>
+<hr />
 </div>
 <div id="debate-3-september-12-2019" class="section level1">
 <h1>Debate 3: September 12, 2019</h1>
 <p>When asked if he would mandate gun buybacks, Beto O’Rourke answered with an enthusiastic <a href="https://fortune.com/2019/09/12/live-updates-third-democratic-debate/">“hell yes”</a>. This line earned significant applause from the debate’s live audience, and O’Rourke backed up his strong stance on gun control with a passionate description of the devastating potential of semi-automatic rifles. Shortly after, he received praise from fellow candidates for his response to the recent shooting in El Paso, O’Rourke’s hometown.</p>
 <p><img src="google_trends_files/figure-html/debate_3-1.png" width="90%" /></p>
 <p>Beto’s resounding support of gun control measures seems to have increased voter interest in him. Searches for his name remained elevated even after the initial spike immediately following the debate, and a small spike is also noted for “hell yes” searches. Interestingly, searches for gun control also increased following the debate, possibly indicating this issue’s importance to voters.</p>
+<hr />
 </div>
 <div id="debate-4-october-15-2019" class="section level1">
 <h1>Debate 4: October 15, 2019</h1>
@@ -354,6 +428,7 @@ $(document).ready(function () {
 <p>Kamala Harris expressed her frustration in the lack of conversation around reproductive rights and abortion in the previous debates by <a href="https://www.vox.com/policy-and-politics/2019/10/15/20916329/democratic-debate-highlights-elizabeth-warren-bernie-sanders-joe-biden">turning a conversation about financing Medicare for All to abortion</a>. She spoke eloquently and dramatically about the need to ensure women’s access to these services.</p>
 <p><img src="google_trends_files/figure-html/debate_4_harris-1.png" width="90%" /></p>
 <p>Again, search interest in Kamala Harris rose sharply immediately after the debate, and an increase in searches that included both her name and “abortion” indicates that this interest may have been due in part to her impassioned comments on women’s reproductive rights. However, search volume for “kamala harris” fell much faster than it did for “andrew yang” following this debate, indicated that his debate performance may have caused a longer-felt impact on voters.</p>
+<hr />
 <div id="yang-vs.harris" class="section level3">
 <h3>Yang vs. Harris</h3>
 <p>To further explore the differences seen in search behavior regarding Kamala Harris and Andrew Yang following the fourth debate, their relative search volume from June 20th, 2019 (a week prior to the first debate) until October 22nd, 2019 (a week following the fourth debate) was graphed.</p>
@@ -365,6 +440,8 @@ $(document).ready(function () {
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -397,6 +474,32 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
