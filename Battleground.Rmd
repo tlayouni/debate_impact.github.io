@@ -64,7 +64,7 @@ president_primary_polls %>%
   mutate(answer = fct_reorder(answer, pct)) %>%
   filter(state == "Iowa",
          answer == c("Biden", "Warren", "Sanders", "Buttigieg")) %>%
-  plot_ly(y = ~pct, color = ~answer, type = "box", colors = "Set2")
+  plot_ly(y = ~pct, color = ~answer, type = "box", colors = "Set3")
 IA_plotly
 ```
 
@@ -77,7 +77,7 @@ president_primary_polls %>%
   mutate(answer = fct_reorder(answer, pct)) %>%
   filter(state == "Pennsylvania",
          answer == c("Biden", "Warren", "Sanders", "Buttigieg")) %>%
-  plot_ly(y = ~pct, color = ~answer, type = "box", colors = "Set2")
+  plot_ly(y = ~pct, color = ~answer, type = "box", colors = "Set3")
 PA_plotly
 ```
 
