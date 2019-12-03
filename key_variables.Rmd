@@ -17,6 +17,13 @@ knitr::opts_chunk$set(
   fig.height = 6,
   out.width = "90%"
 )
+options(
+  ggplot2.continuous.colour = "viridis",
+  ggplot2.continuous.fill = "viridis"
+)
+scale_colour_discrete = scale_colour_viridis_d
+scale_fill_discrete = scale_fill_viridis_d
+theme_set(theme_minimal() + theme(legend.position = "bottom"))
 
 ```
 
@@ -153,7 +160,7 @@ warren_plot =
     x = "Date",
     y = "Polling Percent",
     title = "Elizabeth Warren: Polling Performance from January 24th 2019 to November 3, 2019"
-  )
+  ) 
 
 ggplotly(warren_plot)
 ```
