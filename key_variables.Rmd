@@ -17,22 +17,52 @@ knitr::opts_chunk$set(
   fig.height = 6,
   out.width = "90%"
 )
+options(
+  ggplot2.continuous.colour = "viridis",
+  ggplot2.continuous.fill = "viridis"
+)
+scale_colour_discrete = scale_colour_viridis_d
+scale_fill_discrete = scale_fill_viridis_d
+theme_set(theme_minimal() + theme(legend.position = "bottom"))
 
 ```
 
 
 ## Introduction 
+***
+
+Candidates gain and lose popularity for a variety of reasons during their bids for the presidency. Public opinion is often swayed by both political and personal news stories that either increase trustworthiness or perceived strength of a candidate or call into question a candidate’s integrity or ability to perform their duties as President of the United States.  
+
+Here we will examine key campaign events from January 2019 to November 2019 including controversies and endorsements that may have impacted 3 of the frontrunner candidates during their bids for the Democratic Nomination for President in 2020, Former Vice President Joe Biden, Senator Elizabeth Warren and Senator Bernie Sanders. Data on polling performance was obtained from [FiveThirtyEight](https://fivethirtyeight.com/features/the-state-of-the-polls-2019/) and stories on candidates were found in The New York Times, Vox and Politico. 
+
 
 ## Former Vice President Joe Biden
+***
 
 ```{r echo = FALSE, message = FALSE}
-
 poll_data = 
 read_csv("./data/cleaned_polls.csv") %>% 
   group_by(end_date, candidate_name) %>% 
   mutate(
     mean_pct = mean(pct)
   )
+
+poll_data %>% 
+  group_by(candidate_name) %>% 
+  mutate(
+    poll_min = min(mean_pct),
+    poll_max = max(mean_pct),
+    poll_mean = round(mean(mean_pct)),
+    poll_sd = round(sd(mean_pct))
+    ) %>% 
+  distinct(candidate_name, poll_min, poll_max, poll_mean, poll_sd) %>% 
+  filter(candidate_name == "Joe Biden") %>% 
+  rename("Candidate" = "candidate_name", "Minimum Polling %" = "poll_min", "Maximum Polling %" = "poll_max", "Average Polling %" = "poll_mean", "Standard Deviation Polling %" = "poll_sd") %>% 
+  knitr::kable()
+
+```
+
+```{r echo = FALSE, message = FALSE}
 
 biden_plot = 
 poll_data %>% 
@@ -41,8 +71,9 @@ poll_data %>%
   geom_point() + 
   geom_line() +
   geom_vline(xintercept = as.numeric(as.Date("2019-03-29")), linetype = 4, color = "blue") +
-  geom_vline(xintercept = as.numeric(as.Date("2019-06-28")), linetype = 4, color = "red") +
+  geom_vline(xintercept = as.numeric(as.Date("2019-10-08")), linetype = 4, color = "red") +
    geom_vline(xintercept = as.numeric(as.Date("2019-05-01")), linetype = 4, color = "green") +
+  #scale_x_date(date_breaks = "1 month", breaks = c("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")) +
   labs(
     x = "Date",
     y = "Polling Percent",
@@ -52,10 +83,7 @@ poll_data %>%
 ggplotly(biden_plot)
 ```
 
-
-<center><img src="./images/Flores.jpg" style="width:50%">
-
-#### Lucy Flores’ Essay on Joe Biden’s Inappropriate Touching: March 29, 2019  
+#### Lucy Flores’ Essay on Joe Biden’s Inappropriate Touching: March 29, 2019
 
 
 Lucy Flores a former assemblywoman in the state of Nevada wrote an essay published in The Cut that detailed her experience at a campaign event in 2014 during her run for Lieutenant governor where he smelled her hair and ["proceeded to plant a big slow kiss on the back of my head"]((https://www.thecut.com/2019/03/an-awkward-kiss-changed-how-i-saw-joe-biden.html)). This essay was published less than a month before Vice President Biden announced his campaign for president in April and it was quickly met with a response from the former VP saying [“not once -  never – did I believe I acted inappropriately”](https://www.nytimes.com/2019/03/30/us/politics/joe-biden-lucy-flores-news.html?action=click&module=RelatedCoverage&pgtype=Article&region=Footer) but acknowledged he had made “expressions of affection” over his career and pledged to listen to any accuser or women who shared their experiences. This news was quickly followed by other women speaking out in early April 2019 and sharing similar accounts of inappropriate or uncomfortable touching by the Vice President. 
@@ -74,10 +102,48 @@ poll_data %>%
     )  %>% 
   select(poll_date, mean_pct) %>% 
   arrange(poll_date) %>% 
+  rename("Poll Date" = "poll_date", "Polling Percent" = "mean_pct") %>% 
   knitr::kable()
 ```
 
+#### Ukraine Conspiracy: Family Conflict of Interest: May 1, 2019
+
+On May 1, 2019, the New York Times ran a story on [Joe Biden’s involvement in the firing of Ukraine’s Prosecutor General Viktor Shokin in 2015 that raised questions of a conflict of interest](https://www.nytimes.com/2019/05/01/us/politics/biden-son-ukraine.html). The negotiation that led to Shokin’s firing was touted as a strong performance of Vice President Biden in his foreign policy role while in the White House and the decision to fire Shokin was supported by both the Obama Administration and other Western nations. The prosecutor general was fired for his inability to crack down on the corruption. Hunter Biden, the son of Joe Biden sat on the board of a natural gas company, Burisma,  that according to this New York Times article, was being investigated by Shokin at the time of his firing.
+
+The next poll after this article was published showed the largest gain in polling percentage during the time period covered by these data. After dropping to 17 percent after announcing his candidacy, the next poll ending collection on May 20th, showed an increase of 16 percent to 33 percent overall. While we may have accepted this controversy to negatively impact Joe Biden’s polling performance, this surge in the polls may be due to initial momentum following his bid for presidency or push back against the narrative the Trump Administration had been stressing regarding Biden’s role in Ukraine. 
+
+#### Endorsement by California Senator Diane Feinstein: October 8, 2019
+
+This [endorsement of Joe Biden by Senator Feinstein](https://www.latimes.com/politics/story/2019-10-08/feinstein-joe-biden-endorsement-kamala-harris) comes as somewhat of a slight to her fellow California Senator and candidate for the Democratic nomination, Kamala Harris. This endorsement is even more meaningful considering the current democratic field- including Harris, 5 of her fellow Senators are still in the race. 
+
+There does appear to be some momentum following this October announcement, although it is short-lived. According to polls only a week later, Biden has returned to polling at 32%, some of the highest numbers during his presidency bid, but in less than a month following this endorsement, he sees a 9% decline in the polls. 
+
+
 ## Senator Elizabeth Warren
+***
+
+```{r echo = FALSE, message = FALSE}
+poll_data = 
+read_csv("./data/cleaned_polls.csv") %>% 
+  group_by(end_date, candidate_name) %>% 
+  mutate(
+    mean_pct = mean(pct)
+  )
+
+poll_data %>% 
+  group_by(candidate_name) %>% 
+  mutate(
+    poll_min = min(mean_pct),
+    poll_max = max(mean_pct),
+    poll_mean = round(mean(mean_pct)),
+    poll_sd = round(sd(mean_pct))
+    ) %>% 
+  distinct(candidate_name, poll_min, poll_max, poll_mean, poll_sd) %>% 
+  filter(candidate_name == "Elizabeth Warren") %>% 
+  rename("Candidate" = "candidate_name", "Minimum Polling %" = "poll_min", "Maximum Polling %" = "poll_max", "Average Polling %" = "poll_mean", "Standard Deviation Polling %" = "poll_sd") %>% 
+  knitr::kable()
+
+```
 
 ```{r echo = FALSE, message = FALSE}
 warren_plot = 
@@ -89,17 +155,59 @@ warren_plot =
   geom_vline(xintercept = as.numeric(as.Date("2019-09-16")), linetype = 4, color = "blue") +
   geom_vline(xintercept = as.numeric(as.Date("2019-10-28")), linetype = 4, color = "green") +
    geom_vline(xintercept = as.numeric(as.Date("2019-08-19")), linetype = 4, color = "red") +
-   geom_vline(xintercept = as.numeric(as.Date("2019-02-19")), linetype = 4, color = "orange") +
+   #geom_vline(xintercept = as.numeric(as.Date("2019-02-19")), linetype = 4, color = "orange") +
   labs(
     x = "Date",
     y = "Polling Percent",
     title = "Elizabeth Warren: Polling Performance from January 24th 2019 to November 3, 2019"
-  )
+  ) 
 
 ggplotly(warren_plot)
 ```
 
+#### Warren Issues an Apology for Ancestry Claims: August 19, 2019
+
+Warren received a lot of backlash for her handling of her claims of Native American ancestry in 2018 when she took and publicly released ancestry results after challenging Trump to pay her one million dollars if she took the test. While she had previously apologized for this, during an [August 19th Forum in Iowa](https://www.nytimes.com/2019/08/19/us/politics/elizabeth-warren-native-american.html) in front of a majority Native American crowd, she again apologized for her actions and announced her plans to help Native American communities with housing and addressing the opioid crisis. 
+
+The polls following this meeting showed an initial drop in the polls, down 2.5% to 17.5% and remained lower for 2 consecutive polls. While this drop was small in comparison to the gains Senator Warren had been making in the polls, it may be indicative of some voters’ hesitation to back a candidate whose claims of ancestry have long been a controversy and even in previous elections been used against her by her opponents and seen as a weakness against Donald Trump. 
+
+##### Endorsement from Working Families Party: September 18, 2019
+
+The number of endorsements a candidate receives, especially endorsements prior to the first primary and caucus votes, is a major predictor of success in the primary election and subsequent nomination. Elizabeth Warren received a key endorsement from a political group call Working Families Party, who works closely with unions, activists and organizations across the country and whose resources and voice can be influential. This endorsement is made even more meaningful to the Warren campaign because the group had previously endorsed one of her opponents, Bernie Sanders during the 2016 election. 
+
+In the poll following this announcement, Warren saw a 9 percentage point increase in the polls and reached her highest polling percent to date, 28%. It is hard to distinguish whether this endorsement was a factor in her upward trajectory due to her relatively consistent increase in popularity since January, but this was the largest gain by the candidate over the months of January to November and would signify an important turning point in her campaign.  
+
+#### Elizabeth Warren’s Past as a Corporate Lawyer: October 28, 2019
+
+Elizabeth Warren has experienced one of the largest gains in popularity during the 2020 Democratic Primary on her progressive agenda including free college, Medicare for All and a wealth tax but an article published by the New York Times on her [past work as a lawyer for corporations](https://www.nytimes.com/2019/10/28/us/politics/elizabeth-warren-corporations.html) has cast some doubt on her authenticity. During her time as a corporate lawyer, a job she did while also teaching at Harvard Law School, she earned hundreds of thousands of dollars defending companies like LTV Steel who believed they should not have to pay towards a health fund for retired miners after they had sold off of their mines. 
+
+It is hard to tell how this news affected her polling as it came just days before the last poll on November 3, 2019, but in the short-term, it appears this did not have much of an impact on her performance, with a slight increase in polling percent from 22% to 23%. 
+
 ## Senator Bernie Sanders
+***
+
+```{r echo = FALSE, message = FALSE}
+poll_data = 
+read_csv("./data/cleaned_polls.csv") %>% 
+  group_by(end_date, candidate_name) %>% 
+  mutate(
+    mean_pct = mean(pct)
+  )
+
+poll_data %>% 
+  group_by(candidate_name) %>% 
+  mutate(
+    poll_min = min(mean_pct),
+    poll_max = max(mean_pct),
+    poll_mean = round(mean(mean_pct)),
+    poll_sd = round(sd(mean_pct))
+    ) %>% 
+  distinct(candidate_name, poll_min, poll_max, poll_mean, poll_sd) %>% 
+  filter(candidate_name == "Bernie Sanders") %>% 
+  rename("Candidate" = "candidate_name", "Minimum Polling %" = "poll_min", "Maximum Polling %" = "poll_max", "Average Polling %" = "poll_mean", "Standard Deviation Polling %" = "poll_sd") %>% 
+  knitr::kable()
+
+```
 
 ```{r echo = FALSE, message = FALSE}
 
@@ -121,4 +229,14 @@ poll_data %>%
 
 ggplotly(sanders_plot)
 ```
+
+#### Bernie Becomes a Millionaire and Biden Enters the Race: April 15, 2019- April 25, 2019
+
+Senator Sanders has long been a advocate for working class Americans and making the 1% pay their “fair share of taxes” but in 2016 following his last bid for presidency, Bernie became one of those millionaires himself, due to royalties from his best-selling book “Our Revolution: A Future to Believe In”. Around the same time [Politico] released this story, Former Vice President Joe Biden also entered the crowded Democratic field for president. 
+
+It is difficult to determine the impact these two events had separately on the Sanders campaign, but following both the article and Biden’s announcement, Sanders dropped to his lowest polling percent recorded since January of 2019. This could be due to either the addition of a popular candidate into the race at this time or feelings of mistrust by the public as Bernie Sanders becomes more aligned financially with the wealthy than the working class. 
+
+#### Bernie Sanders Heart Attack: October 4, 2019
+
+#### Bernie Sanders Endorsement by AOC, Ilhan Omar and Rashida Tlaib
 
