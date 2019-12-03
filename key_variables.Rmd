@@ -17,6 +17,13 @@ knitr::opts_chunk$set(
   fig.height = 6,
   out.width = "90%"
 )
+options(
+  ggplot2.continuous.colour = "viridis",
+  ggplot2.continuous.fill = "viridis"
+)
+scale_colour_discrete = scale_colour_viridis_d
+scale_fill_discrete = scale_fill_viridis_d
+theme_set(theme_minimal() + theme(legend.position = "bottom"))
 
 ```
 
@@ -66,12 +73,11 @@ poll_data %>%
   geom_vline(xintercept = as.numeric(as.Date("2019-03-29")), linetype = 4, color = "blue") +
   geom_vline(xintercept = as.numeric(as.Date("2019-10-08")), linetype = 4, color = "red") +
    geom_vline(xintercept = as.numeric(as.Date("2019-05-01")), linetype = 4, color = "green") +
-  #scale_x_date(date_breaks = "1 month", breaks = c("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")) +
   labs(
     x = "Date",
     y = "Polling Percent",
-    title = "Joe Biden: Polling Performance from January 24th 2019 to November 3, 2019"
-  )
+    title = "Joe Biden: Polling Performance from January 24, 2019 to November 3, 2019"
+  ) 
 
 ggplotly(biden_plot)
 ```
@@ -152,8 +158,8 @@ warren_plot =
   labs(
     x = "Date",
     y = "Polling Percent",
-    title = "Elizabeth Warren: Polling Performance from January 24th 2019 to November 3, 2019"
-  )
+    title = "Elizabeth Warren: Polling Performance from January 24, 2019 to November 3, 2019"
+  ) 
 
 ggplotly(warren_plot)
 ```
@@ -217,8 +223,8 @@ poll_data %>%
   labs(
     x = "Date",
     y = "Polling Percent",
-    title = "Bernie Sanders: Polling Performance from January 24th 2019 to November 3, 2019"
-  )
+    title = "Bernie Sanders: Polling Performance from January 24, 2019 to November 3, 2019"
+  ) 
 
 ggplotly(sanders_plot)
 ```
