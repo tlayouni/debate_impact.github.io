@@ -347,7 +347,7 @@ library(rvest)</code></pre>
   rename(trump_mentions = x) %&gt;% 
   filter(candidate %in% c(&quot;Warren&quot;, &quot;Biden&quot;, &quot;Klobuchar&quot;, &quot;Sanders&quot;, &quot;Buttigieg&quot;, &quot;Harris&quot;, &quot;Booker&quot;, &quot;Yang&quot;, &quot;Castro&quot;, &quot;Gabbard&quot;))</code></pre>
 <pre><code>## Warning: Expected 2 pieces. Additional pieces discarded in 1 rows [12].</code></pre>
-<p>Scraping words spoken data from NBC News:</p>
+<p>Scraping words spoken data from FiveThirtyEight:</p>
 <pre class="r"><code>words_spoken = 
   read_html(&quot;https://fivethirtyeight.com/features/the-october-democratic-debate-in-6-charts/&quot;) %&gt;%
   html_nodes(css = &quot;table&quot;) %&gt;% 
