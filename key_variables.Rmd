@@ -71,6 +71,7 @@ poll_data %>%
     )  %>% 
   select(poll_date, mean_pct) %>% 
   arrange(poll_date) %>% 
+  rename("Poll Date" = "poll_date", "Polling Percent" = "mean_pct") %>% 
   knitr::kable()
 ```
 
@@ -109,6 +110,23 @@ warren_plot =
 ggplotly(warren_plot)
 ```
 
+##### Endorsement from Working Families Party: September 18, 2019
+
+The number of endorsements a candidate receives, especially endorsements prior to the first primary and caucus votes, is a major predictor of success in the primary election and subsequent nomination. Elizabeth Warren received a key endorsement from a political group call Working Families Party, who works closely with unions, activists and organizations across the country and whose resources and voice can be influential. This endorsement is made even more meaningful to the Warren campaign because the group had previously endorsed one of her opponents, Bernie Sanders during the 2016 election. 
+
+In the poll following this announcement, Warren saw a 9 percentage point increase in the polls and reached her highest polling percent to date, 28%. It is hard to distinguish whether this endorsement was a factor in her upward trajectory due to her relatively consistent increase in popularity since January, but this was the largest gain by the candidate over the months of January to November and would signify an important turning point in her campaign.  
+
+#### Elizabeth Warren’s Past as a Corporate Lawyer: October 28, 2019
+
+Elizabeth Warren has experienced one of the largest gains in popularity during the 2020 Democratic Primary on her progressive agenda including free college, Medicare for All and a wealth tax but an article published by the New York Times on her [past work as a lawyer for corporations](https://www.nytimes.com/2019/10/28/us/politics/elizabeth-warren-corporations.html) has cast some doubt on her authenticity. During her time as a corporate lawyer, a job she did while also teaching at Harvard Law School, she earned hundreds of thousands of dollars defending companies like LTV Steel who believed they should not have to pay towards a health fund for retired miners after they had sold off of their mines. 
+
+It is hard to tell how this news affected her polling as it came just days before the last poll on November 3, 2019, but in the short-term, it appears this did not have much of an impact on her performance, with a slight increase in polling percent from 22% to 23%. 
+
+#### Warren Issues an Apology for Ancestry Claims: August 19, 2019
+
+Warren received a lot of backlash for her handling of her claims of Native American ancestry in 2018 when she took and publicly released ancestry results after challenging Trump to pay her one million dollars if she took the test. While she had previously apologized for this, during an [August 19th Forum in Iowa](https://www.nytimes.com/2019/08/19/us/politics/elizabeth-warren-native-american.html) in front of a majority Native American crowd, she again apologized for her actions and announced her plans to help Native American communities with housing and addressing the opioid crisis. 
+
+The polls following this meeting showed an initial drop in the polls, down 2.5% to 17.5% and remained lower for 2 consecutive polls. While this drop was small in comparison to the gains Senator Warren had been making in the polls, it may be indicative of some voters’ hesitation to back a candidate whose claims of ancestry have long been a controversy and even in previous elections been used against her by her opponents and seen as a weakness against Donald Trump. 
 ## Senator Bernie Sanders
 
 ```{r echo = FALSE, message = FALSE}
