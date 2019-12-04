@@ -267,6 +267,8 @@ It is difficult to determine the impact these two events had separately on the S
 
 ## The Impact of Endorsements
 
+It is well known that the number of endorsements a candidate has from other politicians, the greater their chances of winning the primary and going on to the general election. In fact, the candidate with the greatest number of endorsements prior to the first primary votes in the Iowa caucus, has [historically gone one to receive the nomination](https://www.businessinsider.com/biggest-political-endorsements-democratic-2020-candidates-2019-3). This may be true for a more traditional democratic primary field, but with the sheer number of candidates and high profile bids for office, this equation becomes more complicated. Here we compare current polling standings, just a few months before the Iowa caucus, with the number of endorsements for each candidate. Endorsements only include governors and members of Congress. 
+
 ```{r echo = FALSE, message = FALSE}
 endorsements = 
   read_csv("./data/endorsements.csv")
@@ -284,3 +286,4 @@ endorsements =
 ggplotly(endorsements_plot)
 ```
 
+Of the top three candidates in the most recent poll on November 3, 2019, only Joe Biden has both a large number of endorsements. Both Elizabeth Warren and Bernie Sanders have a low number of endorsements but are polling around 20%. For candidates who are near the bottom of the pack, between 1% and 5%, the relationship between the number of endorsement and polling performance appear to be consistent with the exception of Kamala Harris.
