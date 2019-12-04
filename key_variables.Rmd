@@ -70,14 +70,21 @@ poll_data %>%
   ggplot(aes(x = end_date, y = mean_pct)) +
   geom_point() + 
   geom_line() +
-  geom_vline(xintercept = as.numeric(as.Date("2019-03-29")), linetype = 4, color = "blue") +
-  geom_vline(xintercept = as.numeric(as.Date("2019-10-08")), linetype = 4, color = "red") +
-   geom_vline(xintercept = as.numeric(as.Date("2019-05-01")), linetype = 4, color = "green") +
+  geom_vline(xintercept = as.numeric(as.Date("2019-03-29")), linetype = 4, color = "#453781FF") +
+  geom_vline(xintercept = as.numeric(as.Date("2019-10-08")), linetype = 4, color = "#287D8EFF") +
+   geom_vline(xintercept = as.numeric(as.Date("2019-05-01")), linetype = 4, color = "#55C667FF") +
   labs(
     x = "Date",
     y = "Polling Percent",
     title = "Joe Biden: Polling Performance from January 24, 2019 to November 3, 2019"
-  ) 
+  ) +
+  scale_x_date(
+    date_breaks = "1 month",
+    labels = c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+  ) +
+  annotate("text", x = as.Date("2019-03-29"), y = 12.5, label = "Flores' Essay", size = 3) +
+  annotate("text", x = as.Date("2019-05-01"), y = 15, label = "Ukraine Conspiracy", size = 3) +
+  annotate("text", x = as.Date("2019-10-08"), y = 17.5, label = "Feinstein Endorsement", size = 3)
 
 ggplotly(biden_plot)
 ```
@@ -151,15 +158,22 @@ warren_plot =
   ggplot(aes(x = end_date, y = mean_pct)) +
   geom_point() + 
   geom_line() +
-  geom_vline(xintercept = as.numeric(as.Date("2019-09-16")), linetype = 4, color = "blue") +
-  geom_vline(xintercept = as.numeric(as.Date("2019-10-28")), linetype = 4, color = "green") +
-   geom_vline(xintercept = as.numeric(as.Date("2019-08-19")), linetype = 4, color = "red") +
+  geom_vline(xintercept = as.numeric(as.Date("2019-09-16")), linetype = 4, color = "#453781FF") +
+  geom_vline(xintercept = as.numeric(as.Date("2019-10-28")), linetype = 4, color = "#287D8EFF") +
+   geom_vline(xintercept = as.numeric(as.Date("2019-08-19")), linetype = 4, color = "#55C667FF") +
    #geom_vline(xintercept = as.numeric(as.Date("2019-02-19")), linetype = 4, color = "orange") +
   labs(
     x = "Date",
     y = "Polling Percent",
     title = "Elizabeth Warren: Polling Performance from January 24, 2019 to November 3, 2019"
-  ) 
+  ) +
+  scale_x_date(
+    date_breaks = "1 month",
+    labels = c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+  ) +
+  annotate("text", x = as.Date("2019-09-16"), y = 10, label = "WFP Endorsement", size = 3) +
+  annotate("text", x = as.Date("2019-10-28"), y = 15, label = "NYT Corporate Lawyer Article", size = 3) +
+  annotate("text", x = as.Date("2019-08-19"), y = 5, label = "Ancestry Apology", size = 3)
 
 ggplotly(warren_plot)
 ```
@@ -170,7 +184,7 @@ Warren received a lot of backlash for her handling of her claims of Native Ameri
 
 The polls following this meeting showed an initial drop in the polls, down 2.5% to 17.5% and remained lower for 2 consecutive polls. While this drop was small in comparison to the gains Senator Warren had been making in the polls, it may be indicative of some voters’ hesitation to back a candidate whose claims of ancestry have long been a controversy and even in previous elections been used against her by her opponents and seen as a weakness against Donald Trump. 
 
-##### Endorsement from Working Families Party: September 18, 2019
+#### Endorsement from Working Families Party: September 18, 2019
 
 The number of endorsements a candidate receives, especially endorsements prior to the first primary and caucus votes, is a major predictor of success in the primary election and subsequent nomination. Elizabeth Warren received a key endorsement from a political group call Working Families Party, who works closely with unions, activists and organizations across the country and whose resources and voice can be influential. This endorsement is made even more meaningful to the Warren campaign because the group had previously endorsed one of her opponents, Bernie Sanders during the 2016 election. 
 
@@ -216,15 +230,23 @@ poll_data %>%
   ggplot(aes(x = end_date, y = mean_pct)) +
   geom_point() + 
   geom_line() +
-  geom_vline(xintercept = as.numeric(as.Date("2019-04-15")), linetype = 4, color = "blue") +
-  geom_vline(xintercept = as.numeric(as.Date("2019-10-04")), linetype = 4, color = "green") +
-   geom_vline(xintercept = as.numeric(as.Date("2019-10-15")), linetype = 4, color  = "red") +
- geom_vline(xintercept = as.numeric(as.Date("2019-04-25")), linetype = 4, color = "orange") +
+  geom_vline(xintercept = as.numeric(as.Date("2019-04-15")), linetype = 4, color = "#453781FF") +
+  geom_vline(xintercept = as.numeric(as.Date("2019-10-04")), linetype = 4, color = "#287D8EFF") +
+   geom_vline(xintercept = as.numeric(as.Date("2019-10-15")), linetype = 4, color  = "#55C667FF") +
+ geom_vline(xintercept = as.numeric(as.Date("2019-04-25")), linetype = 4, color = "#FDE725FF") +
   labs(
     x = "Date",
     y = "Polling Percent",
     title = "Bernie Sanders: Polling Performance from January 24, 2019 to November 3, 2019"
-  ) 
+  ) +
+    scale_x_date(
+    date_breaks = "1 month",
+    labels = c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+  ) +
+  annotate("text", x = as.Date("2019-04-15"), y = 5, label = "Sanders Becomes Millionaire", size = 3) +
+  annotate("text", x = as.Date("2019-10-04"), y = 10, label = "Sanders' Heart Attack", size = 3) +
+  annotate("text", x = as.Date("2019-10-15"), y = 12, label = "Squad Endorsements", size = 3) +
+  annotate("text", x = as.Date("2019-04-25"), y = 8, label = "Biden Enters Race", size = 3)
 
 ggplotly(sanders_plot)
 ```
@@ -238,4 +260,24 @@ It is difficult to determine the impact these two events had separately on the S
 #### Bernie Sanders Heart Attack: October 4, 2019
 
 #### Bernie Sanders Endorsement by AOC, Ilhan Omar and Rashida Tlaib
+
+
+## The Impact of Endorsements
+
+```{r}
+endorsements = 
+  read_csv("./data/endorsements.csv")
+  
+  endorsements_plot = 
+    endorsements %>% 
+  ggplot() + 
+  geom_point(aes(x = n_endorsements, y = current_poll, color = candidate_name, size = 10)) + 
+    labs(
+      x = "Number of Endorsements",
+      y = "Most Recent Polling %", 
+      title = "Endorsements as a Predictor of Polling Performance"
+    )
+
+ggplotly(endorsements_plot)
+```
 
