@@ -44,7 +44,6 @@ theme_set(theme_minimal() + theme(legend.position = "right"))
 
 ```{r, echo = FALSE, include = FALSE}
 president_primary_polls <- read_csv("./data/president_primary_polls.csv")
-google_data <- read_csv("./data/google_data.csv")
 ```
 
 ***
@@ -67,7 +66,7 @@ president_primary_polls %>%
 IA_plotly
 ```
 
-Median polling results for leading candidates show Biden still ahead of the pack with 25 percentage points but also a large range of 20 points between lowest and highest predictions. Warren follows in second in the polls and with a similarly wide range of 19 points. Just a 2 percentage point difference between Warren and Sanders may signify a tight race. Buttigieg continues to lag behind these three but remains in double digits with 13 points, all the while exhibiting the lowest range in polls at only 9.6 between .
+Median polling results for leading candidates show Biden still ahead of the pack with 25 percentage points but also a large range of 20 points between lowest and highest predictions. Warren follows with a similarly wide range of 19 points. Just a 2 percentage point difference between her and Sanders may signify a tight race for second place. Buttigieg continues to lag behind these three but remains in double digits with 13 points, all the while exhibiting the lowest range in polls at only 9.6 between his highest and lowest predictions.
 
 ### Pennsylvania
 ```{r, echo = FALSE, message = FALSE, warning = FALSE}
@@ -90,7 +89,7 @@ y <- c(30, 17, 28, 46, 39, 28, 39)
 median(y)
 ```
 
-Pennsylvania has one of the last primaries (April 28th), which means polling data may not accurately reflect the ultimate outcome of voter choices, especially when considering that outcomes in early states may change the tides for specific individuals. Some candidates are therefore showing a lack of variability in current polling results, including Biden and Buttigieg. However, the overall field is exhibiting a similar trend to Iowa, as Biden leads the way a median of `r median(y)` percentage points among sampled polls. He is followed by Sanders and Warren, who again are polling quite close together at a median of 9.5 and 8 percentage points, respectively. Buttigieg trails the field, with a median of `r median(x)` percentage points.
+Pennsylvania has one of the last primaries (April 28th), which means polling data may not accurately reflect the ultimate outcome of voter choices, especially when considering that outcomes in early states may change the tides for specific individuals. Some candidates are therefore showing a lack of variability in current polling results, including Biden and Buttigieg, which may signify that voters are more consistent in percieving them to maintain their current positions of first and fourth respectively, while not being as certain how Sanders and Warren will finish. However, the overall field is exhibiting a similar trend to Iowa, as Biden leads the way a median of `r median(y)` percentage points among sampled polls. He is followed by Sanders and Warren, who again are polling quite close together at a median of 9.5 and 8 percentage points, respectively. Buttigieg does not trail by much any longer, as he is showing a median of `r median(x)` percentage points. This means that the 2nd through 4th place candidates are all within 3 points of each other.
 
 ***
 
