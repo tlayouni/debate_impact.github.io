@@ -261,3 +261,18 @@ It is difficult to determine the impact these two events had separately on the S
 
 #### Bernie Sanders Endorsement by AOC, Ilhan Omar and Rashida Tlaib
 
+
+## The Impact of Endorsements
+
+```{r}
+endorsements = 
+  read_csv("./data/endorsements.csv")
+  
+  endorsements_plot = 
+    endorsements %>% 
+  ggplot() + 
+  geom_point(aes(x = n_endorsements, y = current_poll, color = candidate_name, size = 10))
+
+ggplotly(endorsements_plot)
+```
+
