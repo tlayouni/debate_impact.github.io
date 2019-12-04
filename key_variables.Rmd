@@ -1,11 +1,8 @@
 ---
-
+title: "**Key Campaign Events and Their Impacts on Polling Performance**"
 
 ---
-
-# **Key Campaign Events and Their Impacts on Polling Performance**
 ***
-
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
