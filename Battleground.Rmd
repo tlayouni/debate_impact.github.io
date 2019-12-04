@@ -67,7 +67,7 @@ president_primary_polls %>%
 IA_plotly
 ```
 
-Median polling results from 31 polls for leading candidates show Biden still ahead of the pack with 25 percentage points but also a large range of 20 points between lowest and highest predictions. Warren follows with a similarly wide range of 19 points. Just a 2 percentage point difference between her and Sanders may signify a tight race for second place. Buttigieg continues to lag behind these three but remains in double digits with 13 points, all the while exhibiting the lowest range in polls at only 9.6 between his highest and lowest predictions.
+Median polling results from 33 polls for leading candidates show Biden still ahead of the pack with 25 percentage points but also a large range of 20 points between lowest and highest predictions. Warren follows with a similarly wide range of 19 points. Just a 2 percentage point difference between her and Sanders may signify a tight race for second place. Buttigieg continues to lag behind these three but remains in double digits with 13 points, all the while exhibiting the lowest range in polls at only 9.6 between his highest and lowest predictions.
 
 ### Pennsylvania
 ```{r, echo = FALSE, message = FALSE, warning = FALSE}
