@@ -184,7 +184,7 @@ Warren received a lot of backlash for her handling of her claims of Native Ameri
 
 The polls following this meeting showed an initial drop in the polls, down 2.5% to 17.5% and remained lower for 2 consecutive polls. While this drop was small in comparison to the gains Senator Warren had been making in the polls, it may be indicative of some voters’ hesitation to back a candidate whose claims of ancestry have long been a controversy and even in previous elections been used against her by her opponents and seen as a weakness against Donald Trump. 
 
-##### Endorsement from Working Families Party: September 18, 2019
+#### Endorsement from Working Families Party: September 18, 2019
 
 The number of endorsements a candidate receives, especially endorsements prior to the first primary and caucus votes, is a major predictor of success in the primary election and subsequent nomination. Elizabeth Warren received a key endorsement from a political group call Working Families Party, who works closely with unions, activists and organizations across the country and whose resources and voice can be influential. This endorsement is made even more meaningful to the Warren campaign because the group had previously endorsed one of her opponents, Bernie Sanders during the 2016 election. 
 
@@ -271,7 +271,12 @@ endorsements =
   endorsements_plot = 
     endorsements %>% 
   ggplot() + 
-  geom_point(aes(x = n_endorsements, y = current_poll, color = candidate_name, size = 10))
+  geom_point(aes(x = n_endorsements, y = current_poll, color = candidate_name, size = 10)) + 
+    labs(
+      x = "Number of Endorsements",
+      y = "Most Recent Polling %", 
+      title = "Endorsements as a Predictor of Polling Performance"
+    )
 
 ggplotly(endorsements_plot)
 ```
