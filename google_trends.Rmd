@@ -296,7 +296,7 @@ debate_4_harrisb_plot =
 debate_4_harrisb_plot + debate_4_harris_plot
 ```
 
-Again, search interest in Kamala Harris rose sharply immediately after the debate, and an increase in searches that included both her name and “abortion” indicates that this interest may have been due in part to her impassioned comments on women’s reproductive rights. However, search volume for “kamala harris” fell much faster than it did for “andrew yang” following this debate, indicated that his debate performance may have caused a longer-felt impact on voters. 
+Again, search interest in Kamala Harris rose sharply immediately after the debate, and an increase in searches that included "reproductive rights" or both her name and “abortion” indicates that this interest may have been due in part to her impassioned comments on women’s reproductive rights. However, search volume for “kamala harris” fell much faster than it did for “andrew yang” following this debate, indicated that his debate performance may have caused a longer-felt impact on voters. 
 
 ***
 
