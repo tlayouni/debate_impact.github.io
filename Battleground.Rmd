@@ -25,7 +25,6 @@ library(viridis)
 library(plotly)
 library(patchwork)
 library(gtrendsR)
-library(dplyr)
 
 knitr::opts_chunk$set(
   echo = TRUE,
@@ -63,7 +62,7 @@ president_primary_polls %>%
   mutate(answer = fct_reorder(answer, pct)) %>%
   filter(state == "Iowa",
          answer == c("Biden", "Warren", "Sanders", "Buttigieg")) %>%
-  plot_ly(y = ~pct, color = ~answer, type = "box", colors = "Set3")
+  plot_ly(y = ~pct, color = ~answer, type = "box", colors = "Set3", ylab = "Percent")
 IA_plotly
 ```
 
@@ -76,21 +75,17 @@ president_primary_polls %>%
   mutate(answer = fct_reorder(answer, pct)) %>%
   filter(state == "Pennsylvania",
          answer == c("Biden", "Warren", "Sanders", "Buttigieg")) %>%
-  plot_ly(y = ~pct, color = ~answer, type = "box", colors = "Set3")
+  plot_ly(y = ~pct, color = ~answer, type = "box", colors = "Set3", ylab = "Percent")
 PA_plotly
 ```
 
 ```{r, echo = FALSE, include = FALSE}
-#Buttigieg
-x <- c(8, 8, 6, 8.5, 6, 4, 6.3)
-median(x)
-
-#Biden
-y <- c(30, 17, 28, 46, 39, 28, 39)
-median(y)
+pa_polls = 
+  president_primary_polls %>% 
+  filter(state == "Pennsylvania")
 ```
 
-The smaller sample size of polls (7) may make it difficult to accurately represent current candidate polling status, and this fewer number of polls could be attributed to Pennsylvania possessing a later primary (April 28th), which means it hasn't garnered as much attention for predictors. However, the overall field is exhibiting a similar trend to Iowa, as Biden leads the way with a median of `r median(y)` percentage points among sampled polls. He is followed by Sanders and Warren, who again are polling quite close together at a median of 9.5 and 8 percentage points, respectively. Buttigieg does not trail by much any longer, as he is showing a median of `r median(x)` percentage points. This means that the 2nd through 4th place candidates are all within 3 points of each other.
+The smaller sample size of polls (7) may make it difficult to accurately represent current candidate polling status, and this fewer number of polls could be attributed to Pennsylvania possessing a later primary (April 28th), which means it hasn't garnered as much attention for predictors. However, the overall field is exhibiting a similar trend to Iowa, as Biden leads the way with a median of `r (median(pull(filter(pa_polls, answer == "Biden"))))` percentage points among sampled polls. He is followed by Sanders and Warren, who again are polling quite close together at a median of 9.5 and 8 percentage points, respectively. Buttigieg does not trail by much any longer, as he is showing a median of `r (median(pull(filter(pa_polls, answer == "Buttigieg"))))` percentage points. This means that the 2nd through 4th place candidates are all within 3 points of each other.
 
 ***
 
@@ -108,12 +103,24 @@ clean_google = function(df) {
   )
     
 }
+
+iowa = (gtrends(c("bernie sanders", "elizabeth warren", "joe biden", "pete buttgieg"), geo = "US-IA", time = "2019-02-03 2019-11-03")$interest_over_time) %>%
+  clean_google()
+
+penn = (gtrends(c("bernie sanders", "elizabeth warren", "joe biden", "pete buttgieg"), geo = "US-PA", time = "2019-02-03 2019-11-03")$interest_over_time) %>%
+  clean_google()
+
 ```
 
 
-```{r, echo = FALSE, include = FALSE}
-iowa = (gtrends(c("bernie sanders", "elizabeth warren", "joe biden", "pete buttgieg"), geo = "US-IA", time = "2019-02-03 2019-11-03")$interest_over_time) %>%
-  clean_google()
+```{r, echo = FALSE}
+options(
+  ggplot2.continuous.colour = "viridis",
+  ggplot2.continuous.fill = "viridis"
+)
+scale_colour_discrete = scale_colour_viridis_d
+scale_fill_discrete = scale_fill_viridis_d
+theme_set(theme_minimal() + theme(legend.position = "right"))
 
 iowa_plot =
   iowa %>%
@@ -123,11 +130,10 @@ iowa_plot =
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
   labs(title = "Iowa",
        x = "",
-       y = "Hits")
-iowa_plot
-
-penn = (gtrends(c("bernie sanders", "elizabeth warren", "joe biden", "pete buttgieg"), geo = "US-PA", time = "2019-02-03 2019-11-03")$interest_over_time) %>%
-  clean_google()
+       y = "Relative Search Proportion",
+       color = "Search Query") +
+  geom_vline(xintercept = as.numeric(as.Date(c("2019-06-26", "2019-07-30", "2019-09-12", "2019-10-15"))), linetype = 4, color = "blue") +
+  annotate("text", x = as.Date(c("2019-06-26", "2019-07-30", "2019-09-12", "2019-10-15")), y = 85, label = c("Debate 1", "Debate 2", "Debate 3", "Debate 4"), size = 3) 
 
 penn_plot =
   penn %>%
@@ -136,13 +142,13 @@ penn_plot =
   geom_path() +
   theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
   labs(title = "Pennsylvania",
-       x = "Time",
-       y = "Hits")
-penn_plot
-```
+       x = "Date",
+       y = "Relative Search Proportion",
+       color = "Search Query") +
+  geom_vline(xintercept = as.numeric(as.Date(c("2019-06-26", "2019-07-30", "2019-09-12", "2019-10-15"))), linetype = 4, color = "blue") +
+  annotate("text", x = as.Date(c("2019-06-26", "2019-07-30", "2019-09-12", "2019-10-15")), y = 85, label = c("Debate 1", "Debate 2", "Debate 3", "Debate 4"), size = 3) 
 
-```{r, echo = FALSE}
 iowa_plot / penn_plot
 ```
 
-Between Iowa and Pennsylvania, there are consistent spikes in search queries for the three leading candidates: Biden, Sanders, and Warren. Not only does each individual's proportion of searches spike at similar time points in each state, but spikes for all three candidates seem to coincide, suggesting that voters are engaging in searches for numerous candidates at similar times. Sanders experienced significant popularity in search results in early spring and in October, likely around the time of the fourth debate. In spring in both states, he reached a search proportion of 100, which means he was the [most searched topic compared to all others on Google](https://medium.com/google-news-lab/what-is-google-trends-data-and-what-does-it-mean-b48f07342ee8) in these regions at that point in time. Biden experienced his greatest spikes in voter search results later in the spring compared to Sanders, potentially due to debate 1 proceedings. Warren did not exhibit any significant spikes in search queries but has seen a steady increase in searches over time, at least in Iowa. Both Biden and Sanders have also expereinced steady overall increases in Iowa voter search queries over time, while in Pennsylvania they've ultimately leveled off. All three saw search increases around the third debate in July. Buttigieg however has not been prominent in search queries at any point over the course of the year in either state, despite his recent positive polling results in Iowa. Overall for the top 3 candidates, changes in search results in both states likely have reflected major events in the democratic race thus far, but search queries towards the end of this year do not reflect any clear preference in candidates.
+Between Iowa and Pennsylvania, there are consistent spikes in relative search queries for the three leading candidates: Biden, Sanders, and Warren. Not only does each individual's proportion of searches spike at similar time points in each state, but spikes for all three candidates seem to coincide, suggesting that voters are engaging in searches for numerous candidates at similar times. Sanders experienced significant popularity in relative searches in early spring and in October, likely around the time of the fourth debate. In spring in both states, he reached a [relative search proportion of 100](https://medium.com/google-news-lab/what-is-google-trends-data-and-what-does-it-mean-b48f07342ee8), which indicates the greatest proportion of all Google searches that one of these four queries constituted on a single day during the period of interest. Biden experienced his greatest spikes in voter search queries later in the spring compared to Sanders, potentially due to debate 1 proceedings. Warren did not exhibit any significant spikes in search queries but has seen a steady increase in relative search proporiton over time, at least in Iowa. Both Biden and Sanders have also experienced steady overall increases in relative search proportions over time in Iowa, while in Pennsylvania they've ultimately leveled off. All three saw relative search increases around the second debate in July. Buttigieg however has not been prominent in search queries at any point over the course of the year in either state, despite his recent positive polling results in Iowa. Overall for the top 3 candidates, changes in relative search results in both states likely have reflected major events in the democratic race thus far, but search queries towards the end of this year do not reflect any clear preference in candidates.
