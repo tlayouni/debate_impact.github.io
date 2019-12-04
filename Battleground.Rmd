@@ -81,7 +81,7 @@ president_primary_polls %>%
 PA_plotly
 ```
 
-Polling results for the main candidates in are not as clearly visualizable, particularly for Pennsylvania, in part perhaps due to the invariability of data.
+Pennsylvania has one of the lastest primaries (April 28th), which means polling data may not accurately reflect the ultimate outcome of voter choices, especially when considering that outcomes in early states may change the tides for specific individuals. Some candidates are therefore showing a lack of variability in current polling results, including Biden and Buttigieg. However, the overall field is exhibiting a similar trend to Iowa, as Biden leads the way with his highest polling result at 46 percentage points among sampled polls. He is followed by Sanders and Warren, who again are polling quite close together at a median of 9.5 and 8 percentage points, respectively. Buttigieg trails the field, with his highest result in the sampled polls at 8.5 percentage points.
 
 ***
 
@@ -136,3 +136,4 @@ penn_plot
 iowa_plot / penn_plot
 ```
 
+Between Iowa and Pennsylvania, there are consistent spikes in search queries for the three leading candidates: Biden, Sanders, and Warren. Not only does each individual's proportion of hits spike at similar time points in each state, but spikes for all three candidates seem to coincide, suggesting that voters are engaging in general political searches at similar times. Queries for Sanders constituted ...
