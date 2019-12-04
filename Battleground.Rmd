@@ -43,7 +43,10 @@ theme_set(theme_minimal() + theme(legend.position = "right"))
 ```
 
 ```{r, echo = FALSE, include = FALSE}
-president_primary_polls <- read_csv("./data/president_primary_polls.csv")
+president_primary_polls <- read_csv("./data/president_primary_polls.csv") 
+
+president_primary_polls = 
+  rename(president_primary_polls, Percent = pct)
 ```
 
 ***
@@ -59,10 +62,10 @@ Democrats who are [currently leading the election field nationally](https://www.
 ```{r, echo = FALSE, message = FALSE, warning = FALSE}
 IA_plotly =
 president_primary_polls %>%
-  mutate(answer = fct_reorder(answer, pct)) %>%
+  mutate(answer = fct_reorder(answer, Percent)) %>%
   filter(state == "Iowa",
          answer == c("Biden", "Warren", "Sanders", "Buttigieg")) %>%
-  plot_ly(y = ~pct, color = ~answer, type = "box", colors = "Set3", ylab = "Percent")
+  plot_ly(y = ~Percent, color = ~answer, type = "box", colors = "Set3") 
 IA_plotly
 ```
 
@@ -72,10 +75,10 @@ Median polling results from 33 polls for leading candidates show Biden still ahe
 ```{r, echo = FALSE, message = FALSE, warning = FALSE}
 PA_plotly =
 president_primary_polls %>%
-  mutate(answer = fct_reorder(answer, pct)) %>%
+  mutate(answer = fct_reorder(answer, Percent)) %>%
   filter(state == "Pennsylvania",
          answer == c("Biden", "Warren", "Sanders", "Buttigieg")) %>%
-  plot_ly(y = ~pct, color = ~answer, type = "box", colors = "Set3", ylab = "Percent")
+  plot_ly(y = ~Percent, color = ~answer, type = "box", colors = "Set3")
 PA_plotly
 ```
 
