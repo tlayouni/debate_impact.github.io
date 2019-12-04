@@ -70,14 +70,21 @@ poll_data %>%
   ggplot(aes(x = end_date, y = mean_pct)) +
   geom_point() + 
   geom_line() +
-  geom_vline(xintercept = as.numeric(as.Date("2019-03-29")), linetype = 4, color = "blue") +
-  geom_vline(xintercept = as.numeric(as.Date("2019-10-08")), linetype = 4, color = "red") +
-   geom_vline(xintercept = as.numeric(as.Date("2019-05-01")), linetype = 4, color = "green") +
+  geom_vline(xintercept = as.numeric(as.Date("2019-03-29")), linetype = 4, color = "#453781FF") +
+  geom_vline(xintercept = as.numeric(as.Date("2019-10-08")), linetype = 4, color = "#287D8EFF") +
+   geom_vline(xintercept = as.numeric(as.Date("2019-05-01")), linetype = 4, color = "#55C667FF") +
   labs(
     x = "Date",
     y = "Polling Percent",
     title = "Joe Biden: Polling Performance from January 24, 2019 to November 3, 2019"
-  ) 
+  ) +
+  scale_x_date(
+    date_breaks = "1 month",
+    labels = c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+  ) +
+  annotate("text", x = as.Date("2019-03-29"), y = 12.5, label = "Flores' Essay", size = 3) +
+  annotate("text", x = as.Date("2019-05-01"), y = 15, label = "Ukraine Conspiracy", size = 3) +
+  annotate("text", x = as.Date("2019-10-08"), y = 17.5, label = "Feinstein Endorsement", size = 3)
 
 ggplotly(biden_plot)
 ```
@@ -151,15 +158,22 @@ warren_plot =
   ggplot(aes(x = end_date, y = mean_pct)) +
   geom_point() + 
   geom_line() +
-  geom_vline(xintercept = as.numeric(as.Date("2019-09-16")), linetype = 4, color = "blue") +
-  geom_vline(xintercept = as.numeric(as.Date("2019-10-28")), linetype = 4, color = "green") +
-   geom_vline(xintercept = as.numeric(as.Date("2019-08-19")), linetype = 4, color = "red") +
+  geom_vline(xintercept = as.numeric(as.Date("2019-09-16")), linetype = 4, color = "#453781FF") +
+  geom_vline(xintercept = as.numeric(as.Date("2019-10-28")), linetype = 4, color = "#287D8EFF") +
+   geom_vline(xintercept = as.numeric(as.Date("2019-08-19")), linetype = 4, color = "#55C667FF") +
    #geom_vline(xintercept = as.numeric(as.Date("2019-02-19")), linetype = 4, color = "orange") +
   labs(
     x = "Date",
     y = "Polling Percent",
     title = "Elizabeth Warren: Polling Performance from January 24, 2019 to November 3, 2019"
-  ) 
+  ) +
+  scale_x_date(
+    date_breaks = "1 month",
+    labels = c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+  ) +
+  annotate("text", x = as.Date("2019-09-16"), y = 10, label = "WFP Endorsement", size = 3) +
+  annotate("text", x = as.Date("2019-10-28"), y = 15, label = "NYT Corporate Lawyer Article", size = 3) +
+  annotate("text", x = as.Date("2019-08-19"), y = 5, label = "Ancestry Apology", size = 3)
 
 ggplotly(warren_plot)
 ```
@@ -216,15 +230,23 @@ poll_data %>%
   ggplot(aes(x = end_date, y = mean_pct)) +
   geom_point() + 
   geom_line() +
-  geom_vline(xintercept = as.numeric(as.Date("2019-04-15")), linetype = 4, color = "blue") +
-  geom_vline(xintercept = as.numeric(as.Date("2019-10-04")), linetype = 4, color = "green") +
-   geom_vline(xintercept = as.numeric(as.Date("2019-10-15")), linetype = 4, color  = "red") +
- geom_vline(xintercept = as.numeric(as.Date("2019-04-25")), linetype = 4, color = "orange") +
+  geom_vline(xintercept = as.numeric(as.Date("2019-04-15")), linetype = 4, color = "#453781FF") +
+  geom_vline(xintercept = as.numeric(as.Date("2019-10-04")), linetype = 4, color = "#287D8EFF") +
+   geom_vline(xintercept = as.numeric(as.Date("2019-10-15")), linetype = 4, color  = "#55C667FF") +
+ geom_vline(xintercept = as.numeric(as.Date("2019-04-25")), linetype = 4, color = "#FDE725FF") +
   labs(
     x = "Date",
     y = "Polling Percent",
     title = "Bernie Sanders: Polling Performance from January 24, 2019 to November 3, 2019"
-  ) 
+  ) +
+    scale_x_date(
+    date_breaks = "1 month",
+    labels = c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+  ) +
+  annotate("text", x = as.Date("2019-04-15"), y = 5, label = "Sanders Becomes Millionaire", size = 3) +
+  annotate("text", x = as.Date("2019-10-04"), y = 10, label = "Sanders' Heart Attack", size = 3) +
+  annotate("text", x = as.Date("2019-10-15"), y = 12, label = "Squad Endorsements", size = 3) +
+  annotate("text", x = as.Date("2019-04-25"), y = 8, label = "Biden Enters Race", size = 3)
 
 ggplotly(sanders_plot)
 ```
