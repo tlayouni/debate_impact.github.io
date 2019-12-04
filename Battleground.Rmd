@@ -53,7 +53,6 @@ google_data <- read_csv("./data/google_data.csv")
 
 Democrats who are [currently leading the election field nationally](https://www.realclearpolitics.com/epolls/2020/president/us/2020_democratic_presidential_nomination-6730.html) include Biden, Sanders, Warren, and Buttigieg. These candidates are similarly topping the field in both [Iowa](https://www.realclearpolitics.com/epolls/2020/president/ia/iowa_democratic_presidential_caucus-6731.html) and [Pennsylvania](https://www.realclearpolitics.com/epolls/2020/president/pa/pennsylvania_democratic_presidential_primary-6860.html).
 
-## Varying Projections
 
 ***
 
