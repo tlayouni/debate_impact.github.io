@@ -11,6 +11,8 @@ output:
 
 *Image source:* [Vox](https://www.vox.com/policy-and-politics/2019/4/26/18512479/2020-primary-campaign-policy-ideas) 
 
+*** 
+
 # Motivation
 
 A highly anticipated presidential election is less than one year away, with the first primary votes happening in Iowa in just two months. We were interested in exploring factors that affect candidate popularity in the 2020 democratic primary over the last year in order to better understand how candidates might perform in upcoming votes. We thought that factors such as debate performance and campaign events might help explain fluctuations in the polls or a particular candidates' success. In order to assess candidate popularity we chose to use polling data as an indicator of potential election success as well as Google Trends data. We wanted to assess the impacts of debate performance, measured by variables such as speaking time, as well as examine trends in polling and google searches of candidates after newsworthy events at the state and national level. 
@@ -31,6 +33,3 @@ This website includes exploratory analyses on the following four topics:
 
 An overview of this project can be viewed through our [Screencast](https://www.youtube.com/watch?v=UeGHCQQLmTA), located on Youtube.
 
-
-
-<iframe width="560" height="315" src="https://www.youtube.com/watch?v=UeGHCQQLmTA" frameborder="0" allowfullscreen></iframe>
