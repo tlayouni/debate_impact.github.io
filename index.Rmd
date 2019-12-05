@@ -9,7 +9,7 @@ output:
 
 <img src="images/candidates.png" style="width:75%">
 
-Image source: Vox 
+*Image source*: [Vox](https://www.vox.com/policy-and-politics/2019/4/26/18512479/2020-primary-campaign-policy-ideas) 
 
 # Motivation
 
