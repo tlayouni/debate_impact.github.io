@@ -17,7 +17,7 @@ A highly anticipated presidential election is less than one year away, with the 
 
 # Exploratory Analyses
 
-This website includes exploratory analyses on the following four topic:
+This website includes exploratory analyses on the following four topics:
 
 * *[Key Events:](https://tlayouni.github.io/debate_impact.github.io/key_variables.html)* This page examines key campaign events from January 2019 to November 2019, including controversies and endorsements that may have impacted 3 of the frontrunner candidates during their bids for the Democratic Nomination for President in 2020, Former Vice President Joe Biden, Senator Elizabeth Warren and Senator Bernie Sanders. We look at how these events might be associated with polling performance.
 
