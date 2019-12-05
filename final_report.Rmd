@@ -28,11 +28,11 @@ National and state level polling for all candidates from January 24, 2019 to Nov
 
 For the plots included in the dashboard, polling data was filtered to include only the polls directly before and directly after the fourth primary debate. A percent change variable was created to show the change in polling numbers before and after the debate. 
 
-Trump mentions and words spoken per candidate were scraped from FiveThirtyEight’s article titled, “The Fourth Democratic Debate in 6 Charts” using `rvest`. 
+Trump mentions and words spoken per candidate were scraped from [FiveThirtyEight](https://fivethirtyeight.com/features/the-october-democratic-debate-in-6-charts/) using `rvest`. 
 
-Airtime was scraped from a Wikipedia article titled, “2020 Democratic Party Presidential Debates and Forums” using `rvest`.
+Airtime was scraped from [Wikipedia](https://en.wikipedia.org/wiki/2020_Democratic_Party_presidential_debates_and_forums) using `rvest`.
 
-Data on candidate attacks during the debate was taken from NBC News. Data were presented in graphic form in an article titled, “Candidate attacks, by the numbers, in the fourth presidential debate” and were entered into a .CSV file manually due to scraping difficulties. The data were checked by all team members to ensure no mistakes were made.
+Data on candidate attacks during the debate was taken from [NBC News](https://www.nbcnews.com/politics/2020-election/fourth-democratic-debate-2020-attack-tracker-graphic-n1066701). Data were presented in graphic form and were therefore entered into a .CSV file manually due to scraping difficulties. The data were checked by all team members to ensure no mistakes were made.
 
 The resulting dataframes were filtered to include only the candidates of interest for this project and joined to create a single dataframe including polling percent change and all debate variables of interest.
 
