@@ -10,7 +10,7 @@ library(tidyverse)
 library(rvest)
 ```
 
-**Should Discuss approach at meeting on 11/13**
+Wikipedia frequently updates their data and tables, and this code was used successfully to scrape data on 12/05/2019. Any errors that occur with future use should be able to remedied by updating the problematic column names below. 
 
 # Scraping Data on Debates 
 ***
