@@ -20,6 +20,9 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
@@ -250,6 +253,63 @@ $(document).ready(function () {
 
 
 
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+
 
 </head>
 
@@ -257,6 +317,16 @@ $(document).ready(function () {
 
 
 <div class="container-fluid main-container">
+
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
 
 
 
@@ -277,16 +347,19 @@ $(document).ready(function () {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="key_variables.html">Key Variables</a>
-</li>
-<li>
-  <a href="Battleground.html">Battleground States</a>
+  <a href="key_variables.html">Key Events</a>
 </li>
 <li>
   <a href="dashboard.html">The Fourth Debate</a>
 </li>
 <li>
   <a href="google_trends.html">Google Trends</a>
+</li>
+<li>
+  <a href="Battleground.html">Battleground States</a>
+</li>
+<li>
+  <a href="final_report.html">Final Report</a>
 </li>
 <li>
   <a href="mailto:&lt;sm4594@cumc.columbia.edu&gt;">
@@ -318,7 +391,7 @@ $(document).ready(function () {
 <h1>Introduction</h1>
 <p>Google search data is increasingly viewed as an important predictor of election outcomes. It is thought that the Americans who make searches online may be a more representative sample of the voting population than those reached by polling organizations, and that people may be more honest in the privacy of their own computer than in a poll response where social desirability bias can come into play. After not finding clear trends associated with performance variables from the fourth debate, we decided to consider Google Search behavior as a secondary indicator of the impact that debate performance has on public perceptions of Democratic presidential candidates. Main events from each of the first four Democratic Debates were selected for investigation with Google Trends data, and search volume for relevant terms has been plotted for the week immediately preceding and immediately following each debate.</p>
 <p>Arguably the most notable advocate of the use of Google Trends data in election applications is Seth Stephens-Davidowitz, former data scientist at Google and bestselling author of “Everybody Lies.” Stephens-Davidowitz has examined questions such as the <a href="https://static1.squarespace.com/static/51d894bee4b01caf88ccb4f3/t/51d89ab3e4b05a25fc1f39d4/1373149875469/RacialAnimusAndVotingSethStephensDavidowitz.pdf">role of racism in Barack Obama’s 2008 and 2012 election performance</a> and how Google data can show <a href="https://www.wnyc.org/story/245757-what-our-google-habits-reveal-about-our-voting-habits/">voter reactions to rumors and advertising campaigns</a>. Several of his ideas are incorporated into the following analyses, although his work has been almost entirely focused on predicting presidential elections and these analyses look exclusively at the current Democratic primaries.</p>
-<p>It is important to note that it is impossible to know an individual’s motivation for making a particular search, so these analyses are exclusively exploratory. Additionally, Google Trends yeilds relative search proportions rather than absolute search counts. This means that all searches are scaled from 0 to 100, with 100 representing the day during the period of interest during which the search query made up the greatest proportion of all Google Searches. Comparisons between graphs should therefore be made with caution. Google Trends does allow the comparison of up to 5 search queries at once, where all results are shown on a shared scale. All graphs with multiple queries were generated in this manner. Included terms are therefore all relative to each other and comparisons can be made. Given this scaling system, some searches (such as those for candidate names) have search volume so great that they mask any trends in less frequently searched queries. When this occurred, these high-volume terms were considered on a separate scale in a second panel.</p>
+<p>It is important to note that it is impossible to know an individual’s motivation for making a particular search, so these analyses are exclusively exploratory. Additionally, Google Trends yeilds relative search proportions rather than absolute search counts. This means that all searches are scaled from 0 to 100, with 100 representing the day during the period of interest during which the search query made up the greatest proportion of all Google Searches. Comparisons between graphs should therefore be made with caution. Google Trends does allow the comparison of up to 5 search queries at once, where all results are shown on a shared scale. All graphs with multiple queries were generated in this manner. Included terms are therefore all relative to each other and comparisons can be made. Given this scaling system, some searches (such as those for candidate names) have a search volume so great that they mask any trends in less frequently searched queries. When this occurred, these high-volume terms were considered on a separate scale in a second panel.</p>
 <hr />
 </div>
 <div id="debate-1-june-27-2019" class="section level1">
@@ -367,6 +440,8 @@ $(document).ready(function () {
 
 
 
+</div>
+</div>
 
 </div>
 
@@ -399,6 +474,32 @@ $(document).ready(function () {
 
 <!-- code folding -->
 
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
