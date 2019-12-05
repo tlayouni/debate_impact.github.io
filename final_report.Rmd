@@ -7,7 +7,7 @@ output: html_document
 
 # Motivation
 
-With a highly anticipated presidential election less than one year away and the first primary votes happening in Iowa in just two months, we were interested in exploring factors that affect candidate popularity in the 2020 democratic primary over the last year that might give us an idea of how candidates will perform in upcoming votes. We thought that events like debates and campaign events might help to understand fluctuations in the polls or a particular candidates success. In order to assess candidate popularity we chose to use polling data as an indicator of potential election success as well as Google Trends data. We wanted to assess the impacts of debate performance, measured by variables such as speaking time, as well as examine trends in polling and google searches of candidates after newsworthy events at the state and national level. 
+With a highly anticipated presidential election less than one year away and the first primary votes happening in Iowa in just two months, we were interested in exploring factors that affect candidate popularity in the 2020 democratic primary over the last year in order to better understand how candidates might perform in upcoming votes. We thought that events like debates and campaign events might help to understand fluctuations in the polls or a particular candidates success. In order to assess candidate popularity we chose to use polling data as an indicator of potential election success as well as Google Trends data. We wanted to assess the impacts of debate performance, measured by variables such as speaking time, as well as examine trends in polling and google searches of candidates after newsworthy events at the state and national level. 
 
 # Related Work
 
