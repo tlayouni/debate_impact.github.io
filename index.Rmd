@@ -11,10 +11,13 @@ output:
 
 Image source: Vox 
 
+# Motivation
 
 A highly anticipated presidential election is less than one year away, with the first primary votes happening in Iowa in just two months. We were interested in exploring factors that affect candidate popularity in the 2020 democratic primary over the last year in order to better understand how candidates might perform in upcoming votes. We thought that factors such as debate performance and campaign events might help explain fluctuations in the polls or a particular candidates' success. In order to assess candidate popularity we chose to use polling data as an indicator of potential election success as well as Google Trends data. We wanted to assess the impacts of debate performance, measured by variables such as speaking time, as well as examine trends in polling and google searches of candidates after newsworthy events at the state and national level. 
 
-This website includes exploratory analyses on the following four topics:
+# Exploratory analyses
+
+This website includes exploratory analyses on the following four topic:
 
 * *[Key Events:](https://tlayouni.github.io/debate_impact.github.io/key_variables.html)* This page examines key campaign events from January 2019 to November 2019, including controversies and endorsements that may have impacted 3 of the frontrunner candidates during their bids for the Democratic Nomination for President in 2020, Former Vice President Joe Biden, Senator Elizabeth Warren and Senator Bernie Sanders. We look at how these events might be associated with polling performance.
 
