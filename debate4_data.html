@@ -279,16 +279,19 @@ $(document).ready(function () {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="key_variables.html">Key Variables</a>
-</li>
-<li>
-  <a href="Battleground.html">Battleground States</a>
+  <a href="key_variables.html">Key Events</a>
 </li>
 <li>
   <a href="dashboard.html">The Fourth Debate</a>
 </li>
 <li>
   <a href="google_trends.html">Google Trends</a>
+</li>
+<li>
+  <a href="Battleground.html">Battleground States</a>
+</li>
+<li>
+  <a href="final_report.html">Final Report</a>
 </li>
 <li>
   <a href="mailto:&lt;sm4594@cumc.columbia.edu&gt;">
@@ -372,7 +375,7 @@ library(rvest)</code></pre>
 ## )</code></pre>
 <pre><code>## Warning: Expected 2 pieces. Additional pieces discarded in 1 rows [12].</code></pre>
 <p>Read in airtime data:</p>
-<pre class="r"><code>airtime = read_csv(&quot;./speaking_time.csv&quot;) %&gt;% 
+<pre class="r"><code>airtime = read_csv(&quot;./data/speaking_time.csv&quot;) %&gt;% 
   filter(debate == 4) %&gt;% 
   select(candidate, airtime_min)</code></pre>
 <pre><code>## Warning: Missing column names filled in: &#39;X1&#39; [1]</code></pre>
@@ -396,15 +399,13 @@ library(rvest)</code></pre>
 <pre class="r"><code>debate4_polls = 
 read_csv(&quot;./data/president_primary_polls.csv&quot;) %&gt;%
    filter(
-    is.na(state), 
+     is.na(state), 
     party == &quot;DEM&quot;,
     fte_grade %in% c(&quot;A+&quot;, &quot;A&quot;),
-    candidate_name %in% c(&quot;Amy Klobuchar&quot;, &quot;Andrew Yang&quot;, &quot;Bernard Sanders&quot;, &quot;Elizabeth Warren&quot;, &quot;Joseph R. Biden Jr.&quot;, &quot;Julián Castro&quot;, &quot;Kamala D. Harris&quot;, &quot;Pete Buttigieg&quot;, &quot;Cory A. Booker&quot;, &quot;Tulsi Gabbard&quot;)
-   ) %&gt;% 
+    candidate_name %in% c(&quot;Amy Klobuchar&quot;, &quot;Andrew Yang&quot;, &quot;Bernard Sanders&quot;, &quot;Elizabeth Warren&quot;, &quot;Joseph R. Biden Jr.&quot;, &quot;Julián Castro&quot;, &quot;Kamala D. Harris&quot;, &quot;Pete Buttigieg&quot;, &quot;Cory A. Booker&quot;, &quot;Tulsi Gabbard&quot;)) %&gt;% 
   mutate(
     end_date = as.Date(end_date, format = &quot;%m/%d/%y&quot;),
-    candidate_name = recode(candidate_name, &quot;Bernard Sanders&quot; = &quot;Bernie Sanders&quot;, &quot;Joseph R. Biden Jr.&quot; = &quot;Joe Biden&quot;, &quot;Kamala D. Harris&quot; = &quot;Kamala Harris&quot;, &quot;Cory A. Booker&quot; = &quot;Cory Booker&quot;)
-    ) %&gt;% 
+    candidate_name = recode(candidate_name, &quot;Bernard Sanders&quot; = &quot;Bernie Sanders&quot;, &quot;Joseph R. Biden Jr.&quot; = &quot;Joe Biden&quot;, &quot;Kamala D. Harris&quot; = &quot;Kamala Harris&quot;, &quot;Cory A. Booker&quot; = &quot;Cory Booker&quot;)) %&gt;% 
   group_by(end_date, candidate_name) %&gt;% 
   mutate(mean_pct = mean(pct)) %&gt;% 
   rename(candidate = candidate_name) %&gt;% 

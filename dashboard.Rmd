@@ -13,7 +13,8 @@ library(tidyverse)
 library(viridis)
 library(plotly)
 
-debate4_data = read.csv("./data/debate_4.csv")
+debate4_data = read.csv("./data/debate_4.csv") %>% 
+  mutate(pct_change = as.integer(round(pct_change, 0))) 
 ```
 
 Row {data-height=550 }
