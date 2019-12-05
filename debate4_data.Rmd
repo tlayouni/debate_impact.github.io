@@ -53,7 +53,7 @@ attacks = read_csv("./data/debate4_attacks.csv") %>%
 Read in airtime data:
 
 ```{r airtime}
-airtime = read_csv("./speaking_time.csv") %>% 
+airtime = read_csv("./data/speaking_time.csv") %>% 
   filter(debate == 4) %>% 
   select(candidate, airtime_min)
 ```
@@ -69,15 +69,13 @@ Polling data:
 debate4_polls = 
 read_csv("./data/president_primary_polls.csv") %>%
    filter(
-    is.na(state), 
+     is.na(state), 
     party == "DEM",
     fte_grade %in% c("A+", "A"),
-    candidate_name %in% c("Amy Klobuchar", "Andrew Yang", "Bernard Sanders", "Elizabeth Warren", "Joseph R. Biden Jr.", "Julián Castro", "Kamala D. Harris", "Pete Buttigieg", "Cory A. Booker", "Tulsi Gabbard")
-   ) %>% 
+    candidate_name %in% c("Amy Klobuchar", "Andrew Yang", "Bernard Sanders", "Elizabeth Warren", "Joseph R. Biden Jr.", "Julián Castro", "Kamala D. Harris", "Pete Buttigieg", "Cory A. Booker", "Tulsi Gabbard")) %>% 
   mutate(
     end_date = as.Date(end_date, format = "%m/%d/%y"),
-    candidate_name = recode(candidate_name, "Bernard Sanders" = "Bernie Sanders", "Joseph R. Biden Jr." = "Joe Biden", "Kamala D. Harris" = "Kamala Harris", "Cory A. Booker" = "Cory Booker")
-    ) %>% 
+    candidate_name = recode(candidate_name, "Bernard Sanders" = "Bernie Sanders", "Joseph R. Biden Jr." = "Joe Biden", "Kamala D. Harris" = "Kamala Harris", "Cory A. Booker" = "Cory Booker")) %>% 
   group_by(end_date, candidate_name) %>% 
   mutate(mean_pct = mean(pct)) %>% 
   rename(candidate = candidate_name) %>% 

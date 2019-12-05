@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Cassie Coulter, Sophia Miller, Troy Layouni, Emily Halford" />
+
+
+<title>Factors Influencing Candidate Performance in the 2020 Democratic Primary: Final Report</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/sandstone.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 61px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h2 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h3 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h4 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h5 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h6 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Home</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="key_variables.html">Key Variables</a>
+</li>
+<li>
+  <a href="Battleground.html">Battleground States</a>
+</li>
+<li>
+  <a href="dashboard.html">The Fourth Debate</a>
+</li>
+<li>
+  <a href="google_trends.html">Google Trends</a>
+</li>
+<li>
+  <a href="mailto:&lt;sm4594@cumc.columbia.edu&gt;">
+    <span class="fa fa-envelope fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="http://github.com/tlayouni/debate_impact.github.io/">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Factors Influencing Candidate Performance in the 2020 Democratic Primary: Final Report</h1>
+<h4 class="author">Cassie Coulter, Sophia Miller, Troy Layouni, Emily Halford</h4>
+<h4 class="date">12/4/2019</h4>
+
+</div>
+
+
+<div id="motivation" class="section level1">
+<h1>Motivation</h1>
+<p>With a highly anticipated presidential election less than one year away and the first primary votes happening in Iowa in just two months, we were interested in exploring factors that affect candidate popularity in the 2020 democratic primary over the last year that might give us an idea of how candidates will perform in upcoming votes. We thought that events like debates and campaign events might help to understand fluctuations in the polls or a particular candidates success. In order to assess candidate popularity we chose to use polling data as an indicator of potential election success as well as Google Trends data. We wanted to assess the impacts of debate performance, measured by variables such as speaking time, as well as examine trends in polling and google searches of candidates after newsworthy events at the state and national level.</p>
+</div>
+<div id="related-work" class="section level1">
+<h1>Related Work</h1>
+<p>The Key Events exploration in our project was developed after reading a FiveThirtyEight article on the accuracy of election polls in the United States after the 2016 Presidential Election upset. The article found that 80% of election polls accurately predict the winner. We thought that due to the accuracy of polls and the extensive media coverage devoted to the democratic primary election that we may be able to see how events during a given candidate’s campaign may have impacted their polling and subsequently predict their chances of winning the democratic primary.</p>
+<p>The dashboard exploring the fourth democratic debate was inspired by previous research showing that primary debates have a meaningful impact on voting behavior. A well-cited study using 12 years of debate data by McKinny and Warner showed that, unlike general presidential debates, primary debates are likely to affect viewers’ opinions of candidates. The study found that 60% of participants changed their minds about candidates after the primary debates, whereas only 14% changed their minds after the general presidential debates. The Google Trends portion of the project was motivated by Everybody Lies, a book written by Seth Stephens-Davidowitz, a data scientist with experience at Google. He examined the 2012 and 2016 presidential debate using Google Search data and compared these findings to polling data.</p>
+<p>The Battleground section focuses on the role that single states often play in presidential election outcomes, as some are not solidly placed in either the Republican or Democratic camp and were won in the prior election by less than 5%. Pennsylvania is projected to be a swing state come November, 2020, and is experiencing a strong showing from the Democrat party with recent local election results at the county level. Formerly Republican-held Chester, Bucks, and Delaware counties in southeastern PA saw Democrats take numerous county-level positions, including some that had not been blue since 1799. Iowa has been a swing state in several previous elections, and in elections over the last 20 years, the presidential winner has placed top in the top four of their party in Iowa. We sought to evaluate how polling and Google Searches varied between these two potentially key states among the top four democratic candidates.</p>
+</div>
+<div id="data" class="section level1">
+<h1>Data</h1>
+<div id="polling-and-key-events-data" class="section level4">
+<h4><em>Polling and Key Events Data</em></h4>
+<p>National and state level polling for all candidates from January 24, 2019 to November 3, 2019 were obtained from FiveThirtyEight.com. These data contained information on the ranking of the poll (letter grades). Data was cleaned to include only polls with a grade of A or A+ and only democratic candidates that participated in each of the four debates. A mean polling percent was taken from all remaining polls for each available time point. Additional data on key campaign events were obtained from news sources such as the New York Times, Vox, Politico, and The Cut.</p>
+</div>
+<div id="debate-indicators-data" class="section level4">
+<h4><em>Debate Indicators Data</em></h4>
+<p>For the plots included in the dashboard, polling data was filtered to include only the polls directly before and directly after the fourth primary debate. A percent change variable was created to show the change in polling numbers before and after the debate.</p>
+<p>Trump mentions and words spoken per candidate were scraped from FiveThirtyEight’s article titled, “The Fourth Democratic Debate in 6 Charts” using <code>rvest</code>.</p>
+<p>Airtime was scraped from a Wikipedia article titled, “2020 Democratic Party Presidential Debates and Forums” using <code>rvest</code>.</p>
+<p>Data on candidate attacks during the debate was taken from NBC News. Data were presented in graphic form in an article titled, “Candidate attacks, by the numbers, in the fourth presidential debate” and were entered into a .CSV file manually due to scraping difficulties. The data were checked by all team members to ensure no mistakes were made.</p>
+<p>The resulting dataframes were filtered to include only the candidates of interest for this project and joined to create a single dataframe including polling percent change and all debate variables of interest.</p>
+</div>
+<div id="google-trends-data" class="section level4">
+<h4><em>Google Trends Data</em></h4>
+<p>Google trends data was acquired using the gtrendsR package. Search queries were selected using keywords from the debate events, Google’s ‘Related’ and ‘Suggested’ features, and ideas presented by Stephens-Davidowitz in Everybody Lies. Queries pulled with quotation marks include all searches that contain the queried words in that exact order, and queries without quotation marks include all searches that contain the queried words in any order. Quotation marks were only used when exact ordering was needed. In the rare circumstance that a query had a value of &lt;1% for a particular day, the &lt;1% was approximated as 0.5 to allow for search proportion to be treated as a numeric variable.</p>
+</div>
+</div>
+<div id="exploratory-analysis" class="section level1">
+<h1>Exploratory Analysis</h1>
+<p>We explored the relationship between key campaign events including controversies, medical events, and endorsements and a candidate’s polling performance. The list of candidates was narrowed down to the three frontrunner candidates with most of the media coverage. We had originally planned to look at each candidate but it became difficult to find major campaign events for low polling candidates. We also decided to look into the relationship between the number of endorsements per candidate and their current polling performance after reading additional research on how well the number of endorsements predicts nomination to the general election. It is hard to determine whether these events were truly the reason for a drop or gain in polling percent because other factors such as debate performance, candidate fatigue and advertising and therefore our analysis is purely exploratory.</p>
+<p>We also discussed several approaches to the exploratory analysis of debate factors affecting polling performance. Originally, we chose an approach in which we would compile debate indicators across debates one through four and examine their association with candidates’ polling percent change over that time period. However, we realized that many other factors besides debate-related variables were likely to affect polling numbers over that period of time. We ultimately decided to focus on the fourth debate because we believe the percent change in polling numbers directly before and after a single debate is more likely to reflect debate performance.</p>
+<p>Although we believe focusing on one debate is valuable, we anticipated that it may be difficult to observe meaningful trends due to the small sample size. Additionally, we understand that certain debate-related factors that influence voting behavior may be less quantifiable than variables such as airtime and Trump mentions. We therefore chose to explore Google Search behavior as a secondary indicator of the impact that debate performance has on public perceptions of Democratic presidential candidates. We decided to choose key events from each debate to look at using Google Search behavior in the days immediately following the debates. These events were as follows: Kamala Harris’ comments toward Joe Biden in the first debate about his previous opposition to school busing programs, Bernie Sanders’ memorable comment that he “wrote the damn bill” in the second debate, Beto O’Rourke’s comment of “hell yes” to gun buy-back programs in the third debate, and Andrew Yang and Kamala Harris bringing up Universal Basic Income and reproductive rights, respectively, in the fourth debate. We also decided to compare Yang and Harris after the fourth debate to further compare their debate performances. We initially thought about instead looking at the 24 hours preceding and following the debates. However, we realized that a longer timeframe would give us a better understanding of behavior changes by allowing us to see if they were sustained over time so we looked at daily data for the week preceding and following each debate. Analysis was very exploratory in nature, and search volume was visualized using spaghetti plots.</p>
+<p>Finally, there is significant interest in which democratic candidate will eventually go head to head with President Trump in the 2020 presidential election, so we explored polling results in two key states, IA and PA. The list of candidates was limited to the four polling highest in the states who are still in the race: Biden, Sanders, Warren, and Buttigieg. It became difficult to assess polling for candidates in Pennsylvania as opposed to Iowa, as polling data for several candidates was not as varied, which means the spread of polling results was not easily visualizable. This may be due to voters not having as clear of a picture of who will be a realistic contender that late in the race, as Pennsylvania’s primary will happen in April, as opposed to Iowa’s early February caucus. In addition to looking at Google Search behavior following debates at the national level, we also explored how searches for these top candidates varied (or didn’t) between the two states over the course of this year to see if voters exhibited a strong interest or preference in any particular candidate and if these fluctuations coincided with key events like debates.</p>
+</div>
+<div id="additional-analysis" class="section level1">
+<h1>Additional Analysis</h1>
+<p>This project was intended to provide useful real-world insight into factors that may be affecting perceptions of candidates in the upcoming 2020 presidential election. Given our decision to focus on this election, many of our analyses do not have a great enough sample size to support further confirmatory analysis and regression; this would require a compilation of data from numerous election cycles. Therefore, these analyses were purely exploratory and no further analysis was conducted.</p>
+</div>
+<div id="discussion" class="section level1">
+<h1>Discussion</h1>
+<p>Key campaign events were associated with changes in polling status for several candidates. The essay written by Flores about Joe Biden’s inappropriate touching coincided with one of his largest drops in the polls, while the conspiracy theory about his involvement in Ukraine occurred right before his biggest gain in the polls. The Feinstein endorsement occurred shortly before the former Vice President saw a gain in the polls but this was short-lived. Elizabeth Warren has seen mostly consistent gains in the polls since announcing her bid for the presidency so it is more difficult to determine how events may have impacted her polling performance. The only drop in her polling after an event captured in our data was after her apology for the release of her ancestry results, but this was quickly followed by an increase in the polls around the same time as her endorsement from the Working Family Party. Due to the lack of polling information after the New York Times article on Warren’s time as a corporate lawyer, it is hard to tell whether this impacted her polling performance. With events that occurred around the same time period, it was difficult to determine the impact of individual events on Sanders’ polling performance. Polling following Biden’s announcement of his bid for presidency as well as news of Sanders becoming a millionaire showed his largest decline in polling percent. Polling after his heart attack and endorsements by Ilhan Omar, Alexandra Ocasio-Cortez, and Rashida Tlaib showed modest gains. A limited number of data points for polling means we cannot see the immediate effects of each event. Polls only occurred once to twice a month, meaning these events cannot be directly linked to polling.</p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
