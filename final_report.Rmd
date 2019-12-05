@@ -40,7 +40,7 @@ The resulting dataframes were filtered to include only the candidates of interes
 
 #### *Google Trends Data*
 
-Google trends data was acquired using the gtrendsR package. Search queries were selected using keywords from the debate events, Google’s ‘Related’ and ‘Suggested’ features, and ideas presented by Stephens-Davidowitz in Everybody Lies. Queries pulled with quotation marks include all searches that contain the queried words in that exact order, and queries without quotation marks include all searches that contain the queried words in any order. Quotation marks were only used when exact ordering was needed. In the rare circumstance that a query had a value of <1% for a particular day, the <1% was approximated as 0.5 to allow for search proportion to be treated as a numeric variable. 
+Google trends data were acquired using the gtrendsR package. Search queries were selected using keywords from the debate events, Google’s ‘Related’ and ‘Suggested’ features, and ideas presented by Stephens-Davidowitz in Everybody Lies. Queries pulled with quotation marks include all searches that contain the queried words in that exact order, and queries without quotation marks include all searches that contain the queried words in any order. Quotation marks were only used when exact ordering was needed. In the rare circumstance that a query had a value of <1% for a particular day, the <1% was approximated as 0.5 to allow for search proportion to be treated as a numeric variable. 
 
 # Exploratory Analysis
 
