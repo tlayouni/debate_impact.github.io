@@ -135,7 +135,7 @@ debate_time_3 =
   slice(-11) %>% 
   rename(
     "candidate" = "Candidates",
-    "airtime_min" = "Airtime (min.)[110]"
+    "airtime_min" = "Airtime (min.)[111]"
   ) %>% 
      mutate(
     debate = 3,
@@ -158,7 +158,7 @@ debate_time_4 =
   slice(-13) %>% 
   rename(
     "candidate" = "Candidates",
-    "airtime_min" = "Airtime (min.)[121]"
+    "airtime_min" = "Airtime (min.)[122]"
   ) %>% 
   mutate(
     debate = 4,
